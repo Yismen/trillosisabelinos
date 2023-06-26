@@ -1,1 +1,12 @@
+// Font Awesome
+$fa-font-path : "./fontawesome/webfonts" !default;
+
+@import "./fontawesome/fontawesome.scss";
+// our project needs Solid + Brands
+@import "./fontawesome/solid.scss";
+@import "./fontawesome/brands.scss";
+
+@import 'variables';
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+@import "home";
