@@ -111,7 +111,8 @@
 
                     <div class=" d-flex justify-content-center justify-content-center justify-content-lg-start">
                         <a href="{{ config('app.trillos.links.inscripcion') }}"
-                            class="btn btn-primary text-white btn-lg text-uppercase" target="__new">Inscribete</a>
+                            class="btn btn-primary text-white btn-lg text-uppercase shadow"
+                            target="__new">Inscribete</a>
                     </div>
             </div>
         </section>
@@ -226,7 +227,7 @@
                 </div>
                 <div>
                     <a href="{{ config('app.trillos.links.inscripcion') }}" target="__new"
-                        class="btn btn-primary text-white">Inscribete</a>
+                        class="btn btn-primary text-white shadow btn-lg">Inscribete</a>
                 </div>
             </div>
         </div>
