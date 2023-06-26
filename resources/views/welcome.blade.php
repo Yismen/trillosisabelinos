@@ -26,8 +26,7 @@
                 <!-- Logo START -->
                 <a class="navbar-brand fw-bold text-success" href="{{ config('app.trillos.links.inscripcion') }}"
                     target="__new">
-                    <img class="light-mode-item navbar-brand-item w-50" src="{{ asset('storage/images/logo.png') }}"
-                        alt="logo">
+                    <img class="light-mode-item navbar-brand-item w-50" src="{{ asset('images/logo.png') }}" alt="logo">
                     <span class="text-highlighted">{{ 2023 }}</span>
                 </a>
                 <!-- Logo END -->
@@ -99,10 +98,10 @@
                     Trillos Isabelinos <span class="text-highlighted">2023</span>
                 </h1>
 
-                <a href="{{ asset('storage/images/flyer-principal.jpeg') }}" class="poster" target="__new">
+                <a href="{{ asset('images/flyer-principal.jpeg') }}" class="poster" target="__new">
                     {{-- <a href="{{ config('app.trillos.links.inscripcion') }}" class="poster" target="__new"> --}}
-                        <img src="{{ asset('storage/images/flyer-principal.jpeg') }}"
-                            class="img-responsive w-100 shadow" alt="Flyer Trillos">
+                        <img src="{{ asset('images/flyer-principal.jpeg') }}" class="img-responsive w-100 shadow"
+                            alt="Flyer Trillos">
                     </a>
 
                     <p class=" my-3 fs-4 fw-semibold">
@@ -123,20 +122,20 @@
             <div class="text-black row content row">
                 <x-social-link type="primary" class="col-sm-6 col-lg-3 mb-2" title="Formulario de Inscripción"
                     link_url="{{ config('app.trillos.links.inscripcion') }}" icon="fa-brands fa-google-drive"
-                    :image_url="asset('storage/images/qr-codes/form.png')" />
+                    :image_url="asset('images/qr-codes/form.png')" />
 
 
                 <x-social-link type="primary" class="col-sm-6 col-lg-3 mb-2" title="Instagram"
                     link_url="{{ config('app.trillos.links.instagram') }}" icon="fa-brands fa-instagram"
-                    :image_url="asset('storage/images/qr-codes/instagram.png')" />
+                    :image_url="asset('images/qr-codes/instagram.png')" />
 
                 <x-social-link type="primary" class="col-sm-6 col-lg-3 mb-2" title="Facebook"
                     link_url="{{ config('app.trillos.links.facebook') }}" icon="fa-brands fa-facebook"
-                    :image_url="asset('storage/images/qr-codes/facebook.png')" />
+                    :image_url="asset('images/qr-codes/facebook.png')" />
 
                 <x-social-link type="primary" class="col-sm-6 col-lg-3 mb-2" title="Youtube"
                     link_url="{{ config('app.trillos.links.youtube') }}" icon="fa-brands fa-youtube"
-                    :image_url="asset('storage/images/qr-codes/form.png')" />
+                    :image_url="asset('images/qr-codes/form.png')" />
             </div>
         </section> --}}
 
@@ -144,25 +143,25 @@
             <h3 class="title">Pura Diversión, <span class="text-highlighted">Momentos</span> Inolvidables </h3>
             <div class="content row  py-3 justify-content-center align-items-center">
                 <x-showcase class="col-md-6 col-lg-3 mb-3" title="Edición 2019"
-                    :image="asset('storage/images/showcase/showcase-1.jpeg')">
+                    :image="asset('images/showcase/showcase-1.jpeg')">
                     Miguel Garcia, disfrutando un Mabí, bebida insígnia de Trillos Isabelinos.
                 </x-showcase>
                 <x-showcase class="col-md-6 col-lg-3 mb-3" title="Edición 2019"
-                    :image="asset('storage/images/showcase/showcase-1.jpeg')">
+                    :image="asset('images/showcase/showcase-1.jpeg')">
                     Miguel Garcia, disfrutando un Mabí, bebida insígnia de Trillos Isabelinos.
                 </x-showcase>
                 <x-showcase class="col-md-6 col-lg-3 mb-3" title="Edición 2019"
-                    :image="asset('storage/images/showcase/showcase-1.jpeg')"></x-showcase>
+                    :image="asset('images/showcase/showcase-1.jpeg')"></x-showcase>
                 <x-showcase class="col-md-6 col-lg-3 mb-3" title="Edición 2019"
-                    :image="asset('storage/images/showcase/showcase-1.jpeg')"></x-showcase>
+                    :image="asset('images/showcase/showcase-1.jpeg')"></x-showcase>
                 <x-showcase class="col-md-6 col-lg-3 mb-3" title="Edición 2019"
-                    :image="asset('storage/images/showcase/showcase-1.jpeg')"></x-showcase>
+                    :image="asset('images/showcase/showcase-1.jpeg')"></x-showcase>
                 <x-showcase class="col-md-6 col-lg-3 mb-3" title="Edición 2019"
-                    :image="asset('storage/images/showcase/showcase-1.jpeg')"></x-showcase>
+                    :image="asset('images/showcase/showcase-1.jpeg')"></x-showcase>
                 <x-showcase class="col-md-6 col-lg-3 mb-3" title="Edición 2019"
-                    :image="asset('storage/images/showcase/showcase-1.jpeg')"></x-showcase>
+                    :image="asset('images/showcase/showcase-1.jpeg')"></x-showcase>
                 <x-showcase class="col-md-6 col-lg-3 mb-3" title="Edición 2019"
-                    :image="asset('storage/images/showcase/showcase-1.jpeg')"></x-showcase>
+                    :image="asset('images/showcase/showcase-1.jpeg')"></x-showcase>
             </div>
         </section>
 
@@ -288,10 +287,10 @@
                 </div>
                 <div class="col-md-2">
                     <div class="logos">
-                        <img src="{{ asset('storage/images/logos/logo.png') }}" alt="Trillos Isabelinos">
-                        <img src="{{ asset('storage/images/logos/patrulleros.jpeg') }}" alt="Patrulleros 121">
-                        <img src="{{ asset('storage/images/logos/yankees.png') }}" alt="Yankess">
-                        <img src="{{ asset('storage/images/logos/federacion.png') }}" alt="Federacion Nacional">
+                        <img src="{{ asset('images/logos/logo.png') }}" alt="Trillos Isabelinos">
+                        <img src="{{ asset('images/logos/patrulleros.jpeg') }}" alt="Patrulleros 121">
+                        <img src="{{ asset('images/logos/yankees.png') }}" alt="Yankess">
+                        <img src="{{ asset('images/logos/federacion.png') }}" alt="Federacion Nacional">
                     </div>
                 </div>
             </div>
