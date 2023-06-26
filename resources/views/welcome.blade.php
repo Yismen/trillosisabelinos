@@ -24,8 +24,7 @@
         <nav class="navbar navbar-expand-lg  bg-white fixed-top shadow">
             <div class="container">
                 <!-- Logo START -->
-                <a class="navbar-brand fw-bold text-success" href="{{ config('app.trillos.links.inscripcion') }}"
-                    target="__new">
+                <a class="navbar-brand fw-bold text-success" href="#inicio">
                     <img class="light-mode-item navbar-brand-item w-50" src="{{ asset('images/logo.png') }}" alt="logo">
                     <span class="text-highlighted">{{ 2023 }}</span>
                 </a>
