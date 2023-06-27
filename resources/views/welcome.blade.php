@@ -9,7 +9,7 @@
     <meta name="owner" content="Nicasio Suero">
     <meta name="content" content="Trillos Isabelinos">
     <meta name="description" content="Bicicleta de Trillos Republica Dominicana">
-    <title>{{ config('APP_NAME', 'Trillos Isabelinos') }}</title>
+    <title>{{ config('app.name', 'Trillos Isabelinos') }}</title>
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
     @vite([
     'resources/js/app.js',
@@ -315,7 +315,7 @@
                 class="align-items-md-end align-items-start container d-flex flex-column flex-md-row footer justify-content-between">
                 <div>
                     <a href="#inicio" class="text-white text-decoration-none">
-                        <h4 class="mb-5 fw-bold fs-3">{{ config('APP_NAME', 'Trillos Isabelinos') }}</h4>
+                        <h4 class="mb-5 fw-bold fs-3">{{ config('app.name', 'Trillos Isabelinos') }}</h4>
                     </a>
                     <div class="contactos mb-3 mb-md-0 d-flex flex-column">
                         <a href="mailto:nicacio.suero@gmail.com" class="text-white"> <i class="fa fa-envelope"
