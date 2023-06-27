@@ -245,7 +245,7 @@
         <section class="bg-secondary" id="detalles">
             <h3 class="title">Fácil, <span class="text-highlighted">Adsequible</span>, Expectacular!</h3>
             <div
-                class="container align-items-center banner d-flex flex-column flex-lg-row gap-3 justify-content-between p-4 overflow-x-auto">
+                class="container banner d-flex flex-column flex-lg-row gap-3 justify-content-between p-4 overflow-x-auto align-items-start align-items-sm-center">
                 <div class="d-flex gap-3 flex-lg-column text-nowrap">
                     <div class="">
                         <i class="fa fa-clock"></i>
@@ -256,17 +256,15 @@
                         <span class="fw-semibold">Kiandy Ranch</span>
                     </div>
                 </div>
-                <div class=" p-2 shadow ">
-                    <div class="d-flex justify-content-center">
-                        <x-plan type="primary" price="400" name="acompañantes">
-                        </x-plan>
-                        <x-plan type="primary" price="500" :main="true" name="ciclistas">
-                        </x-plan>
-                        <x-plan type="primary" price="300" name="niños hasta 12">
-                        </x-plan>
-                    </div>
+                <div class="d-flex justify-content-center shadow">
+                    <x-plan type="primary" price="400" name="acompañantes">
+                    </x-plan>
+                    <x-plan type="primary" price="500" :main="true" name="ciclistas">
+                    </x-plan>
+                    <x-plan type="primary" price="300" name="niños hasta 12">
+                    </x-plan>
                 </div>
-                <div>
+                <div class="mx-auto mx-lg-0">
                     <a href="{{ config('app.trillos.links.inscripcion') }}" target="__new"
                         class="btn btn-primary text-white shadow btn-lg">Inscribete</a>
                 </div>

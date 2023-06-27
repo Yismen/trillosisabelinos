@@ -193,36 +193,42 @@ section {
     display: flex;
     // flex-direction: column;
     gap: 15px;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     overflow-x: overlay;
-}
 
-.logos img {
-    display: block;
-    width: auto;
-    height: auto;
-    max-width: 120px;
-    filter: grayscale(100%);
-    transition: .5s;
-}
+    & img {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 100px;
+        filter: grayscale(100%);
+        transition: .5s;
+    }
 
-.logos img:hover {
-    filter: grayscale(0%);
-    cursor: pointer;
+    & img:hover {
+        filter: grayscale(0%);
+        cursor: pointer;
+    }
 }
 
 .footer {
 
     & .socials {
         & a {
-            // background-color: $primary;
             padding: 3px;
-            border-radius: 5px;
+            border-radius: 100%;
             color: white;
             font-size: 1.5rem;
-            transition: .5s;
-            // border: solid 1px white;
+            transition: 0.5s;
+            width: 36px;
+            height: 36px;
+            /* border: 1px solid white; */
+            display: flex;
+            text-decoration: none;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(0 0 0 / 35%);
         }
 
         & a:hover {
