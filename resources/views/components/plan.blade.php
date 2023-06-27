@@ -16,7 +16,7 @@
             {{ $name }}
         </div>
         <div>
-            <ul>
+            <ul class="text-nowrap">
                 <li class="list-group-item"> <i class="fa fa-check"></i> Piscina </li>
                 <li class="list-group-item"> <i class="fa fa-check"></i> Almuerzo </li>
                 @if ($main)
