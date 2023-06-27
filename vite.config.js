@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import path from 'path';
+import purge from '@erbelion/vite-plugin-laravel-purgecss';
 
 export default defineConfig({
     server: {
@@ -16,6 +17,9 @@ export default defineConfig({
             ],
             refresh: true,
         }),
+        purge({
+            templates: ['blade']
+        })
     ],
     resolve: {
         alias: {
