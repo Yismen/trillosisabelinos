@@ -45,15 +45,15 @@
                         <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#inicio">Inicio</a> </li>
 
                         <!-- Nav item Tour -->
-                        <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#showcase">Experiencia</a>
+                        <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#showcase">Diversión</a>
                         </li>
 
                         <!-- Nav item Flight -->
-                        <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#redes">Redes</a>
+                        <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#redes">Síguenos</a>
                         </li>
 
                         <!-- Nav item Cabs -->
-                        <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#equipo">Equipo</a>
+                        <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#detalles">Detalles</a>
                         </li>
                         <a class="text-uppercase fs-5 btn btn-primary btn-sm text-white btn-group-vertical"
                             href="{{ config('app.trillos.links.inscripcion') }}" target="__new">Inscribete</a>
@@ -90,7 +90,7 @@
     </nav>
 
     <div class="wrapper">
-        <section class="hero container position-relative" id="hero">
+        <section class="hero container position-relative with-border" id="hero">
             <div class="align-items-center flex-column justify-content-center row align-items-lg-end  py-lg-5 text-center text-lg-start "
                 id="hero-holder">
                 <h1 class="fw-bold my-3 mb-5 mb-lg-3  text-uppercase">
@@ -138,7 +138,7 @@
             </div>
         </section> --}}
 
-        <section class="container showcases" id="showcase">
+        <section class="container showcases with-border" id="showcase">
             <h3 class="title">Pura Diversión, <span class="text-highlighted">Momentos</span> Inolvidables </h3>
             <div class="content row  py-3 justify-content-center align-items-center">
                 <x-showcase class="col-md-6 col-lg-3 mb-3" title="Edición 2019"
@@ -164,96 +164,7 @@
             </div>
         </section>
 
-        <section class="container testimonials">
-            <h3 class="title">El que <span class="text-highlighted">sabe</span>, sabe!</h3>
-
-            <div class="row content">
-
-                <div class="col-sm-6 col-md-4 mb-3">
-                    <x-testimonial name="Miguel Garcia" title="Presitende Bicicentro">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eligendi corrupti quis
-                        consectetur.
-                        <x-slot name="footer">
-                            Trillos Isabelinos 2019!
-                        </x-slot>
-                    </x-testimonial>
-                </div>
-
-                <div class="col-sm-6 col-md-4 mb-3">
-                    <x-testimonial name="Miguel Garcia" title="Presitende Bicicentro">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eligendi corrupti quis
-                        consectetur.
-                        <x-slot name="footer">
-                            Trillos Isabelinos 2019!
-                        </x-slot>
-                    </x-testimonial>
-                </div>
-
-                <div class="col-sm-6 col-md-4 mb-3">
-                    <x-testimonial name="Miguel Garcia" title="Presitende Bicicentro">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eligendi corrupti quis
-                        consectetur.
-                        <x-slot name="footer">
-                            Trillos Isabelinos 2019!
-                        </x-slot>
-                    </x-testimonial>
-                </div>
-            </div>
-        </section>
-
-        <div class="cta container">
-            <div class="align-items-center banner d-flex flex-column flex-lg-row gap-3 justify-content-center p-4">
-                <div class="d-flex gap-3 flex-lg-column text-nowrap">
-                    <div class="">
-                        <i class="fa fa-clock"></i>
-                        <span class="fw-semibold">8:30 AM</span>
-                    </div>
-                    <div class="">
-                        <i class="fa fa-map-marker-alt"></i>
-                        <span class="fw-semibold">Kiandy Ranch</span>
-                    </div>
-                </div>
-                <div class="flex-grow-1">
-                    <div class="d-flex justify-content-center">
-                        <x-plan type="primary" price="400" name="acompañantes">
-                        </x-plan>
-                        <x-plan type="primary" price="500" :main="true" name="ciclistas">
-                        </x-plan>
-                        <x-plan type="primary" price="600" name="niños hasta 12">
-                        </x-plan>
-                    </div>
-                </div>
-                <div>
-                    <a href="{{ config('app.trillos.links.inscripcion') }}" target="__new"
-                        class="btn btn-primary text-white shadow btn-lg">Inscribete</a>
-                </div>
-            </div>
-        </div>
-
-        <section class="members bg-primary text-white" id="equipo">
-            <h3 class="title">Dedicados a <span class="text-highlighted">Servir</span>, dar lo mejor!</h3>
-
-            <div class="row content">
-
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
-                </div>
-
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
-                </div>
-
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
-                </div>
-
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
-                </div>
-            </div>
-        </section>
-
-        <section class="container" id="redes">
+        <section class="container with-border" id="redes">
             <h3 class="title">No te pierdas, <span class="text-highlighted">Síguenos</span> siempre!</h3>
             <div class="row">
                 <div class="col-md-3 d-flex flex-column">
@@ -294,6 +205,96 @@
                 </div>
             </div>
         </section>
+
+        <section class="container testimonials">
+            <h3 class="title">El que <span class="text-highlighted">sabe</span>, sabe!</h3>
+
+            <div class="row content">
+                <div class="col-sm-6 col-md-4 mb-3">
+                    <x-testimonial name="Miguel Garcia" title="Presitende Bicicentro">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eligendi corrupti quis
+                        consectetur.
+                        <x-slot name="footer">
+                            Trillos Isabelinos 2019!
+                        </x-slot>
+                    </x-testimonial>
+                </div>
+
+                <div class="col-sm-6 col-md-4 mb-3">
+                    <x-testimonial name="Miguel Garcia" title="Presitende Bicicentro">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eligendi corrupti quis
+                        consectetur.
+                        <x-slot name="footer">
+                            Trillos Isabelinos 2019!
+                        </x-slot>
+                    </x-testimonial>
+                </div>
+
+                <div class="col-sm-6 col-md-4 mb-3">
+                    <x-testimonial name="Miguel Garcia" title="Presitende Bicicentro">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eligendi corrupti quis
+                        consectetur.
+                        <x-slot name="footer">
+                            Trillos Isabelinos 2019!
+                        </x-slot>
+                    </x-testimonial>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-secondary" id="detalles">
+            <h3 class="title">Fácil, <span class="text-highlighted">Adsequible</span>, Expectacular!</h3>
+            <div
+                class="container align-items-center banner d-flex flex-column flex-lg-row gap-3 justify-content-between p-4 overflow-x-auto">
+                <div class="d-flex gap-3 flex-lg-column text-nowrap">
+                    <div class="">
+                        <i class="fa fa-clock"></i>
+                        <span class="fw-semibold">8:30 AM</span>
+                    </div>
+                    <div class="">
+                        <i class="fa fa-map-marker-alt"></i>
+                        <span class="fw-semibold">Kiandy Ranch</span>
+                    </div>
+                </div>
+                <div class=" p-2 shadow ">
+                    <div class="d-flex justify-content-center">
+                        <x-plan type="primary" price="400" name="acompañantes">
+                        </x-plan>
+                        <x-plan type="primary" price="500" :main="true" name="ciclistas">
+                        </x-plan>
+                        <x-plan type="primary" price="600" name="niños hasta 12">
+                        </x-plan>
+                    </div>
+                </div>
+                <div>
+                    <a href="{{ config('app.trillos.links.inscripcion') }}" target="__new"
+                        class="btn btn-primary text-white shadow btn-lg">Inscribete</a>
+                </div>
+            </div>
+        </section>
+
+        {{-- <section class="members bg-primary text-white" id="equipo">
+            <h3 class="title">Dedicados a <span class="text-highlighted">Servir</span>, dar lo mejor!</h3>
+
+            <div class="row content">
+
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
+                </div>
+            </div>
+        </section> --}}
 
         <section class="bg-primary text-white">
             <div

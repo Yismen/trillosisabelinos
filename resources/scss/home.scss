@@ -1,8 +1,4 @@
-@use "sass:math";
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;600;900&family=Noto+Sans+Syloti+Nagri&family=Poppins:wght@300;600;800&display=swap');
-
-$cta-hight: 460px;
-$cta-separation: math.div($cta-hight , 2);
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -43,6 +39,7 @@ body {
 }
 
 section {
+    // padding: 2rem;
     padding: 4rem 2rem;
 
     &>.title {
@@ -50,6 +47,10 @@ section {
         text-align: center;
         font-weight: 600 !important;
         margin-bottom: 25px;
+    }
+
+    &.with-border {
+        border-bottom: solid 1px rgba($primary, .25);
     }
 
     & .content {
@@ -104,14 +105,6 @@ section {
     display: inline;
 }
 
-.testimonials {
-    padding-bottom: $cta-separation + 20px;
-}
-
-.members {
-    padding-top: $cta-separation + 30px;
-}
-
 .testimonial:hover {
     border: 1px solid rgb(165, 165, 165);
 }
@@ -122,6 +115,7 @@ section {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    // max-width: 250px;
 
     & .header {
         display: flex;
@@ -140,8 +134,8 @@ section {
     }
 
     & .content {
-        font-size: .85rem;
-        letter-spacing: 1px;
+        font-size: .75rem;
+        // letter-spacing: 1px;
         font-style: italic;
         color: black;
         margin: 10px 0;
@@ -218,19 +212,6 @@ section {
     cursor: pointer;
 }
 
-.cta {
-    position: relative;
-
-    & .banner {
-        position: absolute;
-        background-color: $secondary;
-        // color: white;
-        top: -$cta-separation;
-        height: $cta-hight;
-        width: 100%;
-    }
-}
-
 .footer {
 
     & .socials {
@@ -271,9 +252,9 @@ section {
         }
     }
 
-    .testimonials {
-        padding-bottom: 210px;
-    }
+    // .testimonials {
+    //     padding-bottom: 210px;
+    // }
 
     .members {
         padding-top: 220px;
@@ -294,7 +275,7 @@ section {
 
     #hero-holder {
         width: 65%;
-        height: 50vh;
+        height: 70vh;
     }
 
     #hero::before,
@@ -303,7 +284,7 @@ section {
         position: absolute;
         top: 160px;
         left: 0;
-        height: 75%;
+        height: 55%;
         // z-index: -1;
     }
 
@@ -335,9 +316,9 @@ section {
         }
     }
 
-    .testimonials {
-        padding-bottom: 180px;
-    }
+    // .testimonials {
+    //     padding-bottom: 180px;
+    // }
 
     .members {
         padding-top: 190px;
