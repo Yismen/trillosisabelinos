@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    padding-top: 60px;
+    // padding-top: 60px;
 }
 
 .nav-link a.active,
@@ -218,15 +218,16 @@ section {
         & a {
             // background-color: $primary;
             padding: 3px;
-            border-radius: 50%;
+            border-radius: 5px;
             color: white;
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             transition: .5s;
-            border: solid 1px white;
+            // border: solid 1px white;
         }
 
         & a:hover {
             background-color: white;
+            // color: rgba($primary, 1.5);
             color: $primary;
         }
 

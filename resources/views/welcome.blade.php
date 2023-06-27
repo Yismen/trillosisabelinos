@@ -19,9 +19,9 @@
 </head>
 
 <body id="inicio">
-    <nav class="navbar-light">
+    <header class="navbar-light" id="navbar_top">
         <!-- Logo Nav START -->
-        <nav class="navbar navbar-expand-lg  bg-white fixed-top shadow">
+        <nav class="navbar navbar-expand-lg  bg-white shadow">
             <div class="container">
                 <!-- Logo START -->
                 <a class="navbar-brand fw-bold text-success" href="#inicio">
@@ -87,7 +87,7 @@
             </div>
         </nav>
         <!-- Logo Nav END -->
-    </nav>
+    </header>
 
     <div class="wrapper">
         <section class="hero container position-relative with-border" id="hero">
@@ -220,7 +220,7 @@
                     </x-testimonial>
                 </div>
 
-                <div class="col-sm-6 col-md-4 mb-3">
+                <div class="col-sm-6 col-md-4 mb-3 mt-0 mt-lg-4">
                     <x-testimonial name="Miguel Garcia" title="Presitende Bicicentro">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eligendi corrupti quis
                         consectetur.
@@ -262,7 +262,7 @@
                         </x-plan>
                         <x-plan type="primary" price="500" :main="true" name="ciclistas">
                         </x-plan>
-                        <x-plan type="primary" price="600" name="niños hasta 12">
+                        <x-plan type="primary" price="300" name="niños hasta 12">
                         </x-plan>
                     </div>
                 </div>
@@ -330,6 +330,24 @@
     </div>
 
     @stack('scripts')
+    <script>
+        (function(){
+            document.addEventListener("DOMContentLoaded", function(){
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.getElementById('navbar_top').classList.add('fixed-top');
+                // add padding top to show content behind navbar
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+                document.body.style.paddingTop = navbar_height + 'px';
+            } else {
+                document.getElementById('navbar_top').classList.remove('fixed-top');
+                // remove padding top from body
+                document.body.style.paddingTop = '0';
+            } 
+        });
+        }); 
+        })()
+    </script>
 </body>
 
 </html>
