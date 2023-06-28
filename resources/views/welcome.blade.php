@@ -261,7 +261,7 @@
         <section class="bg-secondary" id="detalles">
             <h3 class="title">Fácil, <span class="text-highlighted">Adsequible</span>, Expectacular!</h3>
             <div
-                class="container banner d-flex flex-column flex-lg-row gap-3 justify-content-between p-4 align-items-start align-items-sm-center">
+                class="container banner d-flex flex-column flex-lg-row gap-3 justify-content-between justify-content-md-center p-4 align-items-start align-items-sm-center">
                 <div class="d-flex gap-3 flex-lg-column text-nowrap">
                     <div class="">
                         <i class="fa fa-clock"></i>
@@ -312,7 +312,7 @@
 
         <section class="bg-primary text-white">
             <div
-                class="align-items-md-end align-items-center container d-flex flex-column flex-md-row footer justify-content-between">
+                class="align-items-md-end align-items-center container d-flex flex-column flex-md-row footer justify-content-between ">
                 <div>
                     <a href="#inicio" class="text-white text-decoration-none text-center text-md-start">
                         <h4 class="mb-5 fw-bold fs-3">{{ config('app.name', 'Trillos Isabelinos') }}</h4>
