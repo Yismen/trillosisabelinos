@@ -312,12 +312,12 @@
 
         <section class="bg-primary text-white">
             <div
-                class="align-items-md-end align-items-start container d-flex flex-column flex-md-row footer justify-content-between">
+                class="align-items-md-end align-items-center container d-flex flex-column flex-md-row footer justify-content-between">
                 <div>
-                    <a href="#inicio" class="text-white text-decoration-none">
+                    <a href="#inicio" class="text-white text-decoration-none text-center text-md-start">
                         <h4 class="mb-5 fw-bold fs-3">{{ config('app.name', 'Trillos Isabelinos') }}</h4>
                     </a>
-                    <div class="contactos mb-3 mb-md-0 d-flex flex-column">
+                    <div class="contactos mb-3 mb-md-0 d-flex flex-column text-center text-md-start">
                         <a href="mailto:nicacio.suero@gmail.com" class="text-white"> <i class="fa fa-envelope"
                                 target="__new"></i>
                             nicacio.suero@gmail.com</a>
