@@ -69,7 +69,12 @@ return [
         ]
     ],
 
-    'deploy_secret' => env('APP_DEPLOY_SECRET'),
+    'deployment' => [
+        'php_version' => env('DEPLOY_PHP_VERSION', './vendor/bin/sail'),
+        'php_fpm_version' => env('DEPLOY_PHP_VERSION', './vendor/bin/sail'),
+        'npm_version' => env('DEPLOY_NPM_VERSION', './vendor/bin/sail npm'),
+        'composer_version' => env('DEPLOY_COMPOSER_VERSION', './vendor/bin/sail composer'),
+    ],
 
     /*
     |--------------------------------------------------------------------------
