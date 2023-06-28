@@ -261,7 +261,7 @@
         <section class="bg-secondary" id="detalles">
             <h3 class="title">Fácil, <span class="text-highlighted">Adsequible</span>, Expectacular!</h3>
             <div
-                class="container banner d-flex flex-column flex-lg-row gap-3 justify-content-between p-4 overflow-x-auto align-items-start align-items-sm-center">
+                class="container banner d-flex flex-column flex-lg-row gap-3 justify-content-between p-4 align-items-start align-items-sm-center">
                 <div class="d-flex gap-3 flex-lg-column text-nowrap">
                     <div class="">
                         <i class="fa fa-clock"></i>
@@ -272,7 +272,7 @@
                         <span class="fw-semibold">Kiandy Ranch</span>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center shadow">
+                <div class="d-flex justify-content-start w-100 shadow overflow-x-auto w-md-auto">
                     <x-plan type="primary" price="400" name="acompañantes">
                     </x-plan>
                     <x-plan type="primary" price="500" :main="true" name="ciclistas">

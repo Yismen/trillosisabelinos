@@ -244,6 +244,9 @@ section {
 @include media-breakpoint-up(sm) {}
 
 @include media-breakpoint-up(md) {
+    .w-md-auto {
+        width: auto !important;
+    }
 
     .social-image {
         width: 60% !important;
