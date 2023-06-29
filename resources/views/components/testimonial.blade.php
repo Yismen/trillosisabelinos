@@ -4,7 +4,7 @@
 'footer',
 'image_url' => "https://ui-avatars.com/api/?name=" . $name
 ])
-<div class="testimonial">
+<div class="testimonial h-100">
     <div class="header">
         <img src="{{ $image_url }}" alt="{{ $name }}">
         <div class="">

@@ -141,6 +141,11 @@
         <section class="container showcases with-border" id="showcase">
             <h3 class="title">Pura Diversión, <span class="text-highlighted">Momentos</span> Inolvidables </h3>
             <div class="content row  py-3 justify-content-center align-items-center gap-3">
+
+                <x-showcase class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex justify-content-center"
+                    title="Equipo de Trabajo" :image="asset('images/showcase/equipo-4.jpg')">
+                    Siempre listos, dedicados a servir, trato humano, calidad de primera.
+                </x-showcase>
                 <x-showcase class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex justify-content-center"
                     title="Equipo de Trabajo" :image="asset('images/showcase/equipo-2.jpg')">
                     Edicion 2019, los matatanes.
@@ -173,9 +178,29 @@
                     :image="asset('images/showcase/wendy-cruz-ciclon-bike-aneudy.jpg')">
                     Wendy Cruz, representando Ciclon Bike
                 </x-showcase>
+                <x-showcase class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex justify-content-center"
+                    title="Momentos Inolvidables" :image="asset('images/showcase/momentos-1.jpg')">
+
+                </x-showcase>
+                <x-showcase class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex justify-content-center"
+                    title="Momentos Inolvidables" :image="asset('images/showcase/momentos-2.jpg')">
+
+                </x-showcase>
+                <x-showcase class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex justify-content-center"
+                    title="Momentos Inolvidables" :image="asset('images/showcase/momentos-3.jpg')">
+
+                </x-showcase>
+                <x-showcase class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex justify-content-center"
+                    title="Momentos Inolvidables" :image="asset('images/showcase/momentos-4.jpg')">
+
+                </x-showcase>
                 <x-showcase class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex justify-content-center" title="Entre Amigos!"
                     :image="asset('images/showcase/entre-amigos-constanza.jpg')">
                     Grupo Entre Amigos de Constanza, siempre presentes
+                </x-showcase>
+                <x-showcase class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex justify-content-center" title="Imparables!"
+                    :image="asset('images/showcase/imparables-navarrete.jpg')">
+                    Grupo Imparables de Navarrete
                 </x-showcase>
             </div>
         </section>
@@ -226,32 +251,38 @@
             <h3 class="title">El que <span class="text-highlighted">sabe</span>, sabe!</h3>
 
             <div class="row content">
-                <div class="col-sm-6 col-md-4 mb-3">
-                    <x-testimonial name="Miguel Garcia" title="Presitende Bicicentro">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eligendi corrupti quis
-                        consectetur.
+                <div class="col-sm-6 col-xl-3 mb-3">
+                    <x-testimonial name="Andrés Valerio" title="Bicicentro">
+                        Buena organización y puntualidad.
+                        <x-slot name="footer">
+                            Trillos Isabelinos 2018!
+                        </x-slot>
+                    </x-testimonial>
+                </div>
+
+                <div class="col-sm-6 col-xl-3 mb-3 mt-0 mt-xl-4">
+                    <x-testimonial name="Aneudy el Brutal" title="Ciclista Paralímpico">
+                        Me gustó el mabi en los abastecimientos, me sorprendieron en el Abastecimiento frío.
                         <x-slot name="footer">
                             Trillos Isabelinos 2019!
                         </x-slot>
                     </x-testimonial>
                 </div>
 
-                <div class="col-sm-6 col-md-4 mb-3 mt-0 mt-lg-4">
-                    <x-testimonial name="Miguel Garcia" title="Presitende Bicicentro">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eligendi corrupti quis
-                        consectetur.
+                <div class="col-sm-6 col-xl-3 mb-3">
+                    <x-testimonial name="Enmanuel" title="Patrón Bike">
+                        Buena comida, buena organización, quedo mortal.
                         <x-slot name="footer">
-                            Trillos Isabelinos 2019!
+                            Trillos Isabelinos 2018!
                         </x-slot>
                     </x-testimonial>
                 </div>
 
-                <div class="col-sm-6 col-md-4 mb-3">
-                    <x-testimonial name="Miguel Garcia" title="Presitende Bicicentro">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eligendi corrupti quis
-                        consectetur.
+                <div class="col-sm-6 col-xl-3 mb-3 mt-xl-4">
+                    <x-testimonial name="Wendy Cruz" title="Ciclón Bile">
+                        Un evento con calidad, hicieron buen trabajo.
                         <x-slot name="footer">
-                            Trillos Isabelinos 2019!
+                            Trillos Isabelinos 2018!
                         </x-slot>
                     </x-testimonial>
                 </div>
@@ -262,23 +293,59 @@
             <h3 class="title">Fácil, <span class="text-highlighted">Adsequible</span>, Expectacular!</h3>
             <div
                 class="container banner d-flex flex-column flex-lg-row gap-3 justify-content-between justify-content-md-center p-4 align-items-start align-items-sm-center">
-                <div class="d-flex gap-3 flex-lg-column text-nowrap">
-                    <div class="">
-                        <i class="fa fa-clock"></i>
-                        <span class="fw-semibold">8:30 AM</span>
+                <div class="d-flex gap-3 flex-column text-nowrap">
+                    <div class="d-flex justify-content-between">
+                        <div class="">
+                            <i class="fa fa-clock"></i>
+                            <span class="fw-semibold">8:30 AM</span>
+                        </div>
+                        <div class="">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <span class="fw-semibold">Kiandy Ranch</span>
+                        </div>
                     </div>
-                    <div class="">
-                        <i class="fa fa-map-marker-alt"></i>
-                        <span class="fw-semibold">Kiandy Ranch</span>
+                    <div class="border-top">
+                        {{-- <i class="fa fa-map-marker-alt"></i> --}}
+                        <span class="fw-semibold text-uppercase">Para Depositos</span>
+
+                        <table class="table-sm table-inverse table-hovered table-responsive">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Banco</th>
+                                    <th>Cuenta</th>
+                                    <th>A Nombre de</th>
+                                    <th>Cedula</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row">Banreservas</td>
+                                    <td>9605265552</td>
+                                    <td>Nicacio Suero</td>
+                                    <td>121-0012354-1</td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">Banco Popular</td>
+                                    <td>744540758</td>
+                                    <td>Nicacio Suero</td>
+                                    <td>121-0012354-1</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="d-flex justify-content-start w-100 shadow overflow-x-auto w-md-auto">
-                    <x-plan type="primary" price="400" name="acompañantes">
-                    </x-plan>
-                    <x-plan type="primary" price="500" :main="true" name="ciclistas">
-                    </x-plan>
-                    <x-plan type="primary" price="300" name="niños hasta 12">
-                    </x-plan>
+                <div class="d-flex flex-column">
+                    <div class="d-flex justify-content-start shadow overflow-x-auto w-md-auto">
+                        <x-plan price="500" name="acompañantes">
+                        </x-plan>
+                        <x-plan price="800" :main="true" name="ciclistas">
+                        </x-plan>
+                        <x-plan price="300" name="niños de 6 a 12">
+                        </x-plan>
+                    </div>
+
+                    <div class="fw-bold mt-2 text-uppercase fs-5">Niños menores de 6 años <span
+                            class="highlighted">Gratis</span></div>
                 </div>
                 <div class="mx-auto mx-lg-0">
                     <a href="{{ config('app.trillos.links.inscripcion') }}" target="__new"
@@ -318,9 +385,9 @@
                         <h4 class="mb-5 fw-bold fs-3">{{ config('app.name', 'Trillos Isabelinos') }}</h4>
                     </a>
                     <div class="contactos mb-3 mb-md-0 d-flex flex-column text-center text-md-start">
-                        <a href="mailto:nicacio.suero@gmail.com" class="text-white"> <i class="fa fa-envelope"
+                        <a href="mailto:trillosisabelinos@gmail.com" class="text-white"> <i class="fa fa-envelope"
                                 target="__new"></i>
-                            nicacio.suero@gmail.com</a>
+                            trillosisabelinos@gmail.com</a>
                         <a href="tel:+1-809-993-7940" class="text-white"><i class="fa fa-phone" target="__new"></i>
                             809-993-7940</a>
                     </div>
