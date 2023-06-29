@@ -3,21 +3,19 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
-use App\Models\Plan;
 use Filament\Tables;
-use App\Models\Event;
+use App\Models\Payment;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
-use Illuminate\Validation\Rule;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\PlanResource\Pages;
+use App\Filament\Resources\PaymentResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\PlanResource\RelationManagers;
+use App\Filament\Resources\PaymentResource\RelationManagers;
 
-class PlanResource extends Resource
+class PaymentResource extends Resource
 {
-    protected static ?string $model = Plan::class;
+    protected static ?string $model = Payment::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -25,37 +23,17 @@ class PlanResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\Select::make('registration_id')
+                    ->relationship('registration', 'name')
                     ->required()
-                    ->autofocus()
-                    ->maxLength(255)
-                    ->rules([
-                        'required',
-                        'min:3',
-                        'max:250',
-                    ]),
-                Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->numeric()
-                    ->rules([
-                        'required',
-                        'min:0',
-                    ])
                     ,
-                Forms\Components\TagsInput::make('features')
+                Forms\Components\DatePicker::make('date')
                     ->required()
-                    ->suggestions([
-                        'piscina',
-                        'abastecimientos',
-                        'almuerzo',
-                    ]),
-                Forms\Components\Select::make('event_id')
-                    ->relationship('event', 'name')
-                    ->required()
-                    ->rules([
-                        'required',
-                        Rule::exists(Event::class, 'id'),
-                    ]),
+                    ->maxDate(now()->endOfDay()),
+                Forms\Components\TextInput::make('amount')
+                    ->required(),
+                Forms\Components\Textarea::make('description')
+                    ->required(),
             ]);
     }
 
@@ -63,23 +41,28 @@ class PlanResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('registration.name')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('price')
+                Tables\Columns\TextColumn::make('date')
+                    ->sortable()
+                    ->searchable()
+                    ->date(),
+                Tables\Columns\TextColumn::make('amount')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TagsColumn::make('features')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('event.name')
-                    ->sortable()
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('description'),
+                // Tables\Columns\TextColumn::make('created_at')
+                //     ->dateTime(),
+                // Tables\Columns\TextColumn::make('updated_at')
+                //     ->dateTime(),
+                // Tables\Columns\TextColumn::make('deleted_at')
+                //     ->dateTime(),
             ])
+            ->defaultSort('date', 'desc')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->defaultSort('name')
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
@@ -97,7 +80,7 @@ class PlanResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManagePlans::route('/'),
+            'index' => Pages\ManagePayments::route('/'),
         ];
     }    
     

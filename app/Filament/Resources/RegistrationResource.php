@@ -77,18 +77,41 @@ class RegistrationResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('event.name'),
-                Tables\Columns\TextColumn::make('phone'),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('group'),
-                Tables\Columns\TextColumn::make('additional_phone'),
-                // Tables\Columns\TextColumn::make('amount'),
-                // Tables\Columns\TextColumn::make('amount_paid'),
-                // Tables\Columns\TextColumn::make('amount_pending'),
+                Tables\Columns\TextColumn::make('name')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('event.name')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->sortable()
+                    ->searchable()
+                    ->visible(false),
+                Tables\Columns\TextColumn::make('group')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('additional_phone')
+                    ->sortable()
+                    ->visible(false)
+                    ->searchable(),
+                // Tables\Columns\TextColumn::make('amount')
+                    // ->sortable()
+                    // ->searchable(),
+                // Tables\Columns\TextColumn::make('amount_paid')
+                    // ->sortable()
+                    // ->searchable(),
+                // Tables\Columns\TextColumn::make('amount_pending')
+                    // ->sortable()
+                    // ->searchable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->enum(RegistrationStatusEnum::toArray()),
+                    ->enum(RegistrationStatusEnum::toArray())
+                        ->sortable()
+                        ->searchable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

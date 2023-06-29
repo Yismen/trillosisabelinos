@@ -37,28 +37,17 @@ class EventResource extends Resource
                 TextInput::make('name')
                     ->autofocus()
                     ->required()
-                    ->rules([
-                        'required',
-                        'min:3',
-                        'min:500',
-                    ])
-                    ,
+                    ->minLength(3)
+                    ->maxLength(500),
                 DatePicker::make('date')
                     ->minDate(now()->startOfDay())
                     ->required()
-                    ->rules([
-                        'required',
-                        'date',
-                        'after_or_equal:today',
-                    ])
+                    ->afterOrEqual(now()->startOfDay())
                     ,
                 Select::make('status')
                     ->options(EventStatusEnum::toArray())
-                    // ->required()
-                    ->rules([
-                        'required',
-                        new Enum(EventStatusEnum::class)
-                    ])
+                    ->required()
+                    ->enum(EventStatusEnum::class)
                     ,
             ]);
     }
@@ -67,12 +56,19 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('date')
-                    ->date(),
+                    ->date()
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('status')
-                    ->enum(EventStatusEnum::toArray()),
+                    ->enum(EventStatusEnum::toArray())
+                    ->sortable()
+                    ->searchable(),
             ])
+            ->defaultSort('name')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
 
