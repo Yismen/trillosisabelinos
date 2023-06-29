@@ -52,7 +52,8 @@ class EventResource extends Resource
                         'after_or_equal:today',
                     ])
                     ,
-                Select::make('status')->options(EventStatusEnum::toArray())
+                Select::make('status')
+                    ->options(EventStatusEnum::toArray())
                     // ->required()
                     ->rules([
                         'required',
@@ -67,8 +68,10 @@ class EventResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
-                TextColumn::make('date')->date(),
-                TextColumn::make('status')->enum(EventStatusEnum::toArray()),
+                TextColumn::make('date')
+                    ->date(),
+                TextColumn::make('status')
+                    ->enum(EventStatusEnum::toArray()),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
