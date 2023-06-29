@@ -3,30 +3,21 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
+use App\Models\Plan;
 use Filament\Tables;
 use App\Models\Event;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
-use App\Enums\EventStatusEnum;
 use Illuminate\Validation\Rule;
 use Filament\Resources\Resource;
-use Filament\Tables\Columns\Column;
-use Filament\Forms\Components\Select;
-use Illuminate\Validation\Rules\Enum;
-use App\Rules\Dates\AfterOrEqualToday;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DatePicker;
-use Filament\Tables\Columns\SelectColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\EventResource\Pages;
+use App\Filament\Resources\PlanResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\EventResource\RelationManagers;
+use App\Filament\Resources\PlanResource\RelationManagers;
 
-class EventResource extends Resource
+class PlanResource extends Resource
 {
-    protected static ?string $model = Event::class;
+    protected static ?string $model = Plan::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -34,31 +25,37 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->autofocus()
+                Forms\Components\TextInput::make('name')
                     ->required()
+                    ->autofocus()
+                    ->maxLength(255)
                     ->rules([
                         'required',
                         'min:3',
-                        'min:500',
+                        'max:250',
+                    ]),
+                Forms\Components\TextInput::make('price')
+                    ->required()
+                    ->numeric()
+                    ->rules([
+                        'required',
+                        'min:0',
                     ])
                     ,
-                DatePicker::make('date')
-                    ->minDate(now()->startOfDay())
+                Forms\Components\TagsInput::make('features')
+                    ->required()
+                    ->suggestions([
+                        'piscina',
+                        'abastecimientos',
+                        'almuerzo',
+                    ]),
+                Forms\Components\Select::make('event_id')
+                    ->relationship('event', 'name')
                     ->required()
                     ->rules([
                         'required',
-                        'date',
-                        'after_or_equal:today',
-                    ])
-                    ,
-                Select::make('status')->options(EventStatusEnum::toArray())
-                    // ->required()
-                    ->rules([
-                        'required',
-                        new Enum(EventStatusEnum::class)
-                    ])
-                    ,
+                        Rule::exists(Event::class, 'id'),
+                    ]),
             ]);
     }
 
@@ -66,13 +63,13 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('date')->date(),
-                TextColumn::make('status')->enum(EventStatusEnum::toArray()),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TagsColumn::make('features'),
+                Tables\Columns\TextColumn::make('event.name'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
-
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -91,7 +88,7 @@ class EventResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageEvents::route('/'),
+            'index' => Pages\ManagePlans::route('/'),
         ];
     }    
     

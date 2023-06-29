@@ -2,14 +2,13 @@
 
 namespace App\Enums;
 
-enum EventStatusEnum: int
+use App\Enums\Contracts\EnumContract;
+
+enum EventStatusEnum: int implements EnumContract
 {
     case Pending = 1;
     case Open = 2;
     case Closed = 3;
 
-    public static function toArray(): array
-    {
-        return array_column(self::cases(), 'name', 'value');
-    }
+    use \App\Enums\Traits\AsEnum;
 }
