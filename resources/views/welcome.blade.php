@@ -56,7 +56,7 @@
                         <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#detalles">Detalles</a>
                         </li>
                         <a class="text-uppercase fs-5 btn btn-primary btn-sm text-white btn-group-vertical"
-                            href="{{ config('app.trillos.links.inscripcion') }}" target="__new">Inscribete</a>
+                            href="{{ config('app.trillos.links.inscripcion') }}">Inscribete</a>
                     </ul>
 
                     <ul class="navbar-nav navbar-nav-scroll nav-pills-primary-soft ms-auto p-2 p-xl-0 fs-4">
@@ -97,7 +97,7 @@
                     Trillos Isabelinos <span class="text-highlighted">2023</span>
                 </h1>
 
-                <a href="{{ asset('images/flyer-principal.jpeg') }}" class="poster" target="__new">
+                <a href="{{ asset('images/flyer-principal.jpeg') }}" class="poster">
                     {{-- <a href="{{ config('app.trillos.links.inscripcion') }}" class="poster" target="__new"> --}}
                         <img src="{{ asset('images/flyer-principal.jpeg') }}" class="img-responsive w-100 shadow"
                             alt="Flyer Trillos">
@@ -109,8 +109,7 @@
 
                     <div class=" d-flex justify-content-center justify-content-center justify-content-lg-start">
                         <a href="{{ config('app.trillos.links.inscripcion') }}"
-                            class="btn btn-primary text-white btn-lg text-uppercase shadow"
-                            target="__new">Inscribete</a>
+                            class="btn btn-primary text-white btn-lg text-uppercase shadow">Inscribete</a>
                     </div>
             </div>
         </section>
@@ -209,19 +208,19 @@
             <h3 class="title">No te pierdas, <span class="text-highlighted">Síguenos</span> siempre!</h3>
             <div class="row">
                 <div class="col-md-3 d-flex flex-column">
-                    <a href="{{ config('app.trillos.links.inscripcion') }}" target="_blank" rel="noopener noreferrer"
+                    <a href="{{ config('app.trillos.links.inscripcion') }}" rel="noopener noreferrer"
                         class="social-link">
                         <i class="fa-brands fa-google-drive"></i> Formulario Inscripcion
                     </a>
-                    <a href="{{ config('app.trillos.links.instagram') }}" target="_blank" rel="noopener noreferrer"
+                    <a href="{{ config('app.trillos.links.instagram') }}" target="__new" rel="noopener noreferrer"
                         class="social-link">
                         <i class="fa-brands fa-google-drive"></i> Instagram
                     </a>
-                    <a href="{{ config('app.trillos.links.facebook') }}" target="_blank" rel="noopener noreferrer"
+                    <a href="{{ config('app.trillos.links.facebook') }}" target="__new" rel="noopener noreferrer"
                         class="social-link">
                         <i class="fa-brands fa-google-drive"></i> Facebook
                     </a>
-                    <a href="{{ config('app.trillos.links.youtube') }}" target="_blank" rel="noopener noreferrer"
+                    <a href="{{ config('app.trillos.links.youtube') }}" target="__new" rel="noopener noreferrer"
                         class="social-link">
                         <i class="fa-brands fa-google-drive"></i> Youtube
                     </a>
@@ -348,7 +347,7 @@
                             class="highlighted">Gratis</span></div>
                 </div>
                 <div class="mx-auto mx-lg-0">
-                    <a href="{{ config('app.trillos.links.inscripcion') }}" target="__new"
+                    <a href="{{ config('app.trillos.links.inscripcion') }}"
                         class="btn btn-primary text-white shadow btn-lg">Inscribete</a>
                 </div>
             </div>

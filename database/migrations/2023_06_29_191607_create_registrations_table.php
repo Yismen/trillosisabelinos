@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('name', 500);
             $table->foreignIdFor(Event::class);
             $table->string('phone', 15);
-            $table->string('email');
-            $table->string('group');
+            $table->string('email')->nullable();
+            $table->string('group')->nullable();
             $table->string('additional_phone')->nullable();
-            $table->string('amount')->nullable();
-            $table->string('amount_paid')->nullable();
-            $table->string('amount_pending')->nullable();
+            $table->integer('amount')->nullable()->default(0);
+            $table->integer('amount_paid')->nullable()->default(0);
+            $table->integer('amount_pending')->nullable()->default(0);
             $table->integer('status')->default(RegistrationStatusEnum::Pending->value);
             $table->timestamps();
 

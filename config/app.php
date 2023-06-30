@@ -61,7 +61,7 @@ return [
 
     'trillos' => [
         'links' => [
-            'inscripcion' => 'https://forms.gle/sQqdoh3vGKCpER2q8',
+            'inscripcion' => '/register-to-event/1',
             'facebook' => 'https://www.facebook.com/people/Trillos-Isabelinos/pfbid02Yhj6ZPZNG899gSa4Ntm9svbfbSgpoJeKqe7Jow5iWvkSFGKM1jfyqYBiZTdj8Hrtl/',
             'instagram' => 'https://instagram.com/trillosisabelinos?igshid=NTc4MTIwNjQ2YQ==',
             'youtube' => 'https://www.youtube.com/@TrillosIsabelinos/videos',

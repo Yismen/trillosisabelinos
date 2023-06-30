@@ -13,7 +13,7 @@ class Registration extends Model
 {
     use HasFactory;
 
-    public $fillable = ['name', 'event_id', 'phone', 'email', 'group', 'additional_phone'];
+    public $fillable = ['name', 'event_id', 'phone', 'email', 'group', 'additional_phone', 'amount'];
 
     public $casts = [
         'enum' => RegistrationStatusEnum::class,
@@ -25,4 +25,15 @@ class Registration extends Model
     {
         return $this->belongsTo(Event::class);
     }
+    protected static function booted(): void
+    {
+        static::saved(function (Model $model) {
+            $model->updateQuietly([
+                'status' => $model->amount_pending > 0 ? RegistrationStatusEnum::Pending->value : RegistrationStatusEnum::Paid->value,
+            ]);
+            
+        });
+    }
+
+    
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\RegisterToEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::githubWebhooks('deploy-app');
+
+Route::get('register-to-event/{event}', RegisterToEvent::class);
