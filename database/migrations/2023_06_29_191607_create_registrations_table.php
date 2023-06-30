@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('group')->nullable();
             $table->string('additional_phone')->nullable();
-            $table->integer('amount')->nullable()->default(0);
-            $table->integer('amount_paid')->nullable()->default(0);
-            $table->integer('amount_pending')->nullable()->default(0);
+            $table->integer('amount')->unsigned()->default(0);
+            $table->integer('amount_paid')->unsigned()->default(0);
+            $table->integer('amount_pending')->unsigned()->default(0);
             $table->integer('status')->default(RegistrationStatusEnum::Pending->value);
             $table->timestamps();
 

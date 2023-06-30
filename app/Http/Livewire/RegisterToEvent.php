@@ -50,7 +50,7 @@ class RegisterToEvent extends Component
         $this->validate();
 
         DB::transaction(function() {
-            $this->event->registrations()->create([
+            $event = $this->event->registrations()->create([
                 'name' => $this->name,
                 'phone' => $this->phone,
                 'email' => $this->email,
@@ -60,7 +60,14 @@ class RegisterToEvent extends Component
             ]);
 
             // Send Email notification
-            // Create sales
+            
+            foreach ($this->plans as $id => $plan) {
+                $event->sales()->create([
+                    'plan_id' => $id,
+                    'count' => $plan['quantity'],
+                    'unit_price' => $this->event->plans->where('id', $id)->first()->price
+                ]);
+            }
 
             return redirect('/');
         });
