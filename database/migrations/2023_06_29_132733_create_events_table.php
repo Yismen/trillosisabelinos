@@ -16,7 +16,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 500);
             $table->date('date');
-            $table->integer('status')->default(EventStatusEnum::Pending->value);
+            $table->integer('status')->nullable()->default(EventStatusEnum::Pending->value);
+            $table->longText('images');
             $table->timestamps();
 
             $table->softDeletes();

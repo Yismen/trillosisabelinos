@@ -8,18 +8,19 @@ use App\Models\Payment;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PaymentResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Resources\RelationManagers\RelationGroup;
-use App\Filament\Resources\PaymentResource\RelationManagers\ImagesRelationManager;
 
 class PaymentResource extends Resource
 {
     protected static ?string $model = Payment::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -34,13 +35,29 @@ class PaymentResource extends Resource
                     ->closeOnDateSelection()
                     ->maxDate(now()),
                 Forms\Components\TextInput::make('amount')
-                    ->required(),
+                    ->numeric()
+                    ->type('number')
+                    ->required()
+                    ->mask(fn (\Filament\Forms\Components\TextInput\Mask $mask) => $mask
+                        ->money()
+                        ->numeric()
+                        ->decimalPlaces(2)
+                        ->minValue(0) 
+                        ->thousandsSeparator(','), // Add a separator for thousands.
+                    )
+                    ->minValue(0),
+                    
                 Forms\Components\Textarea::make('description')
                     ->required(),
-                \Filament\Forms\Components\FileUpload::make('images')
+                FileUpload::make('images')
                     ->multiple()
                     ->image()
-                    ->maxSize(4000),
+                    ->directory('payments')
+                    ->preserveFilenames()
+                    ->maxSize(2000)
+                    ->enableReordering()
+                    ->enableOpen()
+                    ->enableDownload(),
             ]);
     }
 
@@ -58,6 +75,9 @@ class PaymentResource extends Resource
                 Tables\Columns\TextColumn::make('amount')
                     ->sortable()
                     ->searchable(),
+                // ImageColumn::make('images')
+                //     ->size(40)
+                //     ->circular()
                 // Tables\Columns\TextColumn::make('description'),
                 // Tables\Columns\TextColumn::make('created_at')
                 //     ->dateTime(),
@@ -97,15 +117,5 @@ class PaymentResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            RelationGroup::make('images', [
-                ImagesRelationManager::class,
-            ]),
-        ];
-        
     }
 }

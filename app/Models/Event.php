@@ -10,20 +10,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Event extends Model
 {
-    use \App\Models\Traits\MorphManyImages;
-    public $fillable = ['name', 'date', 'status'];
+    public $fillable = ['name', 'date', 'status', 'images'];
 
     public $casts = [
         'status' => EventStatusEnum::class,
         'date' => 'date',
+        'images' => 'array',
     ];
     use HasFactory;
     use SoftDeletes;
 
     public function scopeAvailable(Builder $builder)
     {
-        return $builder->whereIn('status', [
-            EventStatusEnum::Pending->value, EventStatusEnum::Open->value
-        ]);
+        return $builder->where('status', EventStatusEnum::Open->value);
+    }
+    protected static function booted(): void
+    {
+        static::saved(function (Model $model) {
+            $status = $model->date >= now() ? EventStatusEnum::Closed : EventStatusEnum::Open;
+
+            $model->updateQuietly([
+                'status' => $status,
+            ]);
+            
+        });
     }
 }

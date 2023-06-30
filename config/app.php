@@ -66,6 +66,14 @@ return [
             'instagram' => 'https://instagram.com/trillosisabelinos?igshid=NTc4MTIwNjQ2YQ==',
             'youtube' => 'https://www.youtube.com/@TrillosIsabelinos/videos',
             'location' => 'https://goo.gl/maps/UU5F8poj9fXyHSqi6',
+        ],
+        'features' => [
+            'piscina',
+            'almuerzo',
+            'asistencia',
+            'abastecimiento',
+            'rifas',
+            'sorpresas',
         ]
     ],
 

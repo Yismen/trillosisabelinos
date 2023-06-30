@@ -16,7 +16,9 @@ use Illuminate\Validation\Rules\Enum;
 use App\Rules\Dates\AfterOrEqualToday;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -30,6 +32,7 @@ class EventResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?int $navigationSort = 1;
     public static function form(Form $form): Form
     {
         return $form
@@ -44,10 +47,20 @@ class EventResource extends Resource
                     ->required()
                     ->afterOrEqual(now()->startOfDay())
                     ,
+                FileUpload::make('images')
+                    ->multiple()
+                    ->image()
+                    ->directory('events')
+                    ->preserveFilenames()
+                    ->maxSize(2000)
+                    ->enableReordering()
+                    ->enableOpen()
+                    ->enableDownload(),
                 Select::make('status')
                     ->options(EventStatusEnum::toArray())
-                    ->required()
+                    ->nullable()
                     ->enum(EventStatusEnum::class)
+                    ->disabled()
                     ,
             ]);
     }

@@ -21,34 +21,12 @@ class PlanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->autofocus()
-                    ->maxLength(255)
-                    ->rules([
-                        'required',
-                        'min:3',
-                        'max:250',
-                    ]),
-                Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->numeric()
-                    ->rules([
-                        'required',
-                        'min:0',
-                    ])
-                    ,
-                Forms\Components\TagsInput::make('features')
-                    ->required()
-                    ->suggestions([
-                        'piscina',
-                        'abastecimientos',
-                        'almuerzo',
-                    ]),
                 Forms\Components\Select::make('event_id')
                     ->relationship('event', 'name')
                     ->required()
@@ -56,6 +34,27 @@ class PlanResource extends Resource
                         'required',
                         Rule::exists(Event::class, 'id'),
                     ]),
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->autofocus()
+                    ->maxLength(255)
+                    ->minLength(3),
+                Forms\Components\TextInput::make('price')
+                    ->required()
+                    ->numeric()
+                    ->type('number')
+                    ->minValue(0)
+                    ->mask(fn (\Filament\Forms\Components\TextInput\Mask $mask) => $mask
+                        ->money()
+                        ->minValue(0) 
+                    )
+                        ,
+                Forms\Components\TextInput::make('currency')
+                    ->nullable()
+                    ->minLength(3),
+                Forms\Components\TagsInput::make('features')
+                    ->required()
+                    ->suggestions(config('app.trillos.features')),
             ]);
     }
 
@@ -67,6 +66,9 @@ class PlanResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('currency')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TagsColumn::make('features')

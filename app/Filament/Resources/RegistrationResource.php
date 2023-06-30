@@ -22,19 +22,26 @@ class RegistrationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?int $navigationSort = 3;
+
+    protected function getTablePollingInterval(): ?string
+    {
+        return '60s';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('event_id')
+                    ->relationship('event', 'name')     
+                    ->required()  
+                    ->exists(Event::class, 'id'),
                 Forms\Components\TextInput::make('name')
                     ->autofocus()
                     ->required()
                     ->maxLength(500)
                     ->minLength(3),
-                Forms\Components\Select::make('event_id')
-                    ->relationship('event', 'name')     
-                    ->required()  
-                    ->exists(Event::class, 'id'),
                 Forms\Components\TextInput::make('phone')
                     ->required()
                     ->tel()

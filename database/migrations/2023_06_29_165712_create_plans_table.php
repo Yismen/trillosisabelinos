@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('price');
             $table->longText('features');
             $table->foreignIdFor(Event::class);
+            $table->string('currency')->nullable()->default('RD$');
             $table->timestamps();
             $table->softDeletes();
         });

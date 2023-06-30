@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->integer('amount')->unsigned();
             $table->longText('description');
+            $table->longText('images');
             $table->timestamps();
             $table->softDeletes();
         });
