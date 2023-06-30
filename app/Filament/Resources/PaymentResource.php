@@ -8,10 +8,12 @@ use App\Models\Payment;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PaymentResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\PaymentResource\RelationManagers;
+use Filament\Resources\RelationManagers\RelationGroup;
+use App\Filament\Resources\PaymentResource\RelationManagers\ImagesRelationManager;
 
 class PaymentResource extends Resource
 {
@@ -29,11 +31,16 @@ class PaymentResource extends Resource
                     ,
                 Forms\Components\DatePicker::make('date')
                     ->required()
-                    ->maxDate(now()->endOfDay()),
+                    ->closeOnDateSelection()
+                    ->maxDate(now()),
                 Forms\Components\TextInput::make('amount')
                     ->required(),
                 Forms\Components\Textarea::make('description')
                     ->required(),
+                \Filament\Forms\Components\FileUpload::make('images')
+                    ->multiple()
+                    ->image()
+                    ->maxSize(4000),
             ]);
     }
 
@@ -90,5 +97,15 @@ class PaymentResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            RelationGroup::make('images', [
+                ImagesRelationManager::class,
+            ]),
+        ];
+        
     }
 }

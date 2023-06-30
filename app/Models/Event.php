@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Event extends Model
 {
+    use \App\Models\Traits\MorphManyImages;
     public $fillable = ['name', 'date', 'status'];
 
     public $casts = [

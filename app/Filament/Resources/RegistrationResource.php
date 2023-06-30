@@ -27,8 +27,8 @@ class RegistrationResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required()
                     ->autofocus()
+                    ->required()
                     ->maxLength(500)
                     ->minLength(3),
                 Forms\Components\Select::make('event_id')
@@ -100,14 +100,14 @@ class RegistrationResource extends Resource
                     ->visible(false)
                     ->searchable(),
                 // Tables\Columns\TextColumn::make('amount')
-                    // ->sortable()
-                    // ->searchable(),
+                //     ->sortable()
+                //     ->searchable(),
                 // Tables\Columns\TextColumn::make('amount_paid')
-                    // ->sortable()
-                    // ->searchable(),
+                //     ->sortable()
+                //     ->searchable(),
                 // Tables\Columns\TextColumn::make('amount_pending')
-                    // ->sortable()
-                    // ->searchable(),
+                //     ->sortable()
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->enum(RegistrationStatusEnum::toArray())
                         ->sortable()
