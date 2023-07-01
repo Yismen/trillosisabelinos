@@ -25,7 +25,7 @@ class Event extends Model
             // ->generateSlugsOnUpdate('name')
             ->saveSlugsTo('slug');
     }
-    public $fillable = ['name', 'date', 'status', 'images', 'features', 'currency'];
+    public $fillable = ['name', 'date', 'status', 'images', 'features', 'currency', 'description'];
 
     public $casts = [
         'status' => EventStatusEnum::class,

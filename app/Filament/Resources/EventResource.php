@@ -14,6 +14,7 @@ use Filament\Tables\Columns\Column;
 use Filament\Forms\Components\Select;
 use Illuminate\Validation\Rules\Enum;
 use App\Rules\Dates\AfterOrEqualToday;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
@@ -52,6 +53,9 @@ class EventResource extends Resource
                 Forms\Components\TagsInput::make('features')
                     ->required()
                     ->suggestions(config('app.trillos.features')),
+                Textarea::make('description')
+                    ->required()
+                    ,
                 FileUpload::make('images')
                     ->multiple()
                     ->image()

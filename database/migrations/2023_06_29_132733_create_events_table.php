@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('slug')->nullable(); // Field name same as your `saveSlugsTo`
             $table->date('date');
             $table->integer('status')->nullable()->default(EventStatusEnum::Open->value);
-            $table->longText('images');
+            $table->longText('images')->nullable();
             $table->longText('features');
+            $table->longText('description');
             $table->string('currency')->nullable()->default('RD$');
             $table->timestamps();
 
