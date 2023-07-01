@@ -103,7 +103,7 @@
     </script>
     @endpush
 
-    @env('production')
+    @if(app()->isProduction())
     <!-- Google tag (gtag.js) -->
     @push('scripts')
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PFZ1SNWHL"></script>
@@ -115,5 +115,5 @@
         gtag('config', 'G-1PFZ1SNWHL');
     </script>
     @endpush
-    @endenv
+    @endIf
 </div>

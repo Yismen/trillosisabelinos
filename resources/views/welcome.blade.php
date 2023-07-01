@@ -434,7 +434,7 @@
         })()
     </script>
 
-    @env('production')
+    @if(app()->isProduction())
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-74T5P7Y73B"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -443,7 +443,7 @@
 
         gtag('config', 'G-74T5P7Y73B');
     </script>
-    @endenv
+    @endIf
 </body>
 
 </html>
