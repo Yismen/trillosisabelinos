@@ -361,7 +361,7 @@
 
                     </div>
 
-                    <div class="border-top  text-center">
+                    <div class="text-center">
                         {{-- <i class="fa fa-map-marker-alt"></i> --}}
                         <span class="fw-semibold text-uppercase">Para Depositos</span>
 

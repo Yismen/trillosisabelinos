@@ -24,6 +24,11 @@ body {
 .poster {
     width: 75%;
     position: relative;
+    transition: .5s;
+}
+
+.poster:hover {
+    transform: scale(110%);
 }
 
 .poster::before {
