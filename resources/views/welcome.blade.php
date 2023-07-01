@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
     @vite([
     'resources/js/app.js',
-    'resources/scss/app.scss'
+    'resources/sass/app.scss'
     ])
     @stack('styles')
 </head>

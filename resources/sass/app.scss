@@ -1,4 +1,5 @@
 // Font Awesome
+@import url('https://fonts.bunny.net/css?family=Nunito');
 $fa-font-path : "./fontawesome/webfonts" !default;
 
 @import "./fontawesome/fontawesome.scss";
@@ -7,6 +8,6 @@ $fa-font-path : "./fontawesome/webfonts" !default;
 @import "./fontawesome/brands.scss";
 
 @import 'variables';
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import 'bootstrap/scss/bootstrap';
 
 @import "home";

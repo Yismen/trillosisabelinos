@@ -21,3 +21,6 @@ Route::get('/', function () {
 Route::githubWebhooks('deploy-app');
 
 Route::get('register-to-event/{event:slug}', RegisterToEvent::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
