@@ -34,7 +34,7 @@
                         @foreach ($event->plans as $plan)
                         <tr class="{{ isset($plans[$plan->id]) ? 'table-info' : '' }} align-baseline" for="#quantity">
                             <td scope="row" class="col-4 text-end fw-bold text-uppercase">{{ $plan->name }}</td>
-                            <td class="col-2">{{ $plan->currency }} {{ $plan->price }} p/p</td>
+                            <td class="col-2">{{ $event->currency }} {{ $plan->price }} p/p</td>
                             <td class="col-2">
                                 <x-inputs.float-input type="number" field='plans.{{ $plan->id }}.quantity' min="0">
                                     Cantidad
@@ -84,7 +84,7 @@
 
                 <div class="d-flex justify-content-between mt-4">
                     <button class="btn btn-primary text-white" type="submit">Registrar</button>
-                    <a href="/" class="btn btn-outline-dark ">Cancel</a>
+                    <a href="/" class="btn btn-outline-dark" wire:click.prevent='cancel'>Cancel</a>
                 </div>
             </form>
         </main>

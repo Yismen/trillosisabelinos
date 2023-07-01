@@ -14,10 +14,9 @@ class Plan extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public $fillable = ['name', 'price', 'features', 'event_id', 'currency'];
+    public $fillable = ['name', 'price', 'event_id'];
 
     public $casts = [
-        'features' => 'array',
         'price' => AsMoney::class
     ];
 

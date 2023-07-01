@@ -61,18 +61,22 @@ return [
 
     'trillos' => [
         'links' => [
-            'inscripcion' => '/register-to-event/1',
+            'inscripcion' => '/register-to-event/trillos-isabelinos-2023',
             'facebook' => 'https://www.facebook.com/people/Trillos-Isabelinos/pfbid02Yhj6ZPZNG899gSa4Ntm9svbfbSgpoJeKqe7Jow5iWvkSFGKM1jfyqYBiZTdj8Hrtl/',
             'instagram' => 'https://instagram.com/trillosisabelinos?igshid=NTc4MTIwNjQ2YQ==',
             'youtube' => 'https://www.youtube.com/@TrillosIsabelinos/videos',
             'location' => 'https://goo.gl/maps/UU5F8poj9fXyHSqi6',
         ],
+        'currencies' => [
+            'RD$' => 'RD$',
+            'USD$' => 'USD$',
+        ],
         'features' => [
-            'piscina',
-            'almuerzo',
-            'asistencia',
-            'abastecimiento',
+            'dj en vivo',
+            'pscina',
             'rifas',
+            'almuerzo',
+            'abastecimiento',
             'sorpresas',
         ]
     ],

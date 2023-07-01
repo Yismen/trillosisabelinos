@@ -279,13 +279,13 @@ section {
 @include media-breakpoint-up(lg) {
     .poster {
         position: absolute;
-        width: 30%;
+        width: 40%;
         top: 60px;
         right: 0;
     }
 
     #hero-holder {
-        width: 65%;
+        width: 50%;
         height: 70vh;
     }
 
@@ -442,14 +442,8 @@ section {
 
     .poster {
         position: absolute;
-        width: 25%;
+        width: 35%;
         transition: 0.5s;
-    }
-
-    .poster:hover {
-        transform: scale(135%);
-        // z-index: 1000000000;
-        top: 110px;
     }
 
     .testimonial {

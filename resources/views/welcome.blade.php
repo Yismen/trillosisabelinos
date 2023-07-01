@@ -97,7 +97,7 @@
                     Trillos Isabelinos <span class="text-highlighted">2023</span>
                 </h1>
 
-                <a href="{{ asset('images/flyer-principal.jpeg') }}" class="poster">
+                <a href="{{ asset('images/flyer-principal.jpeg') }}" class="poster" target="__new">
                     {{-- <a href="{{ config('app.trillos.links.inscripcion') }}" class="poster" target="__new"> --}}
                         <img src="{{ asset('images/flyer-principal.jpeg') }}" class="img-responsive w-100 shadow"
                             alt="Flyer Trillos">
@@ -288,125 +288,130 @@
             </div>
         </section>
 
+
         <section class="bg-secondary" id="detalles">
             <h3 class="title">Fácil, <span class="text-highlighted">Adsequible</span>, Expectacular!</h3>
             <div
-                class="container banner d-flex flex-column flex-lg-row gap-3 justify-content-between justify-content-md-center p-4 align-items-start align-items-sm-center">
-                <div class="d-flex gap-3 flex-column text-nowrap">
-                    <div class="d-flex justify-content-between">
-                        <div class="">
-                            <i class="fa fa-clock"></i>
-                            <span class="fw-semibold">8:30 AM</span>
-                        </div>
-                        <div class="">
-                            <i class="fa fa-map-marker-alt"></i>
-                            <span class="fw-semibold">Kiandy Ranch</span>
-                        </div>
+                class="align-items-sm-center align-items-start banner container d-flex flex-column gap-3 justify-content-between justify-content-md-center p-4">
+                {{-- Info --}}
+                <div class="d-flex justify-content-center gap-5 w-100">
+                    <div class="">
+                        <i class="fa fa-clock"></i>
+                        <span class="fw-semibold">8:00 AM</span>
                     </div>
-                    <div class="border-top">
+                    <div class="">
+                        <i class="fa fa-map-marker-alt"></i>
+                        <span class="fw-semibold">Kiandy Ranch</span>
+                    </div>
+                </div>
+
+                {{-- main --}}
+                <div class="d-flex flex-column flex-lg-row justify-content-between gap-5 w-100">
+                    <div class="d-flex flex-column">
+                        <h5 class="fw-bold text-uppercase text-center fs-5">Precios</h5>
+                        <div class="d-flex justify-content-start shadow overflow-x-auto w-md-auto">
+                            <ul class="list-group w-100">
+                                <li class="list-group-item bg-transparent m-0 p-2">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <div class="text-uppercase fw-bold">
+                                            Ciclistas
+                                        </div>
+                                        <div>
+                                            <span class="fw-semibold">RD$</span>
+                                            <span class="fw-bold fs-3">800</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item bg-transparent m-0 p-2">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <div class="text-uppercase fw-bold">
+                                            Acompañantes
+                                        </div>
+                                        <div>
+                                            <span class="fw-semibold">RD$</span>
+                                            <span class="fw-bold fs-3">500</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item bg-transparent m-0 p-2">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <div class="text-uppercase fw-bold">
+                                            Niños (de 6 a 12)
+                                        </div>
+                                        <div>
+                                            <span class="fw-semibold">RD$</span>
+                                            <span class="fw-bold fs-3">300</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="fw-semibold mt-2 text-uppercase 5">
+                            Niños menores de 6 años <span class="highlighted">Gratis</span>
+                        </div>
+
+                        <div>
+                            <span class="badge bg-primary fw-light"><i class="fa fa-music"></i> DJ Envivo</span>
+                            <span class="badge bg-primary fw-light"><i class="fa fa-water"></i> Piscina</span>
+                            <span class="badge bg-primary fw-light"><i class="fa fa-ticket"></i> Rifas</span>
+                            <span class="badge bg-primary fw-light"><i class="fa fa-zap"></i> Abastecimiento</span>
+                            <span class="badge bg-primary fw-light"><i class="fa fa-face-laugh"></i> Almuerzo</span>
+                        </div>
+
+                    </div>
+
+                    <div class="border-top  text-center">
                         {{-- <i class="fa fa-map-marker-alt"></i> --}}
                         <span class="fw-semibold text-uppercase">Para Depositos</span>
 
-                        <table class="table-sm table-inverse table-hovered table-responsive">
-                            <thead class="thead-inverse">
-                                <tr>
-                                    <th>Banco</th>
-                                    <th>Cuenta</th>
-                                    <th>A Nombre de</th>
-                                    <th>Cedula</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td scope="row">Banreservas</td>
-                                    <td>9605265552</td>
-                                    <td>Nicacio Suero</td>
-                                    <td>121-0012354-1</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">Banco Popular</td>
-                                    <td>744540758</td>
-                                    <td>Nicacio Suero</td>
-                                    <td>121-0012354-1</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        @include('cuentas-bancarias')
                     </div>
-                </div>
-                <div class="d-flex flex-column">
-                    <div class="d-flex justify-content-start shadow overflow-x-auto w-md-auto">
-                        <x-plan price="500" name="acompañantes">
-                        </x-plan>
-                        <x-plan price="800" :main="true" name="ciclistas">
-                        </x-plan>
-                        <x-plan price="300" name="niños de 6 a 12">
-                        </x-plan>
-                    </div>
-
-                    <div class="fw-bold mt-2 text-uppercase fs-5">Niños menores de 6 años <span
-                            class="highlighted">Gratis</span></div>
                 </div>
                 <div class="mx-auto mx-lg-0">
                     <a href="{{ config('app.trillos.links.inscripcion') }}"
-                        class="btn btn-primary text-white shadow btn-lg">Inscribete</a>
-                </div>
-            </div>
-        </section>
-
-        {{-- <section class="members bg-primary text-white" id="equipo">
-            <h3 class="title">Dedicados a <span class="text-highlighted">Servir</span>, dar lo mejor!</h3>
-
-            <div class="row content">
-
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
-                </div>
-
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
-                </div>
-
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
-                </div>
-
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <x-member name="Miguel Garcia" title="Presitende Bicicentro" />
-                </div>
-            </div>
-        </section> --}}
-
-        <section class="bg-primary text-white">
-            <div
-                class="align-items-md-end align-items-center container d-flex flex-column flex-md-row footer justify-content-between ">
-                <div>
-                    <a href="#inicio" class="text-white text-decoration-none text-center text-md-start">
-                        <h4 class="mb-5 fw-bold fs-3">{{ config('app.name', 'Trillos Isabelinos') }}</h4>
+                        class="btn btn-primary text-white shadow btn-lg">
+                        Inscribete
                     </a>
-                    <div class="contactos mb-3 mb-md-0 d-flex flex-column text-center text-md-start">
-                        <a href="mailto:trillosisabelinos@gmail.com" class="text-white"> <i class="fa fa-envelope"
-                                target="__new"></i>
-                            trillosisabelinos@gmail.com</a>
-                        <a href="tel:+1-809-993-7940" class="text-white"><i class="fa fa-phone" target="__new"></i>
-                            809-993-7940</a>
-                    </div>
-                </div>
-
-                <p class="legal d-flex flex-column mb-4 mb-md-0 ">
-                    Copyright 2023-{{ now()->format('Y') }}
-                    <span>Derechos reservados.</span>
-                </p>
-
-                <div class=" socials d-flex gap-2">
-                    <a href="{{ config('app.trillos.links.instagram') }}" target="__new"><i
-                            class="fa-brands fa-instagram"></i></a>
-                    <a href="{{ config('app.trillos.links.facebook') }}" target="__new"><i
-                            class="fa-brands fa-facebook"></i></a>
-                    <a href="{{ config('app.trillos.links.youtube') }}" target="__new"><i
-                            class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
-        </section>
+
+
+    </div>
+    </section>
+
+
+    <section class="bg-primary text-white">
+        <div
+            class="align-items-md-end align-items-center container d-flex flex-column flex-md-row footer justify-content-between ">
+            <div>
+                <a href="#inicio" class="text-white text-decoration-none text-center text-md-start">
+                    <h4 class="mb-5 fw-bold fs-3">{{ config('app.name', 'Trillos Isabelinos') }}</h4>
+                </a>
+                <div class="contactos mb-3 mb-md-0 d-flex flex-column text-center text-md-start">
+                    <a href="mailto:trillosisabelinos@gmail.com" class="text-white"> <i class="fa fa-envelope"
+                            target="__new"></i>
+                        trillosisabelinos@gmail.com</a>
+                    <a href="tel:+1-809-993-7940" class="text-white"><i class="fa fa-phone" target="__new"></i>
+                        809-993-7940</a>
+                </div>
+            </div>
+
+            <p class="legal d-flex flex-column mb-4 mb-md-0 ">
+                Copyright 2023-{{ now()->format('Y') }}
+                <span>Derechos reservados.</span>
+            </p>
+
+            <div class=" socials d-flex gap-2">
+                <a href="{{ config('app.trillos.links.instagram') }}" target="__new"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <a href="{{ config('app.trillos.links.facebook') }}" target="__new"><i
+                        class="fa-brands fa-facebook"></i></a>
+                <a href="{{ config('app.trillos.links.youtube') }}" target="__new"><i
+                        class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </section>
     </div>
 
     @stack('scripts')

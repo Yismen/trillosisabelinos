@@ -6,9 +6,12 @@ use App\Models\Event;
 use Livewire\Component;
 use App\Models\Registration;
 use Illuminate\Support\Facades\DB;
+use App\Http\Livewire\Traits\HasConfirmation;
+use Flasher\Prime\Notification\NotificationInterface;
 
 class RegisterToEvent extends Component
 {
+    use HasConfirmation;
     public Event $event;
      public $name;
      public $phone;
@@ -54,12 +57,14 @@ class RegisterToEvent extends Component
                 'name' => $this->name,
                 'phone' => $this->phone,
                 'email' => $this->email,
-                'group' => $this->group ?: 'ssf',
+                'group' => $this->group,
                 'additional_phone' => $this->additional_phone,
                 'amount' => $this->total,
             ]);
 
             // Send Email notification
+
+
             
             foreach ($this->plans as $id => $plan) {
                 $event->sales()->create([
@@ -68,6 +73,9 @@ class RegisterToEvent extends Component
                     'unit_price' => $this->event->plans->where('id', $id)->first()->price
                 ]);
             }
+
+
+            $this->inform("Usted ha sido registrado al evento!", view('registration-created')->toHtml(), "OK");
 
             return redirect('/');
         });
@@ -104,5 +112,17 @@ class RegisterToEvent extends Component
         unset($this->plans[$product]);
         
         $this->total = $this->calculateTotal();
+    }
+
+    public function cancel()
+    {
+        $this->confirm('cancelConfirmed', 'Está seguro que quiere cancelar el proceso de registro?', NotificationInterface::ERROR);
+    }
+
+    public function cancelConfirmed()
+    {
+        $this->flash("Proceso de inscripción cancelado. ", NotificationInterface::ERROR);
+        
+        return redirect("/");
     }
 }

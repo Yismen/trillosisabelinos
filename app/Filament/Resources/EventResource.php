@@ -47,6 +47,11 @@ class EventResource extends Resource
                     ->required()
                     ->afterOrEqual(now()->startOfDay())
                     ,
+                Forms\Components\Select::make('currency')
+                    ->options(config('app.trillos.currencies')),
+                Forms\Components\TagsInput::make('features')
+                    ->required()
+                    ->suggestions(config('app.trillos.features')),
                 FileUpload::make('images')
                     ->multiple()
                     ->image()
@@ -74,6 +79,12 @@ class EventResource extends Resource
                     ->searchable(),
                 TextColumn::make('date')
                     ->date()
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('currency')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TagsColumn::make('features')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('status')

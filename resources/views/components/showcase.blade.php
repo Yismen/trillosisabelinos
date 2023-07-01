@@ -5,7 +5,10 @@
 {{-- {{ dd($image, str($image)->afterLast('showcase/')) }} --}}
 <div {{ $attributes->merge([
     'class' => 'showcase'
-    ]) }} style="background-image: url(images/showcase/blurred.jpg)">
+    ]) }} style="background-image: url(images/showcase/blurred.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;">
     <img src="{{ $image }}" alt="{{ $title }}" loading="lazy">
     <div class="body ">
         <div class="content d-flex flex-column px-2">

@@ -30,10 +30,7 @@ class PlanResource extends Resource
                 Forms\Components\Select::make('event_id')
                     ->relationship('event', 'name')
                     ->required()
-                    ->rules([
-                        'required',
-                        Rule::exists(Event::class, 'id'),
-                    ]),
+                    ->exists(Event::class, 'id'),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->autofocus()
@@ -49,12 +46,6 @@ class PlanResource extends Resource
                         ->minValue(0) 
                     )
                         ,
-                Forms\Components\TextInput::make('currency')
-                    ->nullable()
-                    ->minLength(3),
-                Forms\Components\TagsInput::make('features')
-                    ->required()
-                    ->suggestions(config('app.trillos.features')),
             ]);
     }
 
@@ -66,12 +57,6 @@ class PlanResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('currency')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TagsColumn::make('features')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('event.name')

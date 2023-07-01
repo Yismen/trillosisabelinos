@@ -20,4 +20,4 @@ Route::get('/', function () {
 
 Route::githubWebhooks('deploy-app');
 
-Route::get('register-to-event/{event}', RegisterToEvent::class);
+Route::get('register-to-event/{event:slug}', RegisterToEvent::class);
