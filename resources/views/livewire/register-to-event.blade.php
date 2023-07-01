@@ -84,7 +84,7 @@
 
                 <div class="d-flex justify-content-between mt-4">
                     <button class="btn btn-primary text-white" type="submit">Registrar</button>
-                    <a href="/" class="btn btn-outline-dark" wire:click.prevent='cancel'>Cancel</a>
+                    <a href="/" class="btn btn-outline-dark" wire:click.prevent='cancel'>Cancelar</a>
                 </div>
             </form>
         </main>
