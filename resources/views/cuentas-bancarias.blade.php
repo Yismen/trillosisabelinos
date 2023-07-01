@@ -23,7 +23,7 @@
 
     <p class="mt-2 d-flex flex-column">
         <span class="text-uppercase fw-semibold">Favor enviar confirmación de pagos:</span>
-        <a href="tel:+809-993-7840" class="text-black"><i class="pr-3 fa fa-phone"></i> 809-993-7840</a>
+        <a href="tel:+809-993-7940" class="text-black"><i class="pr-3 fa fa-phone"></i> 809-993-7940</a>
         <a href="mailto:trillosisabelinos@gmail.com" class="text-black"><i class="pr-3 fa fa-mail-bulk"></i>
             trillosisabelinos@gmail.com</a>
     </p>
