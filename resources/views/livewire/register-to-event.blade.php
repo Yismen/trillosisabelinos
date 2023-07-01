@@ -29,34 +29,37 @@
                     </div>
                 </div>
 
-                <table class="table table-inverse table-responsive table-borderless table-sm">
-                    <tbody>
-                        @foreach ($event->plans as $plan)
-                        <tr class="{{ isset($plans[$plan->id]) ? 'table-info' : '' }} align-baseline" for="#quantity">
-                            <td scope="row" class="col-4 text-end fw-bold text-uppercase">{{ $plan->name }}</td>
-                            <td class="col-2">{{ $event->currency }} {{ $plan->price }} p/p</td>
-                            <td class="col-2">
-                                <x-inputs.float-input type="number" field='plans.{{ $plan->id }}.quantity' min="0">
-                                    Cantidad
-                                </x-inputs.float-input>
-                            </td>
-                            <td class="">
-                                {{ $plan->currency }} {{
-                                number_format($this->calculateSubtotal(($plans[$plan->id]['quantity'] ?? 0),
-                                $plan->price), 2) }}
-                            </td>
-                            <td class="col-1">
-                                @if ($plans[$plan->id]['quantity'] ?? 0)
+                <div class="table-responsive">
+                    <table class="table table-inverse table-borderless table-sm">
+                        <tbody>
+                            @foreach ($event->plans as $plan)
+                            <tr class="{{ isset($plans[$plan->id]) ? 'table-info' : '' }} align-baseline"
+                                for="#quantity">
+                                <td scope="row" class=" text-end fw-bold text-uppercase">{{ $plan->name }}</td>
+                                <td class="">{{ $event->currency }} {{ $plan->price }} p/p</td>
+                                <td class="">
+                                    <x-inputs.inline-input type="number" field='plans.{{ $plan->id }}.quantity' min="0">
+                                        Cantidad
+                                    </x-inputs.inline-input>
+                                </td>
+                                <td class="">
+                                    {{ $plan->currency }} {{
+                                    number_format($this->calculateSubtotal(($plans[$plan->id]['quantity'] ?? 0),
+                                    $plan->price), 2) }}
+                                </td>
+                                <td class="col-1">
+                                    @if ($plans[$plan->id]['quantity'] ?? 0)
 
-                                <button class="btn btn-sm btn-dark" title="Eliminar"
-                                    wire:click.prevent='clearProduct({{ $plan->id ?? 0 }})'>
-                                    X
-                                </button>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                </table>
+                                    <button class="btn btn-sm btn-dark" title="Eliminar"
+                                        wire:click.prevent='clearProduct({{ $plan->id ?? 0 }})'>
+                                        X
+                                    </button>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                    </table>
+                </div>
 
                 @if ($errors->has('plans') )
                 <div class="alert alert-danger fade show" role="alert">
@@ -82,7 +85,7 @@
                     $ {{ number_format($this->total, 2) }}
                 </div>
 
-                <div class="d-flex justify-content-between mt-4">
+                <div class="d-flex gap-3 flex-column flex-md-row justify-content-between mt-4">
                     <button class="btn btn-primary text-white" type="submit">Registrar</button>
                     <a href="/" class="btn btn-outline-dark" wire:click.prevent='cancel'>Cancelar</a>
                 </div>
@@ -99,4 +102,18 @@
         })()
     </script>
     @endpush
+
+    @env('production')
+    <!-- Google tag (gtag.js) -->
+    @push('scripts')
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PFZ1SNWHL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-1PFZ1SNWHL');
+    </script>
+    @endpush
+    @endenv
 </div>

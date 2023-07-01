@@ -29,5 +29,6 @@ $DEPLOY_PHP_VERSION artisan optimize:clear
 
 $DEPLOY_PHP_VERSION artisan view:cache
 $DEPLOY_PHP_VERSION artisan event:cache
+$DEPLOY_PHP_VERSION artisan optimize
 
 $DEPLOY_PHP_VERSION artisan up
