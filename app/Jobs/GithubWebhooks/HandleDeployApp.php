@@ -27,8 +27,8 @@ class HandleDeployApp implements ShouldQueue
     public function handle(): void
     {
         
-        // $process = new Process(['chmod +x ../deploy.sh']);
-        $process = new Process(['../deploy.sh']);
+        $process = new Process(['chmod +x ../deploy.sh']);
+        $process = new Process(['sh ../deploy.sh']);
         $process->run();
 
         // executes after the command finishes
