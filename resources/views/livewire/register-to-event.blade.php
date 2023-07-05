@@ -50,10 +50,10 @@
                                 <td class="col-1">
                                     @if ($plans[$plan->id]['quantity'] ?? 0)
 
-                                    <button class="btn btn-sm btn-dark" title="Eliminar"
+                                    <a href="#" class="btn btn-sm btn-dark" title="Eliminar"
                                         wire:click.prevent='clearProduct({{ $plan->id ?? 0 }})'>
                                         X
-                                    </button>
+                                    </a>
                                     @endif
                                 </td>
                             </tr>
@@ -75,7 +75,7 @@
                 <div class="alert alert-danger fade show" role="alert">
                     <ul>
                         @foreach ($errors->get('plans.*.quantity') as $error)
-                        <li>{{ $error }}</li>
+                        <li>{{ $error[0] ?? $error }}</li>
                         @endforeach
                     </ul>
                 </div>

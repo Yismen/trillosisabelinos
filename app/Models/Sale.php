@@ -22,13 +22,13 @@ class Sale extends Model
     ];
 
     protected static function booted(): void
-    {        
+    {
         static::saved(function (Model $model) {
-            
+
             $model->updateQuietly([
-                'amount' => $model->count * AsMoney::parse($model->plan->price) *  100
+                'amount' => $model->count * AsMoney::parse($model->plan->price)
             ]);
-            
+
             $model->registration->updateAmounts();
         });
     }
@@ -43,11 +43,12 @@ class Sale extends Model
         return $this->belongsTo(Registration::class);
     }
 
-    public function amount(): Attribute
-    {
-        return Attribute::make(
-            // get: fn (float $amount) => dd($amo),
-            set: fn (float $amount) => $this->count * AsMoney::parse($this->unit_price) *  100,
-        );
-    }
+    // public function amount(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn (float $amount) => dd($amo),
+    //         set: fn (float $amount) => dd("asdf"),
+    //         // set: fn (float $amount) => $this->count * AsMoney::parse($this->unit_price) *  100,
+    //     );
+    // }
 }
