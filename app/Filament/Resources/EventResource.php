@@ -40,6 +40,7 @@ class EventResource extends Resource
                 DatePicker::make('date')
                     ->minDate(now()->startOfDay())
                     ->required()
+                    ->closeOnDateSelection()
                     ->afterOrEqual(now()->startOfDay()),
                 Forms\Components\Select::make('currency')
                     ->options(config('app.trillos.currencies')),
