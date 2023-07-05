@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\RegistrationResource\Pages;
 
-use App\Filament\Resources\RegistrationResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ManageRecords;
+use App\Filament\Resources\RegistrationResource;
 
 class ManageRegistrations extends ManageRecords
 {
@@ -13,7 +13,7 @@ class ManageRegistrations extends ManageRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            // Actions\CreateAction::make(),
         ];
     }
 }

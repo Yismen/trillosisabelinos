@@ -8,10 +8,10 @@ use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SaleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\SaleResource\RelationManagers;
 
 class SaleResource extends Resource
 {
@@ -19,7 +19,7 @@ class SaleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?int $navigationSort =5;
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
@@ -27,9 +27,15 @@ class SaleResource extends Resource
             ->schema([
                 Forms\Components\Select::make('registration_id')
                     ->relationship('registration', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} - {$record->amount_pending}")
                     ->required(),
                 Forms\Components\Select::make('plan_id')
                     ->relationship('plan', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} - {$record->price}")
                     ->required(),
                 Forms\Components\TextInput::make('count')
                     ->required()
@@ -41,6 +47,7 @@ class SaleResource extends Resource
                     ->minValue(0),
                 Forms\Components\TextInput::make('amount')
                     ->numeric()
+                    ->disabled()
                     ->minValue(0),
             ]);
     }
@@ -79,14 +86,14 @@ class SaleResource extends Resource
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageSales::route('/'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\PaymentResource\Pages;
 
 use Filament\Pages\Actions;
-use Illuminate\Database\Eloquent\Model;
 use App\Filament\Resources\PaymentResource;
 use Filament\Resources\Pages\ManageRecords;
 

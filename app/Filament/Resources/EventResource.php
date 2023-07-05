@@ -8,24 +8,16 @@ use App\Models\Event;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use App\Enums\EventStatusEnum;
-use Illuminate\Validation\Rule;
 use Filament\Resources\Resource;
-use Filament\Tables\Columns\Column;
 use Filament\Forms\Components\Select;
-use Illuminate\Validation\Rules\Enum;
-use App\Rules\Dates\AfterOrEqualToday;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Columns\SelectColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\EventResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\EventResource\RelationManagers;
 
 class EventResource extends Resource
 {
@@ -34,6 +26,7 @@ class EventResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?int $navigationSort = 1;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -42,20 +35,19 @@ class EventResource extends Resource
                     ->autofocus()
                     ->required()
                     ->minLength(3)
-                    ->maxLength(500),
+                    ->maxLength(500)
+                    ->unique(ignoreRecord: true),
                 DatePicker::make('date')
                     ->minDate(now()->startOfDay())
                     ->required()
-                    ->afterOrEqual(now()->startOfDay())
-                    ,
+                    ->afterOrEqual(now()->startOfDay()),
                 Forms\Components\Select::make('currency')
                     ->options(config('app.trillos.currencies')),
                 Forms\Components\TagsInput::make('features')
                     ->required()
                     ->suggestions(config('app.trillos.features')),
                 Textarea::make('description')
-                    ->required()
-                    ,
+                    ->required(),
                 FileUpload::make('images')
                     ->multiple()
                     ->image()
@@ -69,8 +61,7 @@ class EventResource extends Resource
                     ->options(EventStatusEnum::toArray())
                     ->nullable()
                     ->enum(EventStatusEnum::class)
-                    ->disabled()
-                    ,
+                    ->disabled(),
             ]);
     }
 
@@ -114,14 +105,14 @@ class EventResource extends Resource
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageEvents::route('/'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

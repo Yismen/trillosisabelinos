@@ -41,7 +41,6 @@ trait HasConfirmation
         string|null $message = 'Are you sure?',
         string|null $viewContent = null,
         string|null $confirmationButtonText = 'INFO'
-        
     ): Envelope {
         return sweetalert(
             $message,

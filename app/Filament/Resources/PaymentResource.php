@@ -8,6 +8,7 @@ use App\Models\Payment;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,28 +28,33 @@ class PaymentResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('registration_id')
+                    ->searchable()
+                    ->preload()
                     ->relationship('registration', 'name')
-                    ->required()
-                    ,
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} - {$record->amount_pending}")
+                    ->required(),
                 Forms\Components\DatePicker::make('date')
                     ->required()
                     ->closeOnDateSelection()
-                    ->maxDate(now()),
+                    ->maxDate(now()->endOfDay()),
                 Forms\Components\TextInput::make('amount')
                     ->numeric()
                     ->type('number')
                     ->required()
-                    ->mask(fn (\Filament\Forms\Components\TextInput\Mask $mask) => $mask
+                    ->mask(
+                        fn (\Filament\Forms\Components\TextInput\Mask $mask) => $mask
                         ->money()
                         ->numeric()
                         ->decimalPlaces(2)
-                        ->minValue(0) 
+                        ->minValue(0)
                         ->thousandsSeparator(','), // Add a separator for thousands.
                     )
-                    ->minValue(0),
-                    
+                    ->minValue(0)
+                    // ->lte('registration.amount_pending')
+                    ->validationAttribute('amount'),
+
                 Forms\Components\Textarea::make('description')
-                    ->required(),
+                    ->nullable(),
                 FileUpload::make('images')
                     ->multiple()
                     ->image()
@@ -66,6 +72,9 @@ class PaymentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('registration.name')
+                    ->getStateUsing(function(Model $record) {
+                        return "{$record->registration->name} - {$record->registration->amount_pending}";
+                    })
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date')
@@ -73,6 +82,9 @@ class PaymentResource extends Resource
                     ->searchable()
                     ->date(),
                 Tables\Columns\TextColumn::make('amount')
+                    ->color(function($record) {
+                        return $record->registration->amount < $record->amount ? 'danger' : '';
+                    })
                     ->sortable()
                     ->searchable(),
                 // ImageColumn::make('images')
@@ -103,14 +115,14 @@ class PaymentResource extends Resource
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManagePayments::route('/'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

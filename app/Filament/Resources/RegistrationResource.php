@@ -8,13 +8,11 @@ use App\Models\Event;
 use App\Models\Registration;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
-use Illuminate\Validation\Rule;
 use Filament\Resources\Resource;
 use App\Enums\RegistrationStatusEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RegistrationResource\Pages;
-use App\Filament\Resources\RegistrationResource\RelationManagers;
 
 class RegistrationResource extends Resource
 {
@@ -24,18 +22,15 @@ class RegistrationResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
-    protected function getTablePollingInterval(): ?string
-    {
-        return '60s';
-    }
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('event_id')
-                    ->relationship('event', 'name')     
-                    ->required()  
+                    ->relationship('event', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->required()
                     ->exists(Event::class, 'id'),
                 Forms\Components\TextInput::make('name')
                     ->autofocus()
@@ -47,10 +42,9 @@ class RegistrationResource extends Resource
                     ->tel()
                     ->maxLength(15),
                 Forms\Components\TextInput::make('email')
-                    ->required()
+                    // ->required()
                     ->email()
-                    ->maxLength(255)
-                    ->unique(Registration::class, 'email'),
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('group')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('additional_phone')
@@ -60,20 +54,17 @@ class RegistrationResource extends Resource
                     ->numeric()
                     ->disabled()
                     ->nullable()
-                    ->minLength(0)
-                    ->maxLength(255),
+                    ->minValue(0),
                 Forms\Components\TextInput::make('amount_paid')
                     ->numeric()
                     ->disabled()
                     ->nullable()
-                    ->minLength(0)
-                    ->maxLength(255),
+                    ->minValue(0),
                 Forms\Components\TextInput::make('amount_pending')
                     ->numeric()
                     ->disabled()
                     ->nullable()
-                    ->minLength(0)
-                    ->maxLength(255),
+                    ->minValue(0),
                 Forms\Components\Select::make('status')
                     ->nullable()
                     ->disabled()
@@ -84,6 +75,7 @@ class RegistrationResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->poll('60 s')
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
@@ -100,21 +92,21 @@ class RegistrationResource extends Resource
                     ->searchable()
                     ->visible(false),
                 Tables\Columns\TextColumn::make('group')
-                    ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->visible(false),
                 Tables\Columns\TextColumn::make('additional_phone')
                     ->sortable()
                     ->visible(false)
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('amount')
-                //     ->sortable()
-                //     ->searchable(),
+                Tables\Columns\TextColumn::make('amount')
+                    ->sortable()
+                    ->searchable(),
                 // Tables\Columns\TextColumn::make('amount_paid')
                 //     ->sortable()
                 //     ->searchable(),
-                // Tables\Columns\TextColumn::make('amount_pending')
-                //     ->sortable()
-                //     ->searchable(),
+                Tables\Columns\TextColumn::make('amount_pending')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->enum(RegistrationStatusEnum::toArray())
                         ->sortable()
@@ -136,14 +128,14 @@ class RegistrationResource extends Resource
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageRegistrations::route('/'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

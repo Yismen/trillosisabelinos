@@ -9,24 +9,23 @@ use Symfony\Component\Process\Process;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Spatie\GitHubWebhooks\Models\GitHubWebhookCall;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class HandleDeployApp implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+
     public function __construct(
         public GitHubWebhookCall $webhookCall
-    )
-    {
-        //
+    ) {
     }
-    
+
     public function handle(): void
     {
-        
         $process = new Process(['chmod +x ../deploy.sh']);
         $process = new Process(['sh ../deploy.sh']);
         $process->run();

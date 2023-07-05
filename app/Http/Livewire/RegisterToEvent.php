@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\Event;
 use Livewire\Component;
-use App\Models\Registration;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\HasConfirmation;
 use Flasher\Prime\Notification\NotificationInterface;
@@ -13,12 +12,11 @@ class RegisterToEvent extends Component
 {
     use HasConfirmation;
     public Event $event;
-     public $name;
-     public $phone;
-     public $email;
-     public $group;
-     public $additional_phone;
-
+    public $name;
+    public $phone;
+    public $email;
+    public $group;
+    public $additional_phone;
 
     public $plans = [];
     public $total = 0;
@@ -32,7 +30,7 @@ class RegisterToEvent extends Component
         'plans.*.quantity' => ['required', 'numeric', 'min:1'],
     ];
 
-    protected $messages = [        
+    protected $messages = [
         'plans.min' => 'Favor poner cantidad en al menos un producto',
         // 'plans.*' => ['required'],
         'plans.*.quantity.min' => 'La cantidad minima permitida es 1',
@@ -42,6 +40,7 @@ class RegisterToEvent extends Component
     {
         $this->event = $event->load('plans');
     }
+
     public function render()
     {
         return view('livewire.register-to-event')
@@ -52,7 +51,7 @@ class RegisterToEvent extends Component
     {
         $this->validate();
 
-        DB::transaction(function() {
+        DB::transaction(function () {
             $event = $this->event->registrations()->create([
                 'name' => $this->name,
                 'phone' => $this->phone,
@@ -64,8 +63,6 @@ class RegisterToEvent extends Component
 
             // Send Email notification
 
-
-            
             foreach ($this->plans as $id => $plan) {
                 $event->sales()->create([
                     'plan_id' => $id,
@@ -74,8 +71,7 @@ class RegisterToEvent extends Component
                 ]);
             }
 
-
-            $this->inform("Usted ha sido registrado al evento!", view('registration-created', ['total' => $this->total])->toHtml(), "OK");
+            $this->inform('Usted ha sido registrado al evento!', view('registration-created', ['total' => $this->total])->toHtml(), 'OK');
 
             return redirect('/');
         });
@@ -110,7 +106,7 @@ class RegisterToEvent extends Component
     public function clearProduct($product)
     {
         unset($this->plans[$product]);
-        
+
         $this->total = $this->calculateTotal();
     }
 
@@ -121,8 +117,8 @@ class RegisterToEvent extends Component
 
     public function cancelConfirmed()
     {
-        $this->flash("Proceso de inscripción cancelado. ", NotificationInterface::ERROR);
-        
-        return redirect("/");
+        $this->flash('Proceso de inscripción cancelado. ', NotificationInterface::ERROR);
+
+        return redirect('/');
     }
 }

@@ -8,12 +8,13 @@ use Filament\Tables;
 use App\Models\Event;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
-use Illuminate\Validation\Rule;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Field;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rules\Unique;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PlanResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\PlanResource\RelationManagers;
 
 class PlanResource extends Resource
 {
@@ -28,24 +29,31 @@ class PlanResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('event_id')
+                    ->searchable()
                     ->relationship('event', 'name')
+                    ->preload()
                     ->required()
                     ->exists(Event::class, 'id'),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->autofocus()
                     ->maxLength(255)
-                    ->minLength(3),
+                    ->minLength(3)
+                    ->unique(callback: function (Unique $rule, callable $get) { 
+                        return $rule
+                            ->where('event_id', $get('event_id'));
+                        }, ignoreRecord: true)
+                    ,
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
                     ->type('number')
                     ->minValue(0)
-                    ->mask(fn (\Filament\Forms\Components\TextInput\Mask $mask) => $mask
+                    ->mask(
+                        fn (\Filament\Forms\Components\TextInput\Mask $mask) => $mask
                         ->money()
-                        ->minValue(0) 
-                    )
-                        ,
+                        ->minValue(0)
+                    ),
             ]);
     }
 
@@ -80,14 +88,14 @@ class PlanResource extends Resource
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManagePlans::route('/'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
@@ -95,4 +103,10 @@ class PlanResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
+    
+    protected function getFormModel(): Plan 
+    {
+        return $this->plan;
+    } 
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -14,6 +15,13 @@ class Sale extends Model
 
     protected $fillable = ['plan_id', 'registration_id', 'count', 'unit_price', 'amount'];
 
+    protected static function booted(): void
+    {
+        static::saved(function (Model $model) {
+            $model->registration->updateAmounts();
+        });
+    }
+
     public function plan(): BelongsTo
     {
         return $this->belongsTo(Plan::class);
@@ -23,13 +31,12 @@ class Sale extends Model
     {
         return $this->belongsTo(Registration::class);
     }
-    protected static function booted(): void
+
+    public function amount(): Attribute
     {
-        static::saved(function (Model $model) {
-            $model->updateQuietly([
-                'amount' => $model->count * $model->unit_price,
-            ]);
-            
-        });
+        return Attribute::make(
+            get: fn (float $amount) => $this->count * $this->unit_price,
+            set: fn (float $amount) => $this->count * $this->unit_price,
+        );
     }
 }

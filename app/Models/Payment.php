@@ -4,7 +4,8 @@ namespace App\Models;
 
 use App\Casts\AsMoney;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Exceptions\InvalidPaymentAmount;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payment extends Model
@@ -24,19 +25,11 @@ class Payment extends Model
     {
         return $this->belongsTo(Registration::class);
     }
-    
+
     protected static function booted(): void
     {
         static::saved(function (Model $model) {
-            $registration = $model->registration;
-            $amount_paid =  $registration->amount_paid + $model->amount;
-
-
-            $model->registration()->update([
-                'amount_paid' => $amount_paid,
-                'amount_pending' => $registration->amount - $amount_paid,
-            ]);
-            
+            $model->registration->updateAmounts();
         });
     }
 }

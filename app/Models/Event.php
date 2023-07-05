@@ -14,11 +14,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Event extends Model
 {
     use HasSlug;
+    use HasFactory;
+    use SoftDeletes;
 
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
@@ -33,13 +35,12 @@ class Event extends Model
         'images' => 'array',
         'features' => 'array',
     ];
-    use HasFactory;
-    use SoftDeletes;
 
     public function scopeAvailable(Builder $builder)
     {
         return $builder->where('status', EventStatusEnum::Open->value);
     }
+
     protected static function booted(): void
     {
         static::saved(function (Model $model) {
@@ -48,7 +49,6 @@ class Event extends Model
             $model->updateQuietly([
                 'status' => $status,
             ]);
-            
         });
     }
 
