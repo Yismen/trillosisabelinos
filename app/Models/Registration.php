@@ -6,6 +6,7 @@ use App\Casts\AsMoney;
 use App\Enums\RegistrationStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,6 +46,14 @@ class Registration extends Model
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function phone(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => str($value)->replace(["-", " ", "(", ")"], ""),
+            set: fn($value) => str($value)->replace(["-", " ", "(", ")"], ""),
+        );
     }
 
     public function updateAmounts()
