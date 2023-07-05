@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Plan::class);
-            $table->foreignIdFor(Registration::class);
+            $table->foreignIdFor(Plan::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Registration::class)->constrained()->onDelete('cascade');
             $table->integer('count')->unsigned()->default(0);
             $table->integer('unit_price')->unsigned()->default(0);
             $table->integer('amount')->unsigned()->nullable()->default(0);

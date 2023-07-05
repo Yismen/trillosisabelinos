@@ -27,7 +27,7 @@ class AsMoney implements CastsAttributes
         return self::parse($value) * 100;
     }
 
-    public static function parse(mixed $value): mixed 
+    public static function parse(mixed $value): mixed
     {
         return number_format($value, 2, '.', '');
     }

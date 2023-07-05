@@ -14,10 +14,10 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Registration::class);
+            $table->foreignIdFor(Registration::class)->constrained()->onDelete('cascade');
             $table->date('date');
             $table->integer('amount')->unsigned();
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->longText('images');
             $table->timestamps();
             $table->softDeletes();

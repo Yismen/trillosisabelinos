@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\AsMoney;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -15,9 +16,19 @@ class Sale extends Model
 
     protected $fillable = ['plan_id', 'registration_id', 'count', 'unit_price', 'amount'];
 
+    protected $casts = [
+        'unit_price' => AsMoney::class,
+        'amount' => AsMoney::class,
+    ];
+
     protected static function booted(): void
-    {
+    {        
         static::saved(function (Model $model) {
+            
+            $model->updateQuietly([
+                'amount' => $model->count * AsMoney::parse($model->plan->price) *  100
+            ]);
+            
             $model->registration->updateAmounts();
         });
     }
@@ -35,8 +46,8 @@ class Sale extends Model
     public function amount(): Attribute
     {
         return Attribute::make(
-            get: fn (float $amount) => $this->count * $this->unit_price,
-            set: fn (float $amount) => $this->count * $this->unit_price,
+            // get: fn (float $amount) => dd($amo),
+            set: fn (float $amount) => $this->count * AsMoney::parse($this->unit_price) *  100,
         );
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
             $table->string('name', 500);
-            $table->foreignIdFor(Event::class);
+            $table->foreignIdFor(Event::class)->constrained()->onDelete('cascade');
             $table->string('phone', 15);
             $table->string('email')->nullable();
             $table->string('group')->nullable();
