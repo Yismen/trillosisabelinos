@@ -117,7 +117,7 @@ class RegisterToEvent extends Component
 
     public function cancelConfirmed()
     {
-        $this->flash('Proceso de inscripción cancelado. ', NotificationInterface::ERROR);
+        $this->flash('Proceso de inscripción cancelado. ', NotificationInterface::WARNING);
 
         return redirect('/');
     }
