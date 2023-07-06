@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "041ba047b568e125668d50b3481eb13d",
+    "content-hash": "86ed3ee71f64489ba63033d06b871e89",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -275,6 +275,77 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "croustibat/filament-jobs-monitor",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/croustibat/filament-jobs-monitor.git",
+                "reference": "13df4a6e1efc2feaefac0c8ae09242ac909baace"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/croustibat/filament-jobs-monitor/zipball/13df4a6e1efc2feaefac0c8ae09242ac909baace",
+                "reference": "13df4a6e1efc2feaefac0c8ae09242ac909baace",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.0",
+                "illuminate/contracts": "^9.0 || ^10.0",
+                "php": "^8.0",
+                "ryangjchandler/filament-progress-column": "^0.3.2",
+                "spatie/laravel-package-tools": "^1.13.5"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Croustibat\\FilamentJobsMonitor\\FilamentJobsMonitorServiceProvider",
+                        "Croustibat\\FilamentJobsMonitor\\QueueMonitorProvider"
+                    ],
+                    "aliases": {
+                        "QueueMonitor": "Croustibat\\FilamentJobsMonitor\\QueueMonitorProvider\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Croustibat\\FilamentJobsMonitor\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste",
+                    "email": "baptiste@derniercri.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Background Jobs monitoring like Horizon for all drivers for FilamentPHP",
+            "homepage": "https://github.com/croustibat/filament-jobs-monitor",
+            "keywords": [
+                "croustibat",
+                "filament-jobs-monitor",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/croustibat/filament-jobs-monitor/issues",
+                "source": "https://github.com/croustibat/filament-jobs-monitor/tree/1.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/croustibat",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-06-29T14:29:45+00:00"
         },
         {
             "name": "danharrin/date-format-converter",
@@ -4460,6 +4531,164 @@
                 }
             ],
             "time": "2023-02-14T16:54:54+00:00"
+        },
+        {
+            "name": "ryangjchandler/filament-profile",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ryangjchandler/filament-profile.git",
+                "reference": "5aaeffc5e5484cc7dbf17a21540a2e07005122e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ryangjchandler/filament-profile/zipball/5aaeffc5e5484cc7dbf17a21540a2e07005122e7",
+                "reference": "5aaeffc5e5484cc7dbf17a21540a2e07005122e7",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.0",
+                "illuminate/contracts": "^9.0|^10.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.11"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^6.0|^7.0",
+                "nunomaduro/larastan": "^2.0",
+                "orchestra/testbench": "^7.0|^8.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5|^10.0",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RyanChandler\\FilamentProfile\\FilamentProfileServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentProfile": "RyanChandler\\FilamentProfile\\Facades\\FilamentProfile"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RyanChandler\\FilamentProfile\\": "src",
+                    "RyanChandler\\FilamentProfile\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Chandler",
+                    "email": "support@ryangjchandler.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple profile page for Filament.",
+            "homepage": "https://github.com/ryangjchandler/filament-profile",
+            "keywords": [
+                "filament-profile",
+                "laravel",
+                "ryangjchandler"
+            ],
+            "support": {
+                "issues": "https://github.com/ryangjchandler/filament-profile/issues",
+                "source": "https://github.com/ryangjchandler/filament-profile/tree/v0.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ryangjchandler",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-03-21T09:58:48+00:00"
+        },
+        {
+            "name": "ryangjchandler/filament-progress-column",
+            "version": "v0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ryangjchandler/filament-progress-column.git",
+                "reference": "0b2f112cbb2322af3d4526ab5fba51e0947ca6c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ryangjchandler/filament-progress-column/zipball/0b2f112cbb2322af3d4526ab5fba51e0947ca6c2",
+                "reference": "0b2f112cbb2322af3d4526ab5fba51e0947ca6c2",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.0",
+                "illuminate/contracts": "^9.0|^10.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^6.0|^7.0",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^7.0|^8.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RyanChandler\\FilamentProgressColumn\\FilamentProgressColumnServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentProgressColumn": "RyanChandler\\FilamentProgressColumn\\Facades\\FilamentProgressColumn"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RyanChandler\\FilamentProgressColumn\\": "src",
+                    "RyanChandler\\FilamentProgressColumn\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Chandler",
+                    "email": "support@ryangjchandler.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Add a progress bar column to your Filament tables.",
+            "homepage": "https://github.com/ryangjchandler/filament-progress-column",
+            "keywords": [
+                "filament-progress-column",
+                "laravel",
+                "ryangjchandler"
+            ],
+            "support": {
+                "issues": "https://github.com/ryangjchandler/filament-progress-column/issues",
+                "source": "https://github.com/ryangjchandler/filament-progress-column/tree/v0.3.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ryangjchandler",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-04-03T12:55:40+00:00"
         },
         {
             "name": "spatie/db-dumper",
