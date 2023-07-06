@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SaleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\RoleResource\RelationManagers\UsersRelationManager;
 
 class SaleResource extends Resource
 {
@@ -100,5 +101,12 @@ class SaleResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            UsersRelationManager::class,
+        ];
     }
 }

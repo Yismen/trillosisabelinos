@@ -11,13 +11,17 @@ use App\Enums\EventStatusEnum;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\MarkdownEditor;
 use App\Filament\Resources\EventResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\EventResource\RelationManagers\PlansRelationManager;
 
 class EventResource extends Resource
 {
@@ -42,12 +46,12 @@ class EventResource extends Resource
                     ->required()
                     ->closeOnDateSelection()
                     ->afterOrEqual(now()->startOfDay()),
-                Forms\Components\Select::make('currency')
+                Select::make('currency')
                     ->options(config('app.trillos.currencies')),
-                Forms\Components\TagsInput::make('features')
+                TagsInput::make('features')
                     ->required()
                     ->suggestions(config('app.trillos.features')),
-                Textarea::make('description')
+                MarkdownEditor::make('description')
                     ->required(),
                 FileUpload::make('images')
                     ->multiple()
@@ -120,5 +124,14 @@ class EventResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+
+
+    public static function getRelations(): array
+    {
+        return [
+            PlansRelationManager::class,
+        ];
     }
 }

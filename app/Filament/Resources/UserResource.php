@@ -8,10 +8,13 @@ use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\UserResource\RelationManagers\RolesRelationManager;
 
 class UserResource extends Resource
 {
@@ -34,10 +37,15 @@ class UserResource extends Resource
                 Forms\Components\DateTimePicker::make('email_verified_at')
                     ->nullable()
                     ->maxDate(now()),
-                // Forms\Components\TextInput::make('password')
-                //     ->password()
-                //     ->required()
-                //     ->maxLength(255),
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->required()
+                    ->hiddenOn('edit')
+                    ->maxLength(255),
+                Select::make('roles')
+                    ->multiple()
+                    ->relationship('roles', 'name')
+                    ->preload(),
             ]);
     }
 
@@ -45,13 +53,14 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('email_verified_at')
+                TextColumn::make('name'),
+                TextColumn::make('email'),
+                TextColumn::make('email_verified_at')
                     ->dateTime('M, d Y'),
-                // Tables\Columns\TextColumn::make('created_at')
+                // ->password(),
+                // TextColumn::make('created_at')
                 //     ->dateTime(),
-                // Tables\Columns\TextColumn::make('updated_at')
+                // TextColumn::make('updated_at')
                 //     ->dateTime(),
             ])
             ->filters([
@@ -84,5 +93,12 @@ class UserResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            RolesRelationManager::class,
+        ];
     }
 }

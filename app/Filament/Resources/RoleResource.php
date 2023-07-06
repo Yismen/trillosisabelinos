@@ -8,6 +8,7 @@ use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\RoleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -38,11 +39,12 @@ class RoleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('guard_name'),
-                // Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('name'),
+                TextColumn::make('guard_name'),
+                TextColumn::make('users.name'),
+                // TextColumn::make('created_at')
                 //     ->dateTime(),
-                // Tables\Columns\TextColumn::make('updated_at')
+                // TextColumn::make('updated_at')
                 //     ->dateTime(),
             ])
             ->filters([
@@ -63,5 +65,10 @@ class RoleResource extends Resource
         return [
             'index' => Pages\ManageRoles::route('/'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('name', '!=', 'admin');
     }
 }
