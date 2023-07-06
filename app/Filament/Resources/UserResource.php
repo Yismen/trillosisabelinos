@@ -5,12 +5,16 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
+use App\Guards\EditYourSelf;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\CheckboxList;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
@@ -21,6 +25,10 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+
+    protected static ?string $navigationGroup = 'Backkend';
+
+
     protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
@@ -33,6 +41,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
+                    ->unique(ignoreRecord: true)
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('email_verified_at')
                     ->nullable()
@@ -42,10 +51,8 @@ class UserResource extends Resource
                     ->required()
                     ->hiddenOn('edit')
                     ->maxLength(255),
-                Select::make('roles')
-                    ->multiple()
-                    ->relationship('roles', 'name')
-                    ->preload(),
+                CheckboxList::make('roles')
+                    ->relationship('roles', 'name'),
             ]);
     }
 
@@ -57,6 +64,9 @@ class UserResource extends Resource
                 TextColumn::make('email'),
                 TextColumn::make('email_verified_at')
                     ->dateTime('M, d Y'),
+                BadgeColumn::make('roles_count')
+                    ->color('danger')
+                    ->counts('roles'),
                 // ->password(),
                 // TextColumn::make('created_at')
                 //     ->dateTime(),
@@ -90,6 +100,7 @@ class UserResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
+            ->where('id', '!=', auth()->user()->id)
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);

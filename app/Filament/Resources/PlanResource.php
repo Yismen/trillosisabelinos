@@ -39,11 +39,10 @@ class PlanResource extends Resource
                     ->autofocus()
                     ->maxLength(255)
                     ->minLength(3)
-                    ->unique(callback: function (Unique $rule, callable $get) { 
+                    ->unique(callback: function (Unique $rule, callable $get) {
                         return $rule
                             ->where('event_id', $get('event_id'));
-                        }, ignoreRecord: true)
-                    ,
+                    }, ignoreRecord: true),
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
@@ -51,8 +50,8 @@ class PlanResource extends Resource
                     ->minValue(0)
                     ->mask(
                         fn (\Filament\Forms\Components\TextInput\Mask $mask) => $mask
-                        ->money()
-                        ->minValue(0)
+                            ->money()
+                            ->minValue(0)
                     ),
             ]);
     }
@@ -103,10 +102,4 @@ class PlanResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
-
-    
-    protected function getFormModel(): Plan 
-    {
-        return $this->plan;
-    } 
 }

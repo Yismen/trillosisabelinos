@@ -18,6 +18,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\MarkdownEditor;
 use App\Filament\Resources\EventResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -53,6 +54,7 @@ class EventResource extends Resource
                     ->suggestions(config('app.trillos.features')),
                 MarkdownEditor::make('description')
                     ->required(),
+                // CheckboxList::make('plans.name'),
                 FileUpload::make('images')
                     ->multiple()
                     ->image()
@@ -125,8 +127,6 @@ class EventResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
-
-
 
     public static function getRelations(): array
     {

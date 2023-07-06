@@ -9,7 +9,9 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\CheckboxList;
 use App\Filament\Resources\RoleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RoleResource\RelationManagers;
@@ -20,6 +22,8 @@ class RoleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationGroup = 'Backkend';
+
     protected static ?int $navigationSort = 7;
 
     public static function form(Form $form): Form
@@ -29,6 +33,10 @@ class RoleResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                CheckboxList::make('roles')
+                    ->relationship('users', 'name', fn (Builder $query) => $query->where('id', '!=', auth()->user()->id))
+                // ->preload()
+                ,
                 // Forms\Components\TextInput::make('guard_name')
                 //     ->required()
                 //     ->maxLength(255),
@@ -41,7 +49,10 @@ class RoleResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('guard_name'),
-                TextColumn::make('users.name'),
+                // TextColumn::make('users.name'),
+                BadgeColumn::make('users_count')
+                    ->color('danger')
+                    ->counts('users'),
                 // TextColumn::make('created_at')
                 //     ->dateTime(),
                 // TextColumn::make('updated_at')
@@ -69,6 +80,8 @@ class RoleResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('name', '!=', 'admin');
+        return parent::getEloquentQuery()
+            // ->where('name', '!=', 'admin')
+        ;
     }
 }
