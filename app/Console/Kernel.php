@@ -13,6 +13,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+
+        $schedule->command(\Spatie\Backup\Commands\CleanupCommand::class, [
+            '--only-db'
+        ])->dailyAt('03:00');
+        $schedule->command(\Spatie\Backup\Commands\BackupCommand::class, [
+            '--only-db'
+        ])->dailyAt('03:15');
     }
 
     /**
