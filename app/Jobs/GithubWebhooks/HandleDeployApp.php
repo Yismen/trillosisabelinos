@@ -5,7 +5,7 @@ namespace App\Jobs\GithubWebhooks;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Queue\SerializesModels;
-use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -26,17 +26,11 @@ class HandleDeployApp implements ShouldQueue
 
     public function handle(): void
     {
-        $process = new Process(['chmod +x ../deploy.sh']);
-        $process = new Process(['sh ../deploy.sh']);
-        $process->run();
+        $process = Process::run(['chmod +x ../deploy.sh']);
+        $process = Process::run(['sh ../deploy.sh']);
 
-        // executes after the command finishes
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
+        echo $process->output();
 
-        echo $process->getOutput();
-
-        Log::alert($process->getOutput());
+        Log::alert($process->output());
     }
 }
