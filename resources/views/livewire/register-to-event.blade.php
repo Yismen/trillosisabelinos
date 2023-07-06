@@ -33,12 +33,12 @@
                     <table class="table table-inverse table-borderless table-sm">
                         <tbody>
                             @foreach ($event->plans as $plan)
-                            <tr class="{{ isset($plans[$plan->id]) ? 'table-info' : '' }} align-baseline"
+                            <tr class="{{ $plans[$plan->id]['quantity'] ?? 0 ? 'table-info' : '' }} align-baseline"
                                 for="#quantity">
                                 <td scope="row" class=" text-end fw-bold text-uppercase">{{ $plan->name }}</td>
                                 <td class="">{{ $event->currency }} {{ $plan->price }} p/p</td>
                                 <td class="">
-                                    <x-inputs.inline-input type="number" field='plans.{{ $plan->id }}.quantity' min="0">
+                                    <x-inputs.inline-input type="number" field='plans.{{ $plan->id }}.quantity' min="1">
                                         Cantidad
                                     </x-inputs.inline-input>
                                 </td>
@@ -48,7 +48,7 @@
                                     $plan->price), 2) }}
                                 </td>
                                 <td class="col-1">
-                                    @if ($plans[$plan->id]['quantity'] ?? 0)
+                                    @if ($plans[$plan->id] ?? 0)
 
                                     <a href="#" class="btn btn-sm btn-dark" title="Eliminar"
                                         wire:click.prevent='clearProduct({{ $plan->id ?? 0 }})'>
