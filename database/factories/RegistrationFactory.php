@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Event;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,11 @@ class RegistrationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'event_id' => Event::factory(),
+            'phone' => $this->faker->phoneNumber(),
+            'email' => $this->faker->email(),
+            'group' => $this->faker->company(),
         ];
     }
 }
