@@ -5,12 +5,14 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Payment;
+use App\Models\Registration;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PaymentResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -43,11 +45,11 @@ class PaymentResource extends Resource
                     ->required()
                     ->mask(
                         fn (\Filament\Forms\Components\TextInput\Mask $mask) => $mask
-                        ->money()
-                        ->numeric()
-                        ->decimalPlaces(2)
-                        ->minValue(0)
-                        ->thousandsSeparator(','), // Add a separator for thousands.
+                            ->money()
+                            ->numeric()
+                            ->decimalPlaces(2)
+                            ->minValue(0)
+                            ->thousandsSeparator(','), // Add a separator for thousands.
                     )
                     ->minValue(0)
                     // ->lte('registration.amount_pending')
@@ -72,7 +74,7 @@ class PaymentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('registration.name')
-                    ->getStateUsing(function(Model $record) {
+                    ->getStateUsing(function (Model $record) {
                         return "{$record->registration->name} - {$record->registration->amount_pending}";
                     })
                     ->sortable()
@@ -82,7 +84,7 @@ class PaymentResource extends Resource
                     ->searchable()
                     ->date(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->color(function($record) {
+                    ->color(function ($record) {
                         return $record->registration->amount < $record->amount ? 'danger' : '';
                     })
                     ->sortable()
@@ -100,6 +102,10 @@ class PaymentResource extends Resource
             ])
             ->defaultSort('date', 'desc')
             ->filters([
+                SelectFilter::make('Registration')
+                    ->searchable()
+                    ->options(Registration::pluck('name', 'id'))
+                    ->attribute('registration_id'),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([

@@ -9,7 +9,10 @@ use App\Models\Registration;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Tables\Filters\Filter;
 use App\Enums\RegistrationStatusEnum;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RegistrationResource\Pages;
@@ -78,41 +81,53 @@ class RegistrationResource extends Resource
             ->poll('60 s')
             ->defaultSort('created_at', 'desc')
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('event.name')
+                TextColumn::make('event.name')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
+                TextColumn::make('phone')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email')
+                TextColumn::make('email')
                     ->sortable()
                     ->searchable()
                     ->visible(false),
-                Tables\Columns\TextColumn::make('group')
+                TextColumn::make('group')
                     ->searchable()
                     ->visible(false),
-                Tables\Columns\TextColumn::make('additional_phone')
+                TextColumn::make('additional_phone')
                     ->sortable()
                     ->visible(false)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('amount')
-                    ->sortable()
-                    ->searchable(),
-                // Tables\Columns\TextColumn::make('amount_paid')
+                // TextColumn::make('amount')
                 //     ->sortable()
                 //     ->searchable(),
-                Tables\Columns\TextColumn::make('amount_pending')
+                // TextColumn::make('amount_paid')
+                //     ->sortable()
+                //     ->searchable(),
+                TextColumn::make('amount_pending')
+                    ->label('Pending')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('status')
+                TextColumn::make('created_at')
+                    ->label('Date')
+                    ->date()
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('status')
                     ->enum(RegistrationStatusEnum::toArray())
-                        ->sortable()
-                        ->searchable(),
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
+                SelectFilter::make('Event')
+                    ->options(Event::pluck('name', 'id'))
+                    ->searchable()
+                    ->attribute('event_id'),
+                SelectFilter::make('Status')
+                    ->options(RegistrationStatusEnum::toArray()),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([

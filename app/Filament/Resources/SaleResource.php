@@ -5,10 +5,12 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use App\Models\Sale;
 use Filament\Tables;
+use App\Models\Registration;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SaleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -72,6 +74,10 @@ class SaleResource extends Resource
                 Tables\Columns\TextColumn::make('amount'),
             ])
             ->filters([
+                SelectFilter::make('Registration')
+                    ->searchable()
+                    ->options(Registration::pluck('name', 'id'))
+                    ->attribute('registration_id'),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([

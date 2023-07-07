@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
+use App\Models\Role;
 use App\Models\User;
 use Filament\Tables;
 use App\Guards\EditYourSelf;
@@ -13,6 +14,7 @@ use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\CheckboxList;
 use App\Filament\Resources\UserResource\Pages;
@@ -60,8 +62,12 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('email'),
+                TextColumn::make('name')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('email')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('email_verified_at')
                     ->dateTime('M, d Y'),
                 BadgeColumn::make('roles_count')
@@ -74,6 +80,10 @@ class UserResource extends Resource
                 //     ->dateTime(),
             ])
             ->filters([
+                SelectFilter::make('Role')
+                    ->searchable()
+                    ->options(Role::pluck('name', 'id'))
+                    ->relationship('roles'),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([

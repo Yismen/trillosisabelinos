@@ -15,10 +15,10 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         $schedule->command(\Spatie\Backup\Commands\CleanupCommand::class, [
-            '--only-db'
+            '--disable-notifications'
         ])->dailyAt('03:00');
         $schedule->command(\Spatie\Backup\Commands\BackupCommand::class, [
-            '--only-db'
+            '--only-db --disable-notifications'
         ])->dailyAt('03:15');
     }
 

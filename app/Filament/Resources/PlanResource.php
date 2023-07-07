@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Field;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rules\Unique;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PlanResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -71,6 +72,10 @@ class PlanResource extends Resource
                     ->searchable(),
             ])
             ->filters([
+                SelectFilter::make('Event')
+                    ->options(Event::pluck('name', 'id'))
+                    ->searchable()
+                    ->attribute('event_id'),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->defaultSort('name')

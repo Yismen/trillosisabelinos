@@ -4,12 +4,15 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use App\Models\Role;
+use App\Models\User;
 use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\CheckboxList;
 use App\Filament\Resources\RoleResource\Pages;
@@ -47,8 +50,12 @@ class RoleResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('guard_name'),
+                TextColumn::make('name')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('guard_name')
+                    ->searchable()
+                    ->sortable(),
                 // TextColumn::make('users.name'),
                 BadgeColumn::make('users_count')
                     ->color('danger')
@@ -59,6 +66,16 @@ class RoleResource extends Resource
                 //     ->dateTime(),
             ])
             ->filters([
+                SelectFilter::make('guard_name')
+                    ->label('Guard')
+                    // ->searchable()
+                    ->options(Role::pluck('guard_name', 'guard_name'))
+                    ->attribute('guard_name'),
+
+                SelectFilter::make('User')
+                    ->searchable()
+                    ->options(User::pluck('name', 'id'))
+                    ->relationship('users'),
                 //
             ])
             ->actions([
