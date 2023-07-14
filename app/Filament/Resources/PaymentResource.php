@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Closure;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Payment;
@@ -32,8 +33,27 @@ class PaymentResource extends Resource
                 Forms\Components\Select::make('registration_id')
                     ->searchable()
                     ->preload()
-                    ->relationship('registration', 'name')
-                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} - {$record->amount_pending}")
+                    ->options(function ($context, $record) {
+                        return Registration::query()
+                            ->when(
+                                in_array($context, ['edit']),
+                                fn ($query) => $query
+                                    ->where('amount_pending', '>', 0)
+                                    ->orWhere('id', '=', $record->registration->id)
+                            )
+                            ->when(
+                                in_array($context, ['create']),
+                                fn ($query) => $query
+                                    ->where('amount_pending', '>', 0)
+                            )
+                            ->orderBy('name')
+                            ->get()
+                            ->map(fn ($registration) => [
+                                'id' => $registration->id,
+                                'name'  =>  "{$registration->name} - {$registration->amount_pending}"
+                            ])
+                            ->pluck('name', 'id');;
+                    })
                     ->required(),
                 Forms\Components\TextInput::make('code')
                     ->visibleOn(['view']),
