@@ -35,6 +35,8 @@ class PaymentResource extends Resource
                     ->relationship('registration', 'name')
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} - {$record->amount_pending}")
                     ->required(),
+                Forms\Components\TextInput::make('code')
+                    ->visibleOn(['view']),
                 Forms\Components\DatePicker::make('date')
                     ->required()
                     ->closeOnDateSelection()
@@ -77,6 +79,9 @@ class PaymentResource extends Resource
                     ->getStateUsing(function (Model $record) {
                         return "{$record->registration->name} - {$record->registration->amount_pending}";
                     })
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('code')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date')
