@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\CheckboxList;
 use App\Filament\Resources\PaymentResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\PaymentResource\RelationManagers\SalesRelationManager;
 
 class PaymentResource extends Resource
@@ -135,7 +136,7 @@ class PaymentResource extends Resource
                     ->schema([
                         Stack::make([
                             TextColumn::make('registration.name')
-                                ->getStateUsing(fn ($record) => "Registration: " . str($record->registration->name)->headline())
+                                ->getStateUsing(fn ($record) => "Registration: " . str($record->registration->name ?? '')->headline())
                                 ->searchable()
                                 ->sortable(),
                             TextColumn::make('date')
@@ -171,6 +172,7 @@ class PaymentResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
                 Tables\Actions\ForceDeleteBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
+                FilamentExportBulkAction::make('Export'),
             ]);
     }
 
