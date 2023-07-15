@@ -28,27 +28,22 @@ class MakeAdminUser extends Command
      */
     public function handle()
     {
-        if ($this->confirm('Are you 100% sure you want to make this person admin?')) {
-            // code...
-            $email = $this->ask('Email');
+        $email = $this->ask('Email');
 
-            $user = User::query()->where('email', $email)->first();
+        $user = User::query()->where('email', $email)->first();
 
-            if (!$user) {
-                $user = User::create([
-                    'name' => $this->ask('Name'),
-                    'email' => $email,
-                    'password' => Hash::make($this->secret('Password')),
-                ]);
-            }
-
-            $role = Role::query()->where('name', 'admin')->firstOrCreate(['name' => 'admin']);
-
-            $user->assignRole($role);
-
-            $this->info('Listo!');
-        } else {
-            $this->warn('Cancelled');
+        if (!$user) {
+            $user = User::create([
+                'name' => $this->ask('Name'),
+                'email' => $email,
+                'password' => Hash::make($this->secret('Password')),
+            ]);
         }
+
+        $role = Role::query()->where('name', 'admin')->firstOrCreate(['name' => 'admin']);
+
+        $user->assignRole($role);
+
+        $this->info('Listo!');
     }
 }

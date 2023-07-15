@@ -29,18 +29,27 @@ class MonthlyStatsChart extends BarChartWidget
                 'type' => 'linear',
                 'display' => true,
                 'position' => 'left',
+                // 'grid' => [
+                //     'display' => false,
+                // ],
                 // 'stacked' => true,
             ],
             'cashflow' => [
                 'type' => 'linear',
                 // 'display' => true,
                 'position' => 'right',
+                'grid' => [
+                    'display' => false,
+                ],
                 'stacked' => false,
             ],
             'payments' => [
                 'type' => 'linear',
                 'display' => false,
                 'position' => 'right',
+                'grid' => [
+                    'display' => false,
+                ],
                 'stacked' => true,
             ]
         ]

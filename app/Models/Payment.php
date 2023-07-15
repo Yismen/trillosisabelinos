@@ -6,6 +6,8 @@ use App\Casts\AsMoney;
 use Illuminate\Database\Eloquent\Model;
 use App\Exceptions\InvalidPaymentAmount;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -20,7 +22,8 @@ class Payment extends Model
     public $casts = [
         'date' => 'date',
         'images' => 'array',
-        'amount' => AsMoney::class
+        'amount' => AsMoney::class,
+        'subscriptions' => 'array',
     ];
 
     public function registration(): BelongsTo
@@ -36,11 +39,9 @@ class Payment extends Model
         });
     }
 
-    public function sales(): BelongsToMany
+    public function sales(): HasMany
     {
-        return $this->belongsToMany(Sale::class)
-            ->as('subscriptions')
-            ->withTimestamps();
+        return $this->hasMany(Sale::class);
     }
 
     protected function getCode(): string
@@ -55,5 +56,22 @@ class Payment extends Model
             ? str($split[0])->substr(0, 4)
             : implode("", [str($split[0])->substr(0, 2), str($split[1])->substr(0, 2)]);
         return str($code)->upper() . '-' . str($this->id)->padLeft(5, 0);
+    }
+
+    public function updateAmounts()
+    {
+        $model = $this->load(['sales']);
+        $amount = $model->sales->sum('amount');
+
+        $model->updateQuietly([
+            'amount' => $amount,
+        ]);
+    }
+
+    public function subscriptions(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->sales->map(fn ($sale) => ['name' => "{$sale->count}-{$sale->plan->name}-{$sale->unit_price}"])->pluck('name')->toArray(),
+        );
     }
 }

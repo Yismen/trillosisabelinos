@@ -10,6 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use App\Enums\RegistrationStatusEnum;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use pxlrbt\FilamentExcel\Columns\Column;
 use Filament\Tables\Filters\SelectFilter;
@@ -102,12 +103,6 @@ class RegistrationResource extends Resource
                     ->sortable()
                     ->visible(false)
                     ->searchable(),
-                // TextColumn::make('amount')
-                //     ->sortable()
-                //     ->searchable(),
-                // TextColumn::make('amount_paid')
-                //     ->sortable()
-                //     ->searchable(),
                 TextColumn::make('amount_pending')
                     ->label('Pending')
                     ->sortable()
@@ -118,6 +113,7 @@ class RegistrationResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('status')
+                    ->color(fn ($record) => $record->status === RegistrationStatusEnum::Paid->value ? 'success' : 'danger')
                     ->enum(RegistrationStatusEnum::toArray())
                     ->sortable()
                     ->searchable(),
@@ -134,7 +130,7 @@ class RegistrationResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
             ])

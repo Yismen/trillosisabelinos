@@ -14,7 +14,7 @@ class Sale extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['plan_id', 'registration_id', 'count', 'unit_price', 'amount'];
+    protected $fillable = ['plan_id', 'registration_id', 'count', 'unit_price', 'amount', 'payment_id'];
 
     protected $casts = [
         'unit_price' => AsMoney::class,
@@ -24,11 +24,12 @@ class Sale extends Model
     protected static function booted(): void
     {
         static::saved(function (Model $model) {
-
             $model->updateQuietly([
+                'unit_price' => $model->plan->price,
                 'amount' => $model->count * AsMoney::parse($model->plan->price)
             ]);
 
+            $model->payment?->updateAmounts();
             $model->registration->updateAmounts();
         });
     }
@@ -36,6 +37,11 @@ class Sale extends Model
     public function plan(): BelongsTo
     {
         return $this->belongsTo(Plan::class);
+    }
+
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class);
     }
 
     public function registration(): BelongsTo
