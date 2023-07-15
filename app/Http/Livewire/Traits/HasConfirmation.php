@@ -50,7 +50,8 @@ trait HasConfirmation
                 'showDenyButton' => false,
                 'confirmButtonText' => $confirmationButtonText,
                 'html' => $viewContent,
-                'backdrop' => false
+                'backdrop' => true,
+                'allowOutsideClick' => false,
             ]
         );
     }
