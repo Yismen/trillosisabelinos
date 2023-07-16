@@ -9,6 +9,7 @@ use App\Models\Registration;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Card;
 use App\Enums\RegistrationStatusEnum;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -18,6 +19,8 @@ use Illuminate\Database\Eloquent\Builder;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RegistrationResource\Pages;
+use App\Filament\Resources\RegistrationResource\RelationManagers\SalesRelationManager;
+use App\Filament\Resources\RegistrationResource\RelationManagers\PaymentsRelationManager;
 
 class RegistrationResource extends Resource
 {
@@ -31,49 +34,53 @@ class RegistrationResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('event_id')
-                    ->relationship('event', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->required()
-                    ->exists(Event::class, 'id'),
-                Forms\Components\TextInput::make('name')
-                    ->autofocus()
-                    ->required()
-                    ->maxLength(500)
-                    ->minLength(3),
-                Forms\Components\TextInput::make('phone')
-                    ->required()
-                    ->tel()
-                    ->maxLength(15),
-                Forms\Components\TextInput::make('email')
-                    // ->required()
-                    ->email()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('group')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('additional_phone')
-                    ->tel()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('amount')
-                    ->numeric()
-                    ->disabled()
-                    ->nullable()
-                    ->minValue(0),
-                Forms\Components\TextInput::make('amount_paid')
-                    ->numeric()
-                    ->disabled()
-                    ->nullable()
-                    ->minValue(0),
-                Forms\Components\TextInput::make('amount_pending')
-                    ->numeric()
-                    ->disabled()
-                    ->nullable()
-                    ->minValue(0),
-                Forms\Components\Select::make('status')
-                    ->nullable()
-                    ->disabled()
-                    ->options(RegistrationStatusEnum::toArray()),
+                Card::make([
+
+                    Forms\Components\Select::make('event_id')
+                        ->relationship('event', 'name')
+                        ->searchable()
+                        ->preload()
+                        ->required()
+                        ->exists(Event::class, 'id'),
+                    Forms\Components\TextInput::make('name')
+                        ->autofocus()
+                        ->required()
+                        ->maxLength(500)
+                        ->minLength(3),
+                    Forms\Components\TextInput::make('phone')
+                        ->required()
+                        ->tel()
+                        ->maxLength(15),
+                    Forms\Components\TextInput::make('email')
+                        // ->required()
+                        ->email()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('group')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('additional_phone')
+                        ->tel()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('amount')
+                        ->numeric()
+                        ->disabled()
+                        ->nullable()
+                        ->minValue(0),
+                    Forms\Components\TextInput::make('amount_paid')
+                        ->numeric()
+                        ->disabled()
+                        ->nullable()
+                        ->minValue(0),
+                    Forms\Components\TextInput::make('amount_pending')
+                        ->numeric()
+                        ->disabled()
+                        ->nullable()
+                        ->minValue(0),
+                    Forms\Components\Select::make('status')
+                        ->nullable()
+                        ->disabled()
+                        ->options(RegistrationStatusEnum::toArray()),
+                ])
+                    ->columns(2),
             ]);
     }
 
@@ -163,6 +170,7 @@ class RegistrationResource extends Resource
     {
         return [
             'index' => Pages\ManageRegistrations::route('/'),
+            'view' => Pages\ViewRegistration::route('/{record}'),
         ];
     }
 
@@ -172,5 +180,13 @@ class RegistrationResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            PaymentsRelationManager::class,
+            SalesRelationManager::class,
+        ];
     }
 }
