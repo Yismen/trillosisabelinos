@@ -6,7 +6,7 @@
         <span class="fw-semibold"># Ced.: 121-0012354-1</span>
     </div>
 
-    <div class="list-group">
+    <div class="list-group shadow">
         <div class="list-group-item d-flex w-100 justify-content-between bg-transparent">
             <h5 class="m-0 p-0">Banreservas</h5>
             <p class="fw-semibold m-0 p-0">9605265552</p>
