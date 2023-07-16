@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RegistrationResource\Pages;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\RegistrationResource\RelationManagers\SalesRelationManager;
 use App\Filament\Resources\RegistrationResource\RelationManagers\PaymentsRelationManager;
 
@@ -145,24 +146,7 @@ class RegistrationResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
                 Tables\Actions\ForceDeleteBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
-                \pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction::make()
-                    ->exports([
-                        ExcelExport::make()
-                            ->withColumns([
-                                // name', 'event_id', 'phone', 'email', 'group', 'additional_phone', 'amount', 'amount_paid', 'amount_pending', 'status';
-                                Column::make('name'),
-                                Column::make('event.name'),
-                                Column::make('phone'),
-                                Column::make('email'),
-                                Column::make('group'),
-                                Column::make('additional_phone'),
-                                Column::make('amount'),
-                                Column::make('amount_paid'),
-                                Column::make('amount_pending'),
-                                Column::make('status'),
-                            ])
-                            ->withFilename('Registrations')
-                    ]),
+                FilamentExportBulkAction::make('Export'),
             ]);
     }
 
