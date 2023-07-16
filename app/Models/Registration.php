@@ -33,6 +33,15 @@ class Registration extends Model
         static::saving(function (Model $model) {
             $model->updateAmounts();
         });
+
+        static::deleting(function (Model $model) {
+            $model->payments->each->delete();
+            $model->sales->each->delete();
+        });
+
+        static::restored(function (Model $model) {
+            $model->sales()->withTrashed()->get()->each->restore();
+        });
     }
 
     public function event(): BelongsTo

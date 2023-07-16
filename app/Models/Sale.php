@@ -32,6 +32,11 @@ class Sale extends Model
             $model->payment?->updateAmounts();
             $model->registration->updateAmounts();
         });
+
+        static::deleted(function (Model $model) {
+            $model->payment?->updateAmounts();
+            $model->registration?->updateAmounts();
+        });
     }
 
     public function plan(): BelongsTo

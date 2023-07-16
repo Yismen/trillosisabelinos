@@ -37,6 +37,10 @@ class Payment extends Model
             $model->registration->updateAmounts();
             $model->updateQuietly(['code' => $model->getCode()]);
         });
+
+        static::deleted(function (Model $model) {
+            $model->sales->each->update(['payment_id' => null]);
+        });
     }
 
     public function sales(): HasMany
