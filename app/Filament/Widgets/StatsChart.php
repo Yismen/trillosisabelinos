@@ -11,13 +11,17 @@ use Flowframe\Trend\TrendValue;
 use Illuminate\Support\Collection;
 use Filament\Widgets\BarChartWidget;
 
-class MonthlyStatsChart extends BarChartWidget
+class StatsChart extends BarChartWidget
 {
-    protected static ?string $heading = 'Registros por mes';
+    protected static ?string $heading = 'Registros, Ventas y Pagos';
 
     protected static ?string $pollingInterval = '60s';
 
     protected static ?int $sort = 2;
+
+    protected int | string | array $columnSpan = 2;
+    protected static ?string $maxHeight = '300px';
+
 
     protected static ?array $options = [
         'interaction' => [
@@ -64,7 +68,7 @@ class MonthlyStatsChart extends BarChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Registros Por Mes',
+                    'label' => 'Registros',
                     'data' => $countRegistrations->map(fn (TrendValue $value) => $value->aggregate),
                     'backgroundColor' => 'rgb(51 112 107 / 50%)',
                     'borderColor' => 'rgb(51 112 107 / 50%)',
@@ -72,7 +76,7 @@ class MonthlyStatsChart extends BarChartWidget
                     // 'stacked' => true,
                 ],
                 [
-                    'label' => 'Ventas Por Mes',
+                    'label' => 'Ventas',
                     'data' => $amountSold->map(fn (TrendValue $value) => $value->aggregate),
                     'backgroundColor' => 'rgb(249, 168, 37)',
                     'borderColor' => 'rgb(249, 168, 37)',
@@ -82,7 +86,7 @@ class MonthlyStatsChart extends BarChartWidget
                     // 'stacked' => false,
                 ],
                 [
-                    'label' => 'Pagos Por Mes',
+                    'label' => 'Pagos',
                     'data' => $amountPaid->map(fn (TrendValue $value) => $value->aggregate),
                     'backgroundColor' => 'rgb(101, 31, 255)',
                     'borderColor' => 'rgb(101, 31, 255)',
@@ -104,7 +108,7 @@ class MonthlyStatsChart extends BarChartWidget
                 start: $this->start(),
                 end: $this->end()
             )
-            ->perMonth()
+            ->perDay()
             ->sum('amount')
             ->map(function ($item) {
                 $item->aggregate = $item->aggregate / 100;
@@ -127,7 +131,7 @@ class MonthlyStatsChart extends BarChartWidget
                 start: $this->start(),
                 end: $this->end()
             )
-            ->perMonth()
+            ->perDay()
             ->aggregate('amount', 'sum')
             ->map(function ($item) {
                 $item->aggregate = $item->aggregate / 100;
@@ -143,17 +147,22 @@ class MonthlyStatsChart extends BarChartWidget
                 start: $this->start(),
                 end: $this->end()
             )
-            ->perMonth()
+            ->perDay()
             ->count();
     }
 
     protected function start(): Carbon
     {
-        return now()->subMonths(12)->startOfMonth();
+        $minRegsitration = Registration::first()->created_at;
+        $maxDateAllowed = now()->subDays(30)->startOfDay();
+
+        return $maxDateAllowed->isBefore($minRegsitration)
+            ? $minRegsitration
+            : $maxDateAllowed;
     }
 
     protected function end(): Carbon
     {
-        return now()->endOfMonth();
+        return now()->endOfDay();
     }
 }
