@@ -12,8 +12,8 @@
     <title>{{ config('app.name', 'Trillos Isabelinos') }}</title>
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
     @vite([
-    'resources/js/app.js',
-    'resources/sass/app.scss'
+    'resources/js/welcome.js',
+    'resources/sass/welcome.scss'
     ])
     @stack('styles')
 </head>
@@ -41,7 +41,7 @@
                         </a>
                         <span><i class="fa fa-copyright"></i> 2023-{{ now()->format('Y') }}</span>
                 </div>
-                
+
 
                 <div class="d-flex flex-column justify-content-center align-items-center gap-3">
                     <div class="contactos d-flex flex-column text-center">

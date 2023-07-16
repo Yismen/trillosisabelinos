@@ -12,8 +12,8 @@
     <title>{{ config('app.name', 'Trillos Isabelinos') }}</title>
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
     @vite([
-    'resources/js/app.js',
-    'resources/sass/app.scss'
+    'resources/js/welcome.js',
+    'resources/sass/welcome.scss'
     ])
     @stack('styles')
     @livewireStyles
@@ -110,9 +110,9 @@
                 document.getElementById('navbar_top').classList.remove('fixed-top');
                 // remove padding top from body
                 document.body.style.paddingTop = '0';
-            } 
+            }
         });
-        }); 
+        });
         })()
     </script>
 </body>
