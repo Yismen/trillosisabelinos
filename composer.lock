@@ -5485,16 +5485,16 @@
         },
         {
             "name": "spatie/flysystem-dropbox",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/flysystem-dropbox.git",
-                "reference": "01b530218caa99b546f993490e54cd13b67604ff"
+                "reference": "766879111204a6e49412b5ff5989a6654e1b8ae0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/flysystem-dropbox/zipball/01b530218caa99b546f993490e54cd13b67604ff",
-                "reference": "01b530218caa99b546f993490e54cd13b67604ff",
+                "url": "https://api.github.com/repos/spatie/flysystem-dropbox/zipball/766879111204a6e49412b5ff5989a6654e1b8ae0",
+                "reference": "766879111204a6e49412b5ff5989a6654e1b8ae0",
                 "shasum": ""
             },
             "require": {
@@ -5537,7 +5537,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/flysystem-dropbox/issues",
-                "source": "https://github.com/spatie/flysystem-dropbox/tree/3.0.0"
+                "source": "https://github.com/spatie/flysystem-dropbox/tree/3.0.1"
             },
             "funding": [
                 {
@@ -5549,7 +5549,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-13T12:19:03+00:00"
+            "time": "2023-07-17T07:48:52+00:00"
         },
         {
             "name": "spatie/invade",
@@ -10973,16 +10973,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.2.5",
+            "version": "10.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "15a89f123d8ca9c1e1598d6d87a56a8bf28c72cd"
+                "reference": "1c17815c129f133f3019cc18e8d0c8622e6d9bcd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/15a89f123d8ca9c1e1598d6d87a56a8bf28c72cd",
-                "reference": "15a89f123d8ca9c1e1598d6d87a56a8bf28c72cd",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1c17815c129f133f3019cc18e8d0c8622e6d9bcd",
+                "reference": "1c17815c129f133f3019cc18e8d0c8622e6d9bcd",
                 "shasum": ""
             },
             "require": {
@@ -11054,7 +11054,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.2.5"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.2.6"
             },
             "funding": [
                 {
@@ -11070,7 +11070,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-14T04:18:47+00:00"
+            "time": "2023-07-17T12:08:28+00:00"
         },
         {
             "name": "psr/cache",

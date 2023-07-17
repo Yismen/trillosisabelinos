@@ -10,15 +10,15 @@
             </a>
             <a href="{{ config('app.trillos.links.instagram') }}" target="__new" rel="noopener noreferrer"
                 class="social-link">
-                <i class="fa-brands fa-google-drive"></i> Instagram
+                <i class="fa-brands fa-instagram"></i> Instagram
             </a>
             <a href="{{ config('app.trillos.links.facebook') }}" target="__new" rel="noopener noreferrer"
                 class="social-link">
-                <i class="fa-brands fa-google-drive"></i> Facebook
+                <i class="fa-brands fa-facebook"></i> Facebook
             </a>
             <a href="{{ config('app.trillos.links.youtube') }}" target="__new" rel="noopener noreferrer"
                 class="social-link">
-                <i class="fa-brands fa-google-drive"></i> Youtube
+                <i class="fa-brands fa-youtube"></i> Youtube
             </a>
         </div>
         <div class="col-md-7">
