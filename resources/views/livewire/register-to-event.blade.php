@@ -98,7 +98,7 @@
             document.addEventListener("DOMContentLoaded", function(){
                 let firstInput = $("#registration_form").find('input[type=text],textarea,select').filter(':visible:first');
                 firstInput.focus();
-            });     
+            });
         })()
     </script>
     @endpush
@@ -106,13 +106,14 @@
     @if(app()->isProduction())
     <!-- Google tag (gtag.js) -->
     @push('scripts')
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PFZ1SNWHL"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDMG8GWEY6"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-        gtag('config', 'G-1PFZ1SNWHL');
+    gtag('config', 'G-LDMG8GWEY6');
     </script>
     @endpush
     @endIf
