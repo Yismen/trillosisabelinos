@@ -25,12 +25,20 @@ class SalesAndPaymentsByPlanCard extends BaseWidget
 
         foreach ($this->getSales() as $sale) {
             $cards[] = Card::make($sale->plan . ' Inscritos', $sale->total)
-                ->color('primary');
+                ->icon('heroicon-o-login')
+                ->color('warning')
+                ->extraAttributes([
+                    'class' => 'bg-warning-500/10',
+                ]);
         }
 
         foreach ($this->getPayments() as $payment) {
             $cards[] = Card::make($payment->plan . ' Pagos', $payment->total)
-                ->color('success');
+                ->color('success')
+                ->icon('heroicon-o-cash')
+                ->extraAttributes([
+                    'class' => 'bg-success-500/10',
+                ]);
         }
 
         return $cards;
