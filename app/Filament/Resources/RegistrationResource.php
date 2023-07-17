@@ -27,7 +27,9 @@ class RegistrationResource extends Resource
 {
     protected static ?string $model = Registration::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-login';
+
+    protected static ?string $navigationGroup = 'Event Results';
 
     protected static ?int $navigationSort = 3;
 

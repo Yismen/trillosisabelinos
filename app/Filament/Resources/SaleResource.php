@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
+use App\Models\Plan;
 use App\Models\Sale;
 use Filament\Tables;
 use App\Models\Registration;
@@ -20,9 +21,11 @@ class SaleResource extends Resource
 {
     protected static ?string $model = Sale::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-sparkles';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?string $navigationGroup = 'Event Results';
+
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -78,6 +81,10 @@ class SaleResource extends Resource
                     ->searchable()
                     ->options(Registration::pluck('name', 'id'))
                     ->attribute('registration_id'),
+                SelectFilter::make('Plan')
+                    ->searchable()
+                    ->options(Plan::pluck('name', 'id'))
+                    ->attribute('plan_id'),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([

@@ -17,7 +17,7 @@ class StatsChart extends BarChartWidget
 
     protected static ?string $pollingInterval = '60s';
 
-    protected static ?int $sort = 2;
+    protected static ?int $sort = 3;
 
     protected int | string | array $columnSpan = 2;
     protected static ?string $maxHeight = '300px';
