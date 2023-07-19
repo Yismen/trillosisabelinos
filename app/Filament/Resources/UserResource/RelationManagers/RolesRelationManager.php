@@ -36,33 +36,34 @@ class RolesRelationManager extends RelationManager
 
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                // Tables\Filters\TrashedFilter::make()
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                // Tables\Actions\CreateAction::make(),
                 Tables\Actions\AttachAction::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
                 Tables\Actions\DetachAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                Tables\Actions\ForceDeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
+                // Tables\Actions\ForceDeleteAction::make(),
+                // Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DetachBulkAction::make(),
                 Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
-                Tables\Actions\ForceDeleteBulkAction::make(),
+                // Tables\Actions\RestoreBulkAction::make(),
+                // Tables\Actions\ForceDeleteBulkAction::make(),
             ]);
     }
 
     protected function getTableQuery(): Builder
     {
         return parent::getTableQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
+            // ->withoutGlobalScopes([
+            //     SoftDeletingScope::class,
+            // ])
+        ;
     }
 }

@@ -10,9 +10,13 @@ use App\Models\Registration;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Filters\TernaryFilter;
 use App\Filament\Resources\SaleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RoleResource\RelationManagers\UsersRelationManager;
@@ -61,8 +65,13 @@ class SaleResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('registration.name')
             ->columns([
                 Tables\Columns\TextColumn::make('registration.name')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('payment.code')
+                    ->label('Code')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('plan.name')
@@ -74,7 +83,15 @@ class SaleResource extends Resource
                 Tables\Columns\TextColumn::make('unit_price')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('amount'),
+                Tables\Columns\TextColumn::make('amount')
+                    ->searchable()
+                    ->sortable(),
+                IconColumn::make('payment_id')
+                    ->label('Pago')
+                    ->color(fn ($state): string => $state !== null ? 'success' : '')
+                    ->options([
+                        'heroicon-o-check-circle' => fn ($state): bool => $state !== null,
+                    ])
             ])
             ->filters([
                 SelectFilter::make('Registration')
@@ -85,6 +102,9 @@ class SaleResource extends Resource
                     ->searchable()
                     ->options(Plan::pluck('name', 'id'))
                     ->attribute('plan_id'),
+                TernaryFilter::make('Paid')
+                    ->nullable()
+                    ->attribute('payment_id'),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
@@ -114,12 +134,5 @@ class SaleResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            UsersRelationManager::class,
-        ];
     }
 }

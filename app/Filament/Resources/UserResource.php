@@ -10,6 +10,7 @@ use App\Guards\EditYourSelf;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -37,24 +38,33 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->unique(ignoreRecord: true)
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('email_verified_at')
-                    ->nullable()
-                    ->maxDate(now()),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->required()
-                    ->hiddenOn('edit')
-                    ->maxLength(255),
-                CheckboxList::make('roles')
-                    ->relationship('roles', 'name'),
+                Card::make([
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('email')
+                        ->email()
+                        ->required()
+                        ->unique(ignoreRecord: true)
+                        ->maxLength(255),
+                    Forms\Components\DateTimePicker::make('email_verified_at')
+                        ->nullable()
+                        ->maxDate(now()),
+                    Forms\Components\TextInput::make('password')
+                        ->password()
+                        ->required()
+                        ->visibleOn('create')
+                        ->confirmed()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('password_confirmation')
+                        ->password()
+                        ->required()
+                        ->visibleOn('create')
+                        ->maxLength(255),
+                    CheckboxList::make('roles')
+                        ->relationship('roles', 'name'),
+                ])
+                    ->columns(2),
             ]);
     }
 
@@ -104,6 +114,8 @@ class UserResource extends Resource
     {
         return [
             'index' => Pages\ManageUsers::route('/'),
+            'view' => Pages\ViewUser::route('/{record}'),
+            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 

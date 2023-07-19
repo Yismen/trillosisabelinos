@@ -9,6 +9,7 @@ use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Card;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
@@ -18,6 +19,7 @@ use Filament\Forms\Components\CheckboxList;
 use App\Filament\Resources\RoleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RoleResource\RelationManagers;
+use App\Filament\Resources\RoleResource\RelationManagers\UsersRelationManager;
 
 class RoleResource extends Resource
 {
@@ -33,16 +35,16 @@ class RoleResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                CheckboxList::make('roles')
-                    ->relationship('users', 'name', fn (Builder $query) => $query->where('id', '!=', auth()->user()->id))
-                // ->preload()
-                ,
-                // Forms\Components\TextInput::make('guard_name')
-                //     ->required()
-                //     ->maxLength(255),
+                Card::make([
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('guard_name')
+                        ->required()
+                        ->maxLength(255),
+                    CheckboxList::make('roles')
+                        ->relationship('users', 'name', fn (Builder $query) => $query->where('id', '!=', auth()->user()->id)),
+                ])->columns(2),
             ]);
     }
 
@@ -92,6 +94,8 @@ class RoleResource extends Resource
     {
         return [
             'index' => Pages\ManageRoles::route('/'),
+            'view' => Pages\ViewRole::route('/{record}'),
+            'edit' => Pages\EditRole::route('/{record}/edit'),
         ];
     }
 
@@ -100,5 +104,12 @@ class RoleResource extends Resource
         return parent::getEloquentQuery()
             // ->where('name', '!=', 'admin')
         ;
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            UsersRelationManager::class,
+        ];
     }
 }

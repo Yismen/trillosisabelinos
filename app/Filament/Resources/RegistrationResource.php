@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 use App\Enums\RegistrationStatusEnum;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use pxlrbt\FilamentExcel\Columns\Column;
 use Filament\Tables\Filters\SelectFilter;
@@ -97,6 +98,8 @@ class RegistrationResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('event.name')
+                    ->limit(10)
+                    ->tooltip(fn ($record) => $record->event->name)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('phone')
@@ -107,14 +110,20 @@ class RegistrationResource extends Resource
                     ->searchable()
                     ->visible(false),
                 TextColumn::make('group')
+                    ->limit(10)
+                    ->tooltip(fn ($record) => $record->name)
                     ->searchable()
-                    ->visible(false),
+                    ->sortable()
+                    ->visible(true),
                 TextColumn::make('additional_phone')
                     ->sortable()
                     ->visible(false)
                     ->searchable(),
+                TagsColumn::make('subscriptions'),
                 TextColumn::make('amount_pending')
+                    ->color(fn ($record) => $record->status === RegistrationStatusEnum::Paid->value ? 'success' : 'danger')
                     ->label('Pending')
+                    ->formatStateUsing(fn ($state) => '$ ' . number_format($state))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')
@@ -122,11 +131,11 @@ class RegistrationResource extends Resource
                     ->date()
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('status')
-                    ->color(fn ($record) => $record->status === RegistrationStatusEnum::Paid->value ? 'success' : 'danger')
-                    ->enum(RegistrationStatusEnum::toArray())
-                    ->sortable()
-                    ->searchable(),
+                // TextColumn::make('status')
+                //     ->color(fn ($record) => $record->status === RegistrationStatusEnum::Paid->value ? 'success' : 'danger')
+                //     ->enum(RegistrationStatusEnum::toArray())
+                //     ->sortable()
+                //     ->searchable(),
             ])
             ->filters([
                 SelectFilter::make('Event')
@@ -171,8 +180,8 @@ class RegistrationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PaymentsRelationManager::class,
             SalesRelationManager::class,
+            PaymentsRelationManager::class,
         ];
     }
 }

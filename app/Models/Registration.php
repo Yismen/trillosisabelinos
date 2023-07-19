@@ -26,6 +26,7 @@ class Registration extends Model
         'amount_paid' => AsMoney::class,
         'amount_pending' => AsMoney::class,
         'name' => AsHeadline::class,
+        'subscriptions' => 'array',
     ];
 
     protected static function booted(): void
@@ -81,5 +82,12 @@ class Registration extends Model
             'amount_pending' => $amount_pending < 0 ? 0 : $amount_pending,
             'status' => $amount_pending > 0 ? RegistrationStatusEnum::Pending : RegistrationStatusEnum::Paid,
         ]);
+    }
+
+    public function subscriptions(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->sales->map(fn ($sale) => ['name' => "{$sale->count}-{$sale->plan->name}-{$sale->unit_price}"])->pluck('name')->toArray(),
+        );
     }
 }
