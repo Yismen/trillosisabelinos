@@ -22,7 +22,7 @@
     @include('welcome.navigation')
 
     <div class="wrapper">
-        @include('welcome.hero')
+        @include('welcome.header')
 
         @include('welcome.showcase')
 
@@ -33,7 +33,7 @@
         @include('welcome.details')
 
 
-        <section class="bg-primary text-white">
+        <div class="bg-primary text-white ">
             <div class="container d-flex flex-column flex-md-row footer justify-content-between gap-5">
                 <div class="text-center text-md-start">
                         <a href="#inicio" class="text-white text-decoration-none text-center text-md-start">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 
     @stack('scripts')

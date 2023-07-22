@@ -1,5 +1,8 @@
 <section class="bg-secondary" id="detalles">
-    <h3 class="title">Fácil, <span class="text-highlighted">Adsequible</span>, Expectacular!</h3>
+    <h3 class="title">
+        Fácil,
+        <span class="text-highlighted">Adsequible</span>, Expectacular!
+    </h3>
     <div
         class="align-items-sm-center align-items-start banner container d-flex flex-column gap-3 justify-content-between justify-content-md-center p-4">
         {{-- Info --}}

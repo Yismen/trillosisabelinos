@@ -1,6 +1,6 @@
-<section class="hero container position-relative with-border" id="hero">
+<section class="main_header container position-relative with-border" id="main_header">
     <div class="align-items-center flex-column justify-content-center row align-items-lg-end  py-lg-5 text-center text-lg-start "
-        id="hero-holder">
+        id="main_header_holder">
         <h1 class="fw-bold my-3 mb-5 mb-lg-3  text-uppercase">
             Trillos Isabelinos <span class="text-highlighted">2023</span>
         </h1>

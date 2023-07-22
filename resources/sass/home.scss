@@ -7,13 +7,15 @@ body {
 
 .nav-link a.active,
 .nav-link {
-    transition: .5s;
+    transition: .3s;
+    // color: $primary !important;
+    // border-bottom: solid 1px $primary;
 }
 
-.nav-link a.active,
+a.nav-link.active,
 .nav-link:hover {
     color: $primary !important;
-    border-bottom: solid 1px $primary;
+    border-bottom: solid 3px $primary;
 }
 
 .showcases>.items {
@@ -222,6 +224,8 @@ section {
 }
 
 .footer {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
 
     & .socials {
         & a {
@@ -280,10 +284,6 @@ section {
     }
 }
 
-#hero-holder {
-    // height: 100vh;
-}
-
 @include media-breakpoint-up(lg) {
     .poster {
         position: absolute;
@@ -292,13 +292,13 @@ section {
         right: 0;
     }
 
-    #hero-holder {
+    #main_header_holder {
         width: 50%;
         height: 70vh;
     }
 
-    #hero::before,
-    #hero::after {
+    #main_header:before,
+    #main_header:after {
         content: "";
         position: absolute;
         top: 160px;
@@ -307,13 +307,13 @@ section {
         // z-index: -1;
     }
 
-    #hero::before {
+    #main_header:before {
         background-color: rgba($primary, .45);
         z-index: -1;
         width: 60px;
     }
 
-    #hero::after {
+    #main_header:after {
         background-color: rgba($secondary, .45);
         width: 20px;
         left: 60px;

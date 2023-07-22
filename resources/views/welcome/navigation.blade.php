@@ -21,7 +21,7 @@
             <div class="navbar-collapse collapse text-left" id="navbarNav">
                 <ul class="navbar-nav navbar-nav-scroll nav-pills-primary-soft  ms-auto p-2 p-xl-0">
                     <!-- Nav item Hotel -->
-                    <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#inicio">Inicio</a> </li>
+                    <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#main_header">Inicio</a> </li>
 
                     <!-- Nav item Tour -->
                     <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#showcase">Diversión</a>
@@ -34,7 +34,7 @@
                     <!-- Nav item Cabs -->
                     <li class="nav-item"> <a class="nav-link text-uppercase fs-5" href="#detalles">Detalles</a>
                     </li>
-                    <a class="text-uppercase fs-5 btn btn-primary btn-sm text-white btn-group-vertical"
+                    <a class="text-uppercase fs-5 btn btn-primary btn-sm text-white btn-group-vertical ms-0 ms-md-3"
                         href="{{ config('app.trillos.links.inscripcion') }}">Inscribete</a>
                 </ul>
 
@@ -62,7 +62,7 @@
                     </li>
                 </ul>
 
-                
+
                 <ul class="navbar-nav navbar-nav-scroll nav-pills-primary-soft  ms-0 ms-md-3">
                     <li class="nav-item">
                         <a class="nav-link text-primary" href="/admin"
@@ -72,11 +72,11 @@
                         </a>
                     </li>
                 </ul>
-                
+
                 {{-- <ul class="navbar-nav navbar-nav-scroll nav-pills-primary-soft ms-auto p-2 p-xl-0 fs-4">
                     <li class="nav-item dropdown">
                         <button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show" id="bd-theme" type="button" aria-expanded="true" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (dark)">
-                        
+
                         <span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end show px-2" aria-labelledby="bd-theme-text" data-bs-popper="static">
@@ -85,18 +85,18 @@
                                     <i class="fa fa-arrow-right-from-bracket"></i> Admin
                                 </a>
                             </li>
-                            <li class="divider">                          
+                            <li class="divider">
                             </li>
                             <li>
-                                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">                          
+                                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
                                     <i class="fa fa-sun"></i>
-                                    Light                          
+                                    Light
                                 </button>
                             </li>
                             <li>
-                                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="true">                          
+                                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="true">
                                     <i class="fa fa-moon"></i>
-                                    Dark                          
+                                    Dark
                                 </button>
                             </li>
                         </ul>
@@ -110,7 +110,7 @@
     <!-- Logo Nav END -->
 
     @push('scripts')
-        
+
     <script>
         (function(){
             document.addEventListener("DOMContentLoaded", function(){
@@ -124,9 +124,9 @@
                 document.getElementById('navbar_top').classList.remove('fixed-top');
                 // remove padding top from body
                 document.body.style.paddingTop = '0';
-            } 
+            }
         });
-        }); 
+        });
         })()
     </script>
     @endpush
