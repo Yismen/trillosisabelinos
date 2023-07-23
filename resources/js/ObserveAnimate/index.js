@@ -1,4 +1,4 @@
-import '../css/animation.css';
+import './animation.css';
 /**
  *
  * @param {string} selector Selector to target all animatable elements
