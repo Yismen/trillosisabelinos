@@ -1,12 +1,12 @@
 <section class="bg-secondary" id="detalles">
-    <h3 class="title">
+    <h3 class="title animate">
         Fácil,
         <span class="text-highlighted">Adsequible</span>, Expectacular!
     </h3>
     <div
-        class="align-items-sm-center align-items-start banner container d-flex flex-column gap-3 justify-content-between justify-content-md-center p-4">
+        class="align-items-sm-center align-items-start banner container d-flex flex-column gap-3 justify-content-between justify-content-md-center p-4 ">
         {{-- Info --}}
-        <div class="d-flex justify-content-center gap-5 w-100">
+        <div class="d-flex justify-content-center gap-5 w-100 animate" data-delay=".15s">
             <div class="">
                 <i class="fa fa-clock"></i>
                 <span class="fw-semibold">8:00 AM</span>
@@ -18,8 +18,8 @@
         </div>
 
         {{-- main --}}
-        <div class="d-flex flex-column flex-lg-row justify-content-between gap-5 w-100">
-            <div class="d-flex flex-column">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-5 w-100" data-delay=".25s">
+            <div class="d-flex flex-column animate" data-delay=".25s">
                 <h5 class="fw-bold text-uppercase text-center fs-5">Precios</h5>
                 <div class="d-flex justify-content-start shadow overflow-x-auto w-md-auto">
                     <ul class="list-group w-100">
@@ -73,14 +73,14 @@
 
             </div>
 
-            <div class="text-center">
+            <div class="text-center animate" data-delay=".55s">
                 {{-- <i class="fa fa-map-marker-alt"></i> --}}
                 <span class="fw-semibold text-uppercase">Para Depositos</span>
 
                 @include('cuentas-bancarias')
             </div>
         </div>
-        <div class="mx-auto mx-lg-0">
+        <div class="mx-auto mx-lg-0 animate" data-delay=".4s" data-animation="slide-in-left">
             <a href="{{ config('app.trillos.links.inscripcion') }}"
                 class="btn btn-primary text-white shadow btn-lg">
                 Inscribete

@@ -1,9 +1,9 @@
 
 
 <section class="container with-border" id="redes">
-    <h3 class="title">No te pierdas, <span class="text-highlighted">Síguenos</span> siempre!</h3>
+    <h3 class="title animate" data-animation="fade-in-bottom">No te pierdas, <span class="text-highlighted">Síguenos</span> siempre!</h3>
     <div class="row">
-        <div class="col-md-3 d-flex flex-column">
+        <div class="col-md-3 d-flex flex-column animate" data-delay="0.5s" data-animation="slide-in-right">
             <a href="{{ config('app.trillos.links.inscripcion') }}" rel="noopener noreferrer"
                 class="social-link">
                 <i class="fa-brands fa-google-drive"></i> Formulario Inscripcion
@@ -21,7 +21,7 @@
                 <i class="fa-brands fa-youtube"></i> Youtube
             </a>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-7 animate" data-delay="0.3s" data-animation="fade-in-bottom">
             <a href="{{ config('app.trillos.links.location') }}" target="__new">
                 <i class="fa fa-map-marker-alt mr-2"></i>
                 Punto de Partida: Kiandy Ranch
@@ -31,7 +31,7 @@
                 width="100%" height="360" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 animate" data-delay="0.2s" data-animation="slide-in-left">
             <div class="logos">
                 <img src="{{ asset('images/logos/logo.png') }}" alt="Trillos Isabelinos">
                 <img src="{{ asset('images/logos/patrulleros.jpeg') }}" alt="Patrulleros 121">

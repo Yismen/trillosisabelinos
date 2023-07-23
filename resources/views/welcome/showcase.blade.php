@@ -1,8 +1,8 @@
 
 
 <section class="container showcases with-border" id="showcase">
-    <h3 class="title">Pura Diversión, <span class="text-highlighted">Momentos</span> Inolvidables </h3>
-    <div class="content row  py-3 justify-content-center align-items-center gap-3">
+    <h3 class="title animate" >Pura Diversión, <span class="text-highlighted">Momentos</span> Inolvidables </h3>
+    <div class="content row  py-3 justify-content-center align-items-center gap-3 animate" data-delay=".5s">
 
         <x-showcase class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex justify-content-center"
             title="Equipo de Trabajo" :image="asset('images/showcase/equipo-4.jpg')">

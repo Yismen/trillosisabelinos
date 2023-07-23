@@ -1,9 +1,9 @@
 
 
 <section class="container testimonials">
-    <h3 class="title">El que <span class="text-highlighted">sabe</span>, sabe!</h3>
+    <h3 class="title animate">El que <span class="text-highlighted">sabe</span>, sabe!</h3>
 
-    <div class="row content">
+    <div class="row content animate" data-delay=".3s">
         <div class="col-sm-6 col-xl-3 mb-3">
             <x-testimonial name="Andrés Valerio" title="Bicicentro">
                 Buena organización y puntualidad.

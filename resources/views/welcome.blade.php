@@ -34,7 +34,7 @@
 
 
         <div class="bg-primary text-white ">
-            <div class="container d-flex flex-column flex-md-row footer justify-content-between gap-5">
+            <div class="container d-flex flex-column flex-md-row page-footer justify-content-between gap-5">
                 <div class="text-center text-md-start">
                         <a href="#inicio" class="text-white text-decoration-none text-center text-md-start">
                             <h4 class="fw-bold fs-3">{{ config('app.name', 'Trillos Isabelinos') }}</h4>
