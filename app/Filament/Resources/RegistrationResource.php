@@ -103,6 +103,8 @@ class RegistrationResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('name')
+                    ->limit(15)
+                    ->tooltip(fn ($record) => $record->group)
                     ->sortable()
                     ->searchable(),
                 // TextColumn::make('event.name')
@@ -118,7 +120,7 @@ class RegistrationResource extends Resource
                     ->searchable()
                     ->visible(false),
                 TextColumn::make('group')
-                    ->limit(10)
+                    ->limit(5)
                     ->tooltip(fn ($record) => $record->group)
                     ->searchable()
                     ->sortable()
@@ -128,7 +130,10 @@ class RegistrationResource extends Resource
                     ->visible(false)
                     ->searchable(),
                 TagsColumn::make('subscriptions'),
-                TextColumn::make('code')
+                TextColumn::make('payments.code')
+                    ->label('Code')
+                    ->searchable()
+                    ->sortable()
                     ->getStateUsing(fn ($record) => $record->payments?->first()?->code)
                     ->copyable(),
                 TextColumn::make('amount')
