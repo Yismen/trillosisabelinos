@@ -205,4 +205,9 @@ class RegistrationResource extends Resource
             SalesRelationManager::class,
         ];
     }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'phone', 'email', 'group', 'additional_phone'];
+    }
 }

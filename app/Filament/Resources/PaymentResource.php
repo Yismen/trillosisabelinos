@@ -201,4 +201,9 @@ class PaymentResource extends Resource
             SalesRelationManager::class
         ];
     }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['registration.name', 'code', 'amount'];
+    }
 }
