@@ -206,4 +206,9 @@ class PaymentResource extends Resource
     {
         return ['registration.name', 'code', 'amount'];
     }
+
+    public static function getGlobalSearchResultTitle(Model $record): string
+    {
+        return $record->registration->name;
+    }
 }

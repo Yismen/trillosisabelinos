@@ -210,4 +210,9 @@ class RegistrationResource extends Resource
     {
         return ['name', 'phone', 'email', 'group', 'additional_phone'];
     }
+
+    public static function getGlobalSearchResultTitle(Model $record): string
+    {
+        return $record->name;
+    }
 }
