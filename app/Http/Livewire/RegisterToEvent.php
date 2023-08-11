@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Event;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Livewire\Traits\HasConfirmation;
 use Flasher\Prime\Notification\NotificationInterface;
 
@@ -27,7 +28,7 @@ class RegisterToEvent extends Component
         'email' => ['nullable', 'email'],
         'plans' => ['min:1', 'array'],
         'plans.*' => ['required'],
-        'plans.*.quantity' => ['required', 'numeric', 'min:1'],
+        'plans.*.quantity' => ['numeric', 'min:0'],
     ];
 
     protected $messages = [
@@ -51,6 +52,8 @@ class RegisterToEvent extends Component
     {
         $this->validate();
 
+        $this->requireOneProduct();
+
         DB::transaction(function () {
             $event = $this->event->registrations()->create([
                 'name' => $this->name,
@@ -63,18 +66,43 @@ class RegisterToEvent extends Component
 
             // Send Email notification
 
-            foreach ($this->plans as $id => $plan) {
-                $event->sales()->create([
+            $sales = [];
+            $plans = array_filter(
+                $this->plans,
+                function ($plan) {
+                    return $plan['quantity'] > 0;
+                }
+            );
+
+            foreach ($plans as $id => $plan) {
+                $sales[] = $event->sales()->create([
                     'plan_id' => $id,
                     'count' => $plan['quantity'],
                     'unit_price' => $this->event->plans->where('id', $id)->first()->price
                 ]);
             }
 
-            $this->inform('Usted ha sido registrado al evento!', view('registration-created', ['total' => $this->total])->toHtml(), 'OK');
+            $this->inform('Usted ha sido registrado al evento!', view('registration-created', ['total' => $this->total, 'sales' => collect($sales)])->toHtml(), 'OK');
 
             return redirect('/');
         });
+    }
+
+    private function requireOneProduct()
+    {
+        $validator = Validator::validate(
+            [
+                'plans_quantity' => collect($this->plans)->filter(fn ($plan) => $plan['quantity'] > 0)->sum('quantity')
+            ],
+            [
+                'plans_quantity' => ['numeric', 'min:1']
+            ],
+            [
+                'plans_quantity.min' => 'Elija cantidad en al menos un producto'
+            ]
+        );
+
+        // dd($validator, $validator->fails());
     }
 
     public function calculateSubtotal($quantity, $price): float

@@ -38,7 +38,7 @@
                                 <td scope="row" class=" text-end fw-bold text-uppercase">{{ $plan->name }}</td>
                                 <td class="">{{ $event->currency }} {{ $plan->price }} p/p</td>
                                 <td class="">
-                                    <x-inputs.inline-input type="number" field='plans.{{ $plan->id }}.quantity' min="1">
+                                    <x-inputs.inline-input type="number" field='plans.{{ $plan->id }}.quantity' min="0">
                                         Cantidad
                                     </x-inputs.inline-input>
                                 </td>
@@ -61,10 +61,13 @@
                     </table>
                 </div>
 
-                @if ($errors->has('plans') )
+                @if ($errors->has('plans') || $errors->has('plans_quantity'))
                 <div class="alert alert-danger fade show" role="alert">
                     <ul>
                         @foreach ($errors->get('plans') as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                        @foreach ($errors->get('plans_quantity') as $error)
                         <li>{{ $error }}</li>
                         @endforeach
                     </ul>

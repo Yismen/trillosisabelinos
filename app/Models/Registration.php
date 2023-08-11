@@ -90,4 +90,11 @@ class Registration extends Model
             get: fn () => $this->sales->map(fn ($sale) => ['name' => "{$sale->count}-{$sale->plan->name}-{$sale->unit_price}"])->pluck('name')->toArray(),
         );
     }
+
+    public function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($name) => str($name)->headline(),
+        );
+    }
 }
