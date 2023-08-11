@@ -6,6 +6,8 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
 
@@ -28,6 +30,15 @@ class PaymentsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('code')
                     ->required()
                     ->disabled(),
+                FileUpload::make('images')
+                    ->multiple()
+                    ->image()
+                    ->directory('payments')
+                    ->preserveFilenames()
+                    ->maxSize(2000)
+                    ->enableReordering()
+                    ->enableOpen()
+                    ->enableDownload(),
             ]);
     }
 
@@ -40,6 +51,13 @@ class PaymentsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('amount'),
                 Tables\Columns\TextColumn::make('code')
                     ->copyable(),
+                BadgeColumn::make('images')
+                    ->colors([
+                        'secondary',
+                        'success' => static fn ($state) => $state > 0
+                    ])
+                    ->getStateUsing(fn ($record) => count($record->images))
+
             ])
             ->filters([
                 //
