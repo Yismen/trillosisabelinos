@@ -82,7 +82,17 @@ class RegisterToEvent extends Component
                 ]);
             }
 
-            $this->inform('Usted ha sido registrado al evento!', view('registration-created', ['total' => $this->total, 'sales' => collect($sales)])->toHtml(), 'OK');
+            $this->inform(
+                'Usted ha sido registrado al evento!',
+                view(
+                    'registration-created',
+                    [
+                        'total' => $this->total,
+                        'sales' => collect($sales)
+                    ]
+                )->toHtml(),
+                'OK'
+            );
 
             return redirect('/');
         });
