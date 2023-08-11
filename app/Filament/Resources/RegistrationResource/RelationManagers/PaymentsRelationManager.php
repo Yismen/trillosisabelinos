@@ -6,7 +6,6 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
 
@@ -39,7 +38,8 @@ class PaymentsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('date')
                     ->date(),
                 Tables\Columns\TextColumn::make('amount'),
-                Tables\Columns\TextColumn::make('code'),
+                Tables\Columns\TextColumn::make('code')
+                    ->copyable(),
             ])
             ->filters([
                 //

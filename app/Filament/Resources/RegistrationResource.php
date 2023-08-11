@@ -9,12 +9,20 @@ use App\Models\Registration;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\DB;
 use Filament\Forms\Components\Card;
+use Filament\Tables\Actions\Action;
 use App\Enums\RegistrationStatusEnum;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use pxlrbt\FilamentExcel\Columns\Column;
+use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
@@ -97,11 +105,11 @@ class RegistrationResource extends Resource
                 TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('event.name')
-                    ->limit(10)
-                    ->tooltip(fn ($record) => $record->event->name)
-                    ->sortable()
-                    ->searchable(),
+                // TextColumn::make('event.name')
+                //     ->limit(10)
+                //     ->tooltip(fn ($record) => $record->event->name)
+                //     ->sortable()
+                //     ->searchable(),
                 TextColumn::make('phone')
                     ->sortable()
                     ->searchable(),
@@ -147,7 +155,7 @@ class RegistrationResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 // Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
@@ -166,6 +174,7 @@ class RegistrationResource extends Resource
         return [
             'index' => Pages\ManageRegistrations::route('/'),
             'view' => Pages\ViewRegistration::route('/{record}'),
+            'edit' => Pages\EditRegistration::route('/{record}/edit'),
         ];
     }
 
@@ -180,8 +189,8 @@ class RegistrationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            SalesRelationManager::class,
             PaymentsRelationManager::class,
+            SalesRelationManager::class,
         ];
     }
 }

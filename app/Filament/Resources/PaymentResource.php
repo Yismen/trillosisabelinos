@@ -182,7 +182,7 @@ class PaymentResource extends Resource
     {
         return [
             'index' => Pages\ManagePayments::route('/'),
-            'create' => Pages\CreatePayment::route('/create'),
+            // 'create' => Pages\CreatePayment::route('/create'),
             'edit' => Pages\EditPayment::route('/{record}/edit'),
         ];
     }
