@@ -119,7 +119,7 @@ class RegistrationResource extends Resource
                     ->visible(false),
                 TextColumn::make('group')
                     ->limit(10)
-                    ->tooltip(fn ($record) => $record->name)
+                    ->tooltip(fn ($record) => $record->group)
                     ->searchable()
                     ->sortable()
                     ->visible(true),
@@ -128,6 +128,13 @@ class RegistrationResource extends Resource
                     ->visible(false)
                     ->searchable(),
                 TagsColumn::make('subscriptions'),
+                TextColumn::make('code')
+                    ->getStateUsing(fn ($record) => $record->payments?->first()?->code)
+                    ->copyable(),
+                TextColumn::make('amount')
+                    ->formatStateUsing(fn ($state) => '$ ' . number_format($state))
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('amount_pending')
                     ->color(fn ($record) => $record->status === RegistrationStatusEnum::Paid->value ? 'success' : 'danger')
                     ->label('Pending')
