@@ -21,8 +21,11 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\Layout\Grid;
 use pxlrbt\FilamentExcel\Columns\Column;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
@@ -99,63 +102,66 @@ class RegistrationResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->poll('60 s')
+            // ->poll('360 s')
             ->defaultSort('created_at', 'desc')
+            ->contentGrid([
+                'md' => 2,
+                'lg' => 3,
+                'xl' => 4,
+            ])
             ->columns([
-                TextColumn::make('name')
-                    ->limit(15)
-                    ->tooltip(fn ($record) => $record->group)
-                    ->sortable()
-                    ->searchable(),
-                // TextColumn::make('event.name')
-                //     ->limit(10)
-                //     ->tooltip(fn ($record) => $record->event->name)
-                //     ->sortable()
-                //     ->searchable(),
-                TextColumn::make('phone')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('email')
-                    ->sortable()
-                    ->searchable()
-                    ->visible(false),
-                TextColumn::make('group')
-                    ->limit(5)
-                    ->tooltip(fn ($record) => $record->group)
-                    ->searchable()
-                    ->sortable()
-                    ->visible(true),
-                TextColumn::make('additional_phone')
-                    ->sortable()
-                    ->visible(false)
-                    ->searchable(),
-                TagsColumn::make('subscriptions'),
-                TextColumn::make('payments.code')
-                    ->label('Code')
-                    ->searchable()
-                    ->sortable()
-                    ->getStateUsing(fn ($record) => $record->payments?->first()?->code)
-                    ->copyable(),
-                TextColumn::make('amount')
-                    ->formatStateUsing(fn ($state) => '$ ' . number_format($state))
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('amount_pending')
-                    ->color(fn ($record) => $record->status === RegistrationStatusEnum::Paid->value ? 'success' : 'danger')
-                    ->label('Pending')
-                    ->formatStateUsing(fn ($state) => '$ ' . number_format($state))
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->label('Date')
-                    ->date()
-                    ->sortable()
-                    ->searchable(),
-                // TextColumn::make('status')
-                //     ->color(fn ($record) => $record->status === RegistrationStatusEnum::Paid->value ? 'success' : 'danger')
-                //     ->enum(RegistrationStatusEnum::toArray())
-                //     ->sortable()
-                //     ->searchable(),
+                Grid::make([
+                    'sm' => 1
+                ])
+                    ->schema([
+                        Stack::make([
+
+                            TextColumn::make('name')
+                                ->getStateUsing(fn ($record) => str($record->name)->headline())
+                                ->sortable()
+                                ->extraAttributes(['class' => 'font-bold'])
+                                ->searchable(),
+                            // TextColumn::make('event.name')
+                            //     ->limit(10)
+                            //     ->tooltip(fn ($record) => $record->event->name)
+                            //     ->sortable()
+                            //     ->searchable(),
+                            TextColumn::make('phone')
+                                ->sortable()
+                                ->searchable(),
+                            TextColumn::make('group')
+                                ->searchable()
+                                ->sortable()
+                                ->visible(true),
+                            TagsColumn::make('subscriptions'),
+                            TextColumn::make('payments.code')
+                                ->label('Code')
+                                ->searchable()
+                                ->sortable()
+                                ->getStateUsing(fn ($record) => $record->payments?->first()?->code)
+                                ->copyable(),
+                            TextColumn::make('amount')
+                                ->formatStateUsing(fn ($state) => 'Monto Inscrito: $ ' . number_format($state))
+                                ->sortable()
+                                ->searchable(),
+                            TextColumn::make('amount_pending')
+                                ->color(fn ($record) => $record->status === RegistrationStatusEnum::Paid->value ? 'success' : 'danger')
+                                ->label('Pending')
+                                ->formatStateUsing(fn ($state) => 'Monto Pendiente: $ ' . number_format($state))
+                                ->sortable()
+                                ->searchable(),
+                            BadgeColumn::make('status')
+                                ->searchable()
+                                ->sortable()
+                                ->getStateUsing(fn ($record) => "Status: " . $record->status->name)
+                                ->color(fn ($record) => $record->status == RegistrationStatusEnum::Paid ? 'success' : 'danger'),
+                            TextColumn::make('created_at')
+                                ->label('Date')
+                                ->date()
+                                ->sortable()
+                                ->searchable(),
+                        ])
+                    ])
             ])
             ->filters([
                 SelectFilter::make('Event')

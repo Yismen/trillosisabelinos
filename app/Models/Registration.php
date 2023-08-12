@@ -21,7 +21,7 @@ class Registration extends Model
     public $fillable = ['name', 'event_id', 'phone', 'email', 'group', 'additional_phone', 'amount', 'amount_paid', 'amount_pending', 'status'];
 
     public $casts = [
-        'enum' => RegistrationStatusEnum::class,
+        'status' => RegistrationStatusEnum::class,
         'amount' => AsMoney::class,
         'amount_paid' => AsMoney::class,
         'amount_pending' => AsMoney::class,
