@@ -117,6 +117,7 @@ class RegistrationResource extends Resource
                         Stack::make([
 
                             TextColumn::make('name')
+                                ->label('Nombre')
                                 ->getStateUsing(fn ($record) => str($record->name)->headline())
                                 ->sortable()
                                 ->extraAttributes(['class' => 'font-bold'])
@@ -127,26 +128,29 @@ class RegistrationResource extends Resource
                             //     ->sortable()
                             //     ->searchable(),
                             TextColumn::make('phone')
+                                ->label('Telefono')
                                 ->sortable()
                                 ->searchable(),
                             TextColumn::make('group')
+                                ->label('Grupo')
                                 ->searchable()
                                 ->sortable()
                                 ->visible(true),
                             TagsColumn::make('subscriptions'),
                             TextColumn::make('payments.code')
-                                ->label('Code')
+                                ->label('Codigo')
                                 ->searchable()
                                 ->sortable()
                                 ->getStateUsing(fn ($record) => $record->payments?->first()?->code)
                                 ->copyable(),
                             TextColumn::make('amount')
+                                ->label('Vendido')
                                 ->formatStateUsing(fn ($state) => 'Monto Inscrito: $ ' . number_format($state))
                                 ->sortable()
                                 ->searchable(),
                             TextColumn::make('amount_pending')
                                 ->color(fn ($record) => $record->status === RegistrationStatusEnum::Paid->value ? 'success' : 'danger')
-                                ->label('Pending')
+                                ->label('Pendiente')
                                 ->formatStateUsing(fn ($state) => 'Monto Pendiente: $ ' . number_format($state))
                                 ->sortable()
                                 ->searchable(),
@@ -156,7 +160,7 @@ class RegistrationResource extends Resource
                                 ->getStateUsing(fn ($record) => "Status: " . $record->status->name)
                                 ->color(fn ($record) => $record->status == RegistrationStatusEnum::Paid ? 'success' : 'danger'),
                             TextColumn::make('created_at')
-                                ->label('Date')
+                                ->label('Registrado En')
                                 ->date()
                                 ->sortable()
                                 ->searchable(),

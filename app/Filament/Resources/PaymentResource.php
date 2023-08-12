@@ -138,6 +138,7 @@ class PaymentResource extends Resource
                     ->schema([
                         Stack::make([
                             TextColumn::make('registration.name')
+                                ->label('Nombre')
                                 ->getStateUsing(fn ($record) => str($record->registration->name ?? '')->headline())
                                 ->searchable()
                                 ->extraAttributes([
@@ -145,24 +146,30 @@ class PaymentResource extends Resource
                                 ])
                                 ->sortable(),
                             TextColumn::make('registration.phone')
+                                ->label('Telefono')
                                 ->getStateUsing(fn ($record) => str($record->registration->phone ?? '')->headline())
                                 ->searchable()
                                 ->sortable(),
                             TextColumn::make('registration.group')
+                                ->label('Grupo')
                                 ->getStateUsing(fn ($record) => str($record->registration->group ?? '')->headline())
                                 ->searchable()
                                 ->sortable(),
                             TextColumn::make('date')
-                                ->getStateUsing(fn ($record) => "Date: " . $record->date->format("M, d-Y"))
+                                ->label('Fecha')
+                                ->getStateUsing(fn ($record) => $record->date->format("M, d-Y"))
                                 ->searchable()
                                 ->sortable(),
                             TextColumn::make('code')
-                                ->getStateUsing(fn ($record) => "Code: " . $record->code)
+                                ->label('Codigo')
+                                ->getStateUsing(fn ($record) => $record->code)
                                 ->searchable()
                                 ->sortable(),
                             TextColumn::make('amount')
-                                ->getStateUsing(fn ($record) => "Amount: " . $record->amount),
-                            TagsColumn::make('subscriptions'),
+                                ->label('Monto')
+                                ->getStateUsing(fn ($record) => "$" . $record->amount),
+                            TagsColumn::make('subscriptions')
+                                ->label('Productos'),
                         ]),
                     ])
             ])
