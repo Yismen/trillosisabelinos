@@ -138,7 +138,18 @@ class PaymentResource extends Resource
                     ->schema([
                         Stack::make([
                             TextColumn::make('registration.name')
-                                ->getStateUsing(fn ($record) => "Registration: " . str($record->registration->name ?? '')->headline())
+                                ->getStateUsing(fn ($record) => str($record->registration->name ?? '')->headline())
+                                ->searchable()
+                                ->extraAttributes([
+                                    'class' => 'font-bold'
+                                ])
+                                ->sortable(),
+                            TextColumn::make('registration.phone')
+                                ->getStateUsing(fn ($record) => str($record->registration->phone ?? '')->headline())
+                                ->searchable()
+                                ->sortable(),
+                            TextColumn::make('registration.group')
+                                ->getStateUsing(fn ($record) => str($record->registration->group ?? '')->headline())
                                 ->searchable()
                                 ->sortable(),
                             TextColumn::make('date')
