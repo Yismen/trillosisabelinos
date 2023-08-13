@@ -16,6 +16,7 @@
         "jeffgreco13/filament-breezy": "^1.5",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
+        "laravel/telescope": "^4.16",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "php-flasher/flasher-sweetalert-laravel": "^1.15",
