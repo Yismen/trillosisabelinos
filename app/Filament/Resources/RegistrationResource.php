@@ -149,7 +149,7 @@ class RegistrationResource extends Resource
                                 ->sortable()
                                 ->searchable(),
                             TextColumn::make('amount_pending')
-                                ->color(fn ($record) => $record->status === RegistrationStatusEnum::Paid->value ? 'success' : 'danger')
+                                ->color(fn ($record) => $record->status === RegistrationStatusEnum::Paid ? 'success' : 'danger')
                                 ->label('Pendiente')
                                 ->formatStateUsing(fn ($state) => 'Monto Pendiente: $ ' . number_format($state))
                                 ->sortable()

@@ -129,7 +129,8 @@ class PaymentResource extends Resource
 
             ->contentGrid([
                 'md' => 2,
-                'xl' => 3,
+                'lg' => 3,
+                'xl' => 4,
             ])
             ->columns([
                 Grid::make([
