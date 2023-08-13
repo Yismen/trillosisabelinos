@@ -19,8 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::githubWebhooks('deploy-app');
-
 Route::get('register-to-event/{event:slug}', RegisterToEvent::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
