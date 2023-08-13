@@ -20,6 +20,8 @@ class Kernel extends ConsoleKernel
         $schedule->command(\Spatie\Backup\Commands\BackupCommand::class, [
             '--only-db --disable-notifications'
         ])->dailyAt('03:15');
+
+        $schedule->command('telescope:prune --hours=72')->daily();
     }
 
     /**
