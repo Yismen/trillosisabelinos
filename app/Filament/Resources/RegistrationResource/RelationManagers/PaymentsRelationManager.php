@@ -6,7 +6,13 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
+use Illuminate\Support\Facades\DB;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Actions\EditAction;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -63,7 +69,53 @@ class PaymentsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                // Tables\Actions\CreateAction::make(),
+                Tables\Actions\Action::make('Pay')
+                    ->button()
+                    ->color('warning')
+                    ->requiresConfirmation()
+                    ->visible(fn (RelationManager $livewire) => $livewire->ownerRecord->amount_pending > 0)
+                    ->form([
+                        DatePicker::make('date')
+                            ->required()
+                            ->closeOnDateSelection()
+                            ->maxDate(now()->endOfDay()),
+                        FileUpload::make('images')
+                            ->multiple()
+                            ->image()
+                            ->directory('payments')
+                            ->preserveFilenames()
+                            ->maxSize(2000)
+                            ->enableReordering()
+                            ->enableOpen()
+                            ->enableDownload(),
+                        Textarea::make('description')
+                            ->nullable(),
+                        TextInput::make('amount_pending')
+                            ->disabled()
+                            ->formatStateUsing(function (RelationManager $livewire) {
+                                return $livewire->ownerRecord->amount_pending;
+                            })
+                    ])
+                    ->action(function (array $data, RelationManager $livewire) {
+                        $record = $livewire->ownerRecord;
+                        DB::transaction(function () use ($record, $data) {
+                            $payment = $record->payments()
+                                ->create([
+                                    'amount' => 0,
+                                    'date' => $data['date'],
+                                    'images' => $data['images'],
+                                    'description' => $data['description'],
+                                ]);
+
+                            $record->sales->each(function (Model $sale) use ($payment) {
+                                $sale->update([
+                                    'payment_id' => $payment->id
+                                ]);
+                            });
+                        });
+
+                        return redirect(url()->previous());
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
