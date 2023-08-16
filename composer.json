@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.1",
         "alperenersoy/filament-export": "^0.3.7",
+        "barryvdh/laravel-dompdf": "*",
         "filament/filament": "^2.17",
         "flowframe/laravel-trend": "^0.1.5",
         "guzzlehttp/guzzle": "^7.2",
@@ -19,6 +20,7 @@
         "laravel/telescope": "^4.16",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
+        "laraveldaily/laravel-invoices": "^3.0",
         "php-flasher/flasher-sweetalert-laravel": "^1.15",
         "spatie/flysystem-dropbox": "^3.0",
         "spatie/laravel-backup": "^8.1",

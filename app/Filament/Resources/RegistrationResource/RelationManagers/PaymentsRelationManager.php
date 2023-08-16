@@ -8,13 +8,11 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Illuminate\Support\Facades\DB;
 use Filament\Forms\Components\Textarea;
-use Filament\Tables\Actions\EditAction;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
 
 class PaymentsRelationManager extends RelationManager
@@ -69,6 +67,11 @@ class PaymentsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
+                Tables\Actions\Action::make('Invoice')
+                    ->color('primary')
+                    ->visible(fn (RelationManager $livewire) => $livewire->ownerRecord->amount_pending == 0)
+                    ->url(fn (RelationManager $livewire) =>  route('registration.payment.invoice.download', $livewire->ownerRecord))
+                    ->openUrlInNewTab(true),
                 Tables\Actions\Action::make('Pay')
                     ->button()
                     ->color('warning')

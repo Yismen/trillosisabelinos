@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\RegisterToEvent;
+use App\Http\Controllers\InvoiceDowloadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,5 @@ Route::get('/', function () {
 Route::get('register-to-event/{event:slug}', RegisterToEvent::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('registration/{registration}/payment/download', InvoiceDowloadController::class)->name('registration.payment.invoice.download');
