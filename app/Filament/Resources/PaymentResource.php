@@ -166,9 +166,16 @@ class PaymentResource extends Resource
                                 ->getStateUsing(fn ($record) => $record->code)
                                 ->searchable()
                                 ->sortable(),
+                            TextColumn::make('description')
+                                ->label('Comentario')
+                                ->limit(10)
+                                ->tooltip(fn ($record) => $record->description)
+                                ->searchable(),
                             TextColumn::make('amount')
                                 ->label('Monto')
-                                ->getStateUsing(fn ($record) => "$" . $record->amount),
+                                ->searchable()
+                                ->sortable()
+                                ->getStateUsing(fn ($record) => "$" . number_format($record->amount, 0)),
                             TagsColumn::make('subscriptions')
                                 ->label('Productos'),
                         ]),

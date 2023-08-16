@@ -31,6 +31,9 @@ class PaymentsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('amount')
                     ->required()
                     ->disabled(),
+                Forms\Components\TextArea::make('description')
+                    ->required()
+                    ->nullable(),
                 Forms\Components\TextInput::make('code')
                     ->required()
                     ->disabled(),
@@ -53,6 +56,9 @@ class PaymentsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('date')
                     ->date(),
                 Tables\Columns\TextColumn::make('amount'),
+                Tables\Columns\TextColumn::make('description')
+                    ->limit(10)
+                    ->tooltip(fn ($record) => $record->description),
                 Tables\Columns\TextColumn::make('code')
                     ->copyable(),
                 BadgeColumn::make('images')
@@ -70,7 +76,7 @@ class PaymentsRelationManager extends RelationManager
                 Tables\Actions\Action::make('Invoice')
                     ->color('primary')
                     ->visible(fn (RelationManager $livewire) => $livewire->ownerRecord->amount_pending == 0)
-                    ->url(fn (RelationManager $livewire) =>  route('registration.payment.invoice.download', $livewire->ownerRecord))
+                    ->url(fn (RelationManager $livewire) =>  route('payment.invoice.download', $livewire->ownerRecord->payments->first()))
                     ->openUrlInNewTab(true),
                 Tables\Actions\Action::make('Pay')
                     ->button()

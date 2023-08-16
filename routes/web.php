@@ -24,4 +24,4 @@ Route::get('register-to-event/{event:slug}', RegisterToEvent::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('registration/{registration}/payment/download', InvoiceDowloadController::class)->name('registration.payment.invoice.download');
+Route::get('payment/{payment}/download', InvoiceDowloadController::class)->name('payment.invoice.download');
